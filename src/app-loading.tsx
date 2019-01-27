@@ -1,8 +1,10 @@
 import axios from 'axios';
+//@ts-ignore
 import {AppLoading, Asset, Font, Icon} from 'expo';
 import React from 'react';
 import {connect, Provider} from 'react-redux';
-import {actionUpdateReduxState, store} from './components/store';
+import {Dispatch} from 'redux';
+import {Action, actionUpdateReduxState, store} from './components/store';
 import {API_BASE} from './config';
 
 export function AppLoaderRoot({onFinish}: {onFinish(): void}): JSX.Element {
@@ -14,14 +16,14 @@ export function AppLoaderRoot({onFinish}: {onFinish(): void}): JSX.Element {
 }
 
 interface Props {
-  actionUpdateReduxState: any;
+  actionUpdateReduxState(payload: object): {type: string; payload: object};
   onFinish(): void;
 }
 
-const AppLoadingContainer = connect(
+const AppLoadingContainer = connect<{}, (dispatch: Dispatch<Action>) => {actionUpdateReduxState(payload: Object): void}, {onFinish(): void}>(
   null,
   dispatch => ({
-    actionUpdateReduxState(payload) {
+    actionUpdateReduxState(payload: Object) {
       dispatch(actionUpdateReduxState(payload));
     }
   }))(

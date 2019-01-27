@@ -17,6 +17,7 @@
     "@expo/samples": "2.1.1",
     "@types/expo": "31.0.8",
     "@types/react-redux": "7.0.0",
+    "@types/react-navigation": "^3.0.1",
     "axios": "0.18.0",
     "expo": "31.0.6",
     "react": "16.7.0",
