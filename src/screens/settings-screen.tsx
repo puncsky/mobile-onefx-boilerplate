@@ -1,5 +1,6 @@
+// @ts-ignore
 import { ExpoConfigView } from '@expo/samples';
-import React from 'react';
+import * as React from 'react';
 
 export default class SettingsScreen extends React.Component {
   public static navigationOptions = {

@@ -56,3 +56,4 @@ flow-typed/npm/
 .env
 dump.rdb
 .vscode/
+package-lock.json

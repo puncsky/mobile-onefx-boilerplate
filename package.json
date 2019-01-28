@@ -5,13 +5,34 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "_note": "npm run lint && npm run tsc-test && ",
+    "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "tslint --fix --project tsconfig.json -t stylish",
     "qualitycheck": "npm-run-all typecheck tslint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.ts?(x)",
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "tsx"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsConfig": {
+          "jsx": "react"
+        }
+      }
+    }
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
@@ -27,9 +48,14 @@
     "redux": "4.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/react-test-renderer": "^16.0.3",
     "babel-preset-expo": "5.0.0",
-    "jest-expo": "31.0.0",
+    "jest": "^23.6.0",
+    "jest-expo": "^31.0.0",
     "react-native-typescript-transformer": "1.2.11",
+    "react-test-renderer": "^16.7.0",
+    "ts-jest": "^23.10.5",
     "tslint": "5.12.1",
     "tslint-microsoft-contrib": "5.2.1",
     "tslint-require-connnect-typing": "1.0.1",

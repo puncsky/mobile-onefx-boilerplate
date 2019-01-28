@@ -1,5 +1,5 @@
 import {WebBrowser} from 'expo';
-import React from 'react';
+import * as React from 'react';
 import {
   Image,
   ScrollView,

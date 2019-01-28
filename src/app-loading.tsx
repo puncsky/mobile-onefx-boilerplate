@@ -1,7 +1,7 @@
 import axios from 'axios';
 //@ts-ignore
 import {AppLoading, Asset, Font, Icon} from 'expo';
-import React from 'react';
+import * as React from 'react';
 import {connect, Provider} from 'react-redux';
 import {Dispatch} from 'redux';
 import {Action, actionUpdateReduxState, store} from './components/store';

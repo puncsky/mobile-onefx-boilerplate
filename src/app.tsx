@@ -1,6 +1,6 @@
 // @ts-ignore
 import {Icon} from 'expo';
-import React from 'react';
+import * as React from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {Provider} from 'react-redux';
 import {AppLoaderRoot} from './app-loading';
@@ -8,11 +8,11 @@ import {store} from './components/store';
 import AppNavigator from './navigation/app-navigator';
 
 interface Props {
-  skipLoadingScreen: boolean;
+  skipLoadingScreen?: boolean;
 }
 
 interface State {
-  isLoadingComplete: boolean;
+  isLoadingComplete?: boolean;
 }
 
 export class App extends React.Component<Props, State> {
