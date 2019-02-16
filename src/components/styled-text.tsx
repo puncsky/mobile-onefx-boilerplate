@@ -8,8 +8,15 @@ interface Props {
 }
 
 export class MonoText extends Component<Props> {
-  public render() {
-    const {children} = this.props;
-    return <Text {...this.props} style={[this.props.style, {fontFamily: 'space-mono'}]}>{children}</Text>;
+  public render(): JSX.Element {
+    const { children } = this.props;
+    return (
+      <Text
+        {...this.props}
+        style={[this.props.style, { fontFamily: 'space-mono' }]}
+      >
+        {children}
+      </Text>
+    );
   }
 }

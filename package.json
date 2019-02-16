@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "tslint --fix --project tsconfig.json -t stylish",
     "qualitycheck": "npm-run-all typecheck tslint",
-    "prettier": "prettier ./src/**"
+    "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/{*.ts,**/*.ts,*.tsx,**/*.tsx}\"\n"
   },
   "jest": {
     "preset": "jest-expo",
