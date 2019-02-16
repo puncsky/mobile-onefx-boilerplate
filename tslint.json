@@ -2,14 +2,18 @@
   "extends": [
     "tslint:latest",
     "tslint-microsoft-contrib/recommended_ruleset",
-    "tslint-require-connnect-typing"
+    "tslint-require-connnect-typing",
+    "tslint-config-prettier"
   ],
   "rulesDirectory": [
     "node_modules/tslint-microsoft-contrib",
     "node_modules/tslint-require-connnect-typing"
   ],
   "rules": {
+    "no-import-side-effect": false,
+    "no-reserved-keywords": false,
     "react-this-binding-issue": false,
+    "no-submodule-imports": false,
     "quotemark": [
       true,
       "single",

@@ -9,7 +9,8 @@
     "test": "jest",
     "typecheck": "tsc --noEmit",
     "lint": "tslint --fix --project tsconfig.json -t stylish",
-    "qualitycheck": "npm-run-all typecheck tslint"
+    "qualitycheck": "npm-run-all typecheck tslint",
+    "prettier": "prettier ./src/**"
   },
   "jest": {
     "preset": "jest-expo",
@@ -37,7 +38,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@types/expo": "31.0.8",
-    "@types/react-navigation": "^2.18.3",
+    "@types/react-navigation": "2.13.10",
     "@types/react-redux": "7.0.0",
     "axios": "0.18.0",
     "expo": "31.0.6",
@@ -53,11 +54,13 @@
     "babel-preset-expo": "5.0.0",
     "jest": "^23.6.0",
     "jest-expo": "^31.0.0",
+    "prettier": "1.16.4",
     "react-native-typescript-transformer": "1.2.11",
     "react-test-renderer": "^16.7.0",
     "ts-jest": "^23.10.5",
     "tslint": "5.12.1",
-    "tslint-microsoft-contrib": "5.2.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-microsoft-contrib": "6.0.0",
     "tslint-require-connnect-typing": "1.0.1",
     "typescript": "3.2.4"
   },

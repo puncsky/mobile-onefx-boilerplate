@@ -6,8 +6,8 @@ import * as renderer from 'react-test-renderer';
 import App from '../../App';
 
 describe('App snapshot', () => {
-  jest.useFakeTimers();
   beforeEach(() => {
+    jest.useFakeTimers();
     NavigationTestUtils.resetInternalState();
   });
 
