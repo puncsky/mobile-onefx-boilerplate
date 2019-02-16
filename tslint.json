@@ -79,21 +79,6 @@
     "strict-boolean-expressions": false,
     "no-unsafe-any": false,
     "completed-docs": false,
-    "no-import-side-effect": [
-      true,
-      {
-        "ignore-module": "(\\.scss|\\.css|moment-duration-format|isomorphic-fetch)$"
-      }
-    ],
-    "no-submodule-imports": [
-      true,
-      "src",
-      "assets",
-      "react-transition-group",
-      "lodash/fp",
-      "redux-saga/effects",
-      "redux-saga/utils"
-    ],
     "newline-before-return": false,
     "match-default-export-name": false,
     "no-implicit-dependencies": false,

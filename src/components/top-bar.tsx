@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Image, StatusBar, Text, View} from 'react-native';
 import {colors} from './colors';
 
-export function TopBar() {
+export function TopBar(): JSX.Element {
   return (
     <View>
       <StatusBar

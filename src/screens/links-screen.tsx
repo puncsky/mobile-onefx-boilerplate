@@ -4,11 +4,11 @@ import * as React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
 export default class LinksScreen extends React.Component {
-  public static navigationOptions = {
+  public static navigationOptions: {title: string} = {
     title: 'Links'
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <ScrollView style={styles.container}>
         {/* Go ahead and delete ExpoLinksView and replace it with your

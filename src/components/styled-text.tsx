@@ -4,7 +4,7 @@ import {Text} from 'react-native';
 
 interface Props {
   style?: object;
-  children: string,
+  children: string;
 }
 
 export class MonoText extends Component<Props> {

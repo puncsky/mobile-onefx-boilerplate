@@ -1,9 +1,9 @@
-import 'react-native';
 import * as React from 'react';
-import App from '../../App';
-import * as renderer from 'react-test-renderer';
+import 'react-native';
 // @ts-ignore
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
+import * as renderer from 'react-test-renderer';
+import App from '../../App';
 
 describe('App snapshot', () => {
   jest.useFakeTimers();
