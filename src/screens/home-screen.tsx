@@ -8,16 +8,29 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Button, Modal } from 'antd-mobile-rn';
 
 import { NoteListContainer } from '../components/note-list';
 import { MonoText } from '../components/styled-text';
 import { TopBar } from '../components/top-bar';
 
-export default class HomeScreen extends React.Component {
+type State = {
+  shouldDisplayModal: boolean
+}
+
+export default class HomeScreen extends React.Component<{}, State> {
   public static navigationOptions: {header: null} = {
     // tslint:disable-next-line
     header: null,
   };
+
+  public state: State = {
+    shouldDisplayModal: false,
+  };
+
+  private onCloseModal = () => {
+    this.setState({shouldDisplayModal: false});
+  }
 
   public render(): JSX.Element {
     const imgSource = __DEV__
@@ -60,6 +73,22 @@ export default class HomeScreen extends React.Component {
               </Text>
             </TouchableOpacity>
           </View>
+
+          <Modal
+            transparent={false}
+            visible={this.state.shouldDisplayModal}
+            animationType="slide-up"
+            onClose={this.onCloseModal}
+          >
+            <View style={{ paddingVertical: 220 }}>
+              <Text style={{ textAlign: 'center' }}>Content...</Text>
+              <Text style={{ textAlign: 'center' }}>Content...</Text>
+            </View>
+            <Button type="primary" onClick={() => this.setState({shouldDisplayModal: false})}>
+              close modal
+            </Button>
+          </Modal>
+          <Button onClick={() => this.setState({shouldDisplayModal: true})}>hey</Button>
         </ScrollView>
       </View>
     );
