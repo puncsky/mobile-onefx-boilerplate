@@ -1,11 +1,11 @@
 // @ts-ignore
-import { ExpoLinksView } from '@expo/samples';
-import * as React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ExpoLinksView } from "@expo/samples";
+import * as React from "react";
+import { ScrollView, StyleSheet } from "react-native";
 
 export default class LinksScreen extends React.Component {
   public static navigationOptions: { title: string } = {
-    title: 'Links',
+    title: "Links"
   };
 
   public render(): JSX.Element {
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: "#fff"
+  }
 });

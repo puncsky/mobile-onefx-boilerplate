@@ -6,9 +6,9 @@
     "ios": "expo start --ios",
     "eject": "expo eject",
     "_note": "npm run lint && npm run tsc-test && ",
-    "test": "jest",
+    "test": "npm run lint && jest",
     "typecheck": "tsc --noEmit",
-    "lint": "tslint --fix --project tsconfig.json -t stylish",
+    "lint": "pretty-quick --staged && tslint --fix --project tsconfig.json -t stylish",
     "qualitycheck": "npm-run-all typecheck tslint",
     "prettier": "prettier --single-quote --trailing-comma es5 --write \"src/{*.ts,**/*.ts,*.tsx,**/*.tsx}\"\n"
   },
@@ -35,6 +35,11 @@
       }
     }
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@types/expo": "31.0.8",
@@ -54,9 +59,11 @@
     "@types/react-test-renderer": "^16.0.3",
     "babel-plugin-import": "^1.11.0",
     "babel-preset-expo": "5.0.0",
+    "husky": "^3.0.0",
     "jest": "^23.6.0",
     "jest-expo": "^31.0.0",
-    "prettier": "1.16.4",
+    "prettier": "^1.16.4",
+    "pretty-quick": "^1.11.1",
     "react-native-typescript-transformer": "1.2.11",
     "react-test-renderer": "^16.7.0",
     "ts-jest": "^23.10.5",

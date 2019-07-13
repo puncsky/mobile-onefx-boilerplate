@@ -1,8 +1,8 @@
 // @ts-ignore
-import { Icon } from 'expo';
-import * as React from 'react';
+import { Icon } from "expo";
+import * as React from "react";
 
-import Colors from '../constants/colors';
+import Colors from "../constants/colors";
 
 interface Props {
   name: string;

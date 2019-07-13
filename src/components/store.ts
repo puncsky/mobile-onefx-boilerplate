@@ -1,4 +1,4 @@
-import { createStore } from 'redux';
+import { createStore } from "redux";
 
 export interface AppState {
   snippets: Array<Snippet>;
@@ -15,16 +15,16 @@ export interface Snippet {
 }
 
 const INITIAL_STATE: AppState = {
-  snippets: [],
+  snippets: []
 };
 
-const UPDATE_REDUX_STATE = 'UPDATE_REDUX_STATE';
+const UPDATE_REDUX_STATE = "UPDATE_REDUX_STATE";
 
 const reducer = (state = INITIAL_STATE, action: Action) => {
   if (action.type === UPDATE_REDUX_STATE) {
     return {
       ...state,
-      ...action.payload,
+      ...action.payload
     };
   }
   return state;
@@ -33,5 +33,5 @@ const reducer = (state = INITIAL_STATE, action: Action) => {
 export const store = createStore(reducer, {});
 export const actionUpdateReduxState = (payload: Object) => ({
   type: UPDATE_REDUX_STATE,
-  payload,
+  payload
 });

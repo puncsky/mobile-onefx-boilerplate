@@ -1,1 +1,1 @@
-export const RECENT_POSTS = '@guiguio:recentPosts';
+export const RECENT_POSTS = "@guiguio:recentPosts";

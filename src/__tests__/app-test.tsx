@@ -1,17 +1,17 @@
-import * as React from 'react';
-import 'react-native';
+import * as React from "react";
+import "react-native";
 // @ts-ignore
-import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
-import * as renderer from 'react-test-renderer';
-import App from '../../App';
+import NavigationTestUtils from "react-navigation/NavigationTestUtils";
+import * as renderer from "react-test-renderer";
+import App from "../../App";
 
-describe('App snapshot', () => {
+describe("App snapshot", () => {
   beforeEach(() => {
     jest.useFakeTimers();
     NavigationTestUtils.resetInternalState();
   });
 
-  it('renders the loading screen', async () => {
+  it("renders the loading screen", async () => {
     const tree = renderer.create(<App />).toJSON();
     expect(tree).toMatchSnapshot();
   });

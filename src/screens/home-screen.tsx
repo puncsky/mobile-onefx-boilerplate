@@ -1,41 +1,41 @@
-import { WebBrowser } from 'expo';
-import * as React from 'react';
+import { Button, Modal } from "antd-mobile-rn";
+import { WebBrowser } from "expo";
+import * as React from "react";
 import {
   Image,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
-} from 'react-native';
-import { Button, Modal } from 'antd-mobile-rn';
+  View
+} from "react-native";
 
-import { NoteListContainer } from '../components/note-list';
-import { MonoText } from '../components/styled-text';
-import { TopBar } from '../components/top-bar';
+import { NoteListContainer } from "../components/note-list";
+import { MonoText } from "../components/styled-text";
+import { TopBar } from "../components/top-bar";
 
 type State = {
-  shouldDisplayModal: boolean
-}
+  shouldDisplayModal: boolean;
+};
 
 export default class HomeScreen extends React.Component<{}, State> {
-  public static navigationOptions: {header: null} = {
+  public static navigationOptions: { header: null } = {
     // tslint:disable-next-line
-    header: null,
+    header: null
   };
 
   public state: State = {
-    shouldDisplayModal: false,
+    shouldDisplayModal: false
   };
 
-  private onCloseModal = () => {
-    this.setState({shouldDisplayModal: false});
-  }
+  private readonly onCloseModal = () => {
+    this.setState({ shouldDisplayModal: false });
+  };
 
   public render(): JSX.Element {
     const imgSource = __DEV__
-      ? require('../assets/images/robot-dev.png')
-      : require('../assets/images/robot-prod.png');
+      ? require("../assets/images/robot-dev.png")
+      : require("../assets/images/robot-prod.png");
     return (
       <View style={styles.container}>
         <TopBar />
@@ -81,14 +81,25 @@ export default class HomeScreen extends React.Component<{}, State> {
             onClose={this.onCloseModal}
           >
             <View style={{ paddingVertical: 220 }}>
-              <Text style={{ textAlign: 'center' }}>Content...</Text>
-              <Text style={{ textAlign: 'center' }}>Content...</Text>
+              <Text style={{ textAlign: "center" }}>Content...</Text>
+              <Text style={{ textAlign: "center" }}>Content...</Text>
             </View>
-            <Button type="primary" onClick={() => this.setState({shouldDisplayModal: false})}>
+            <Button
+              type="primary"
+              onClick={() => {
+                this.setState({ shouldDisplayModal: false });
+              }}
+            >
               close modal
             </Button>
           </Modal>
-          <Button onClick={() => this.setState({shouldDisplayModal: true})}>hey</Button>
+          <Button
+            onClick={() => {
+              this.setState({ shouldDisplayModal: true });
+            }}
+          >
+            hey
+          </Button>
         </ScrollView>
       </View>
     );
@@ -119,7 +130,7 @@ export default class HomeScreen extends React.Component<{}, State> {
 
   private readonly handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/development-mode',
+      "https://docs.expo.io/versions/latest/guides/development-mode"
     ).catch(err => {
       // tslint:disable-next-line:no-console
       console.error(`failed to handleLearnMorePress: ${err}`);
@@ -128,7 +139,7 @@ export default class HomeScreen extends React.Component<{}, State> {
 
   private readonly handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
-      'https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes',
+      "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
     ).catch(err => {
       // tslint:disable-next-line:no-console
       console.error(`failed to handleHelpPress: ${err}`);
@@ -139,65 +150,65 @@ export default class HomeScreen extends React.Component<{}, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: "rgba(0,0,0,0.4)",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center"
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center"
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
-  },
+    color: "#2e78b7"
+  }
 });

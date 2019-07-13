@@ -10,7 +10,7 @@
     "node_modules/tslint-require-connnect-typing"
   ],
   "rules": {
-    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
     "no-require-imports": false,
     "no-duplicate-imports": false,
     "no-shadowed-variable": false,
@@ -18,11 +18,7 @@
     "no-reserved-keywords": false,
     "react-this-binding-issue": false,
     "no-submodule-imports": false,
-    "quotemark": [
-      true,
-      "single",
-      "jsx-double"
-    ],
+    "quotemark": [true, "double", "jsx-double"],
     "max-classes-per-file": false,
     "interface-name": false,
     "missing-jsdoc": false,
@@ -39,10 +35,7 @@
         "allowMultiline": true
       }
     ],
-    "array-type": [
-      true,
-      "generic"
-    ],
+    "array-type": [true, "generic"],
     "prefer-array-literal": [
       true,
       {
@@ -95,11 +88,7 @@
     "react-unused-props-and-state": false
   },
   "jsRules": {
-    "quotemark": [
-      true,
-      "single",
-      "jsx-double"
-    ],
+    "quotemark": [true, "single", "jsx-double"],
     "max-classes-per-file": false,
     "no-unused-variable": false
   }

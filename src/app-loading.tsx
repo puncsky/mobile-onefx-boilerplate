@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 //@ts-ignore
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import * as React from 'react';
-import { connect, Provider } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Action, actionUpdateReduxState, store } from './components/store';
-import { API_BASE } from './config';
+import { AppLoading, Asset, Font, Icon } from "expo";
+import * as React from "react";
+import { connect, Provider } from "react-redux";
+import { Dispatch } from "redux";
+import { Action, actionUpdateReduxState, store } from "./components/store";
+import { API_BASE } from "./config";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return (
@@ -23,7 +23,7 @@ interface Props {
 const AppLoadingContainer = connect<
   {},
   (
-    dispatch: Dispatch<Action>,
+    dispatch: Dispatch<Action>
   ) => { actionUpdateReduxState(payload: Object): void },
   { onFinish(): void }
 >(
@@ -31,8 +31,8 @@ const AppLoadingContainer = connect<
   dispatch => ({
     actionUpdateReduxState(payload: Object): void {
       dispatch(actionUpdateReduxState(payload));
-    },
-  }),
+    }
+  })
 )(function AppLoadingInner(props: Props): JSX.Element {
   const { actionUpdateReduxState, onFinish } = props;
 
@@ -41,7 +41,7 @@ const AppLoadingContainer = connect<
       const { data } = await axios.get(`${API_BASE}notes/?offset=0&limit=5`);
       actionUpdateReduxState({
         postsByIDs: data.postsByIDs,
-        snippets: data.snippets,
+        snippets: data.snippets
       });
     } catch (err) {
       // tslint:disable-next-line
@@ -49,16 +49,16 @@ const AppLoadingContainer = connect<
     }
     await Promise.all([
       Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
+        require("./assets/images/robot-dev.png"),
+        require("./assets/images/robot-prod.png")
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
+        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+      })
     ]);
   };
 
