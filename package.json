@@ -41,11 +41,11 @@
     }
   },
   "dependencies": {
+    "@ant-design/react-native": "^3.1.9",
     "@expo/samples": "2.1.1",
     "@types/expo": "31.0.8",
     "@types/react-navigation": "2.13.10",
     "@types/react-redux": "7.0.0",
-    "antd-mobile-rn": "^2.3.3",
     "axios": "0.18.0",
     "expo": "31.0.6",
     "react": "16.5.0",

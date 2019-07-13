@@ -35,7 +35,7 @@ export function TopBar(): JSX.Element {
             source={require("../assets/images/icon.png")}
           />
           <Text style={{ color: colors.white, fontSize: 18 }}>
-            Tian Pan's Notes
+            mobile-onefx-boilerplate
           </Text>
         </View>
       </View>

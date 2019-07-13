@@ -1,10 +1,11 @@
-import { Icon } from "expo";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
+import { Provider as AntdProvider } from "@ant-design/react-native";
 import { AppLoaderRoot } from "./app-loading";
 import { store } from "./components/store";
 import AppNavigator from "./navigation/app-navigator";
+import { antdTheme } from "./components/colors";
 
 interface Props {
   skipLoadingScreen?: boolean;
@@ -22,19 +23,23 @@ export class App extends React.Component<Props, State> {
   public render(): JSX.Element {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
-        <AppLoaderRoot
-          onFinish={() => {
-            this.setState({ isLoadingComplete: true });
-          }}
-        />
+        <AntdProvider theme={antdTheme}>
+          <AppLoaderRoot
+            onFinish={() => {
+              this.setState({ isLoadingComplete: true });
+            }}
+          />
+        </AntdProvider>
       );
     } else {
       return (
         <Provider store={store}>
-          <View style={styles.container}>
-            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-            <AppNavigator />
-          </View>
+          <AntdProvider theme={antdTheme}>
+            <View style={styles.container}>
+              {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+          </AntdProvider>
         </Provider>
       );
     }

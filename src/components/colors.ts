@@ -1,5 +1,5 @@
 export const colors = {
-  primary: "#DE4C4F",
+  primary: "#FBB03B",
   secondary: "#0C8DE4",
   white: "#fff",
 
@@ -20,4 +20,11 @@ export const colors = {
 
   nav01: "#011627", //	Global top bar
   nav02: "#20232a" //	CTA footer
+};
+
+export const antdTheme = {
+  brand_primary: colors.primary,
+  color_link: colors.primary,
+  primary_button_fill: colors.primary,
+  primary_button_fill_tap: colors.primary
 };

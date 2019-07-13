@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd-mobile-rn";
+import { Button, Modal } from "@ant-design/react-native";
 import { WebBrowser } from "expo";
 import * as React from "react";
 import {
@@ -10,7 +10,6 @@ import {
   View
 } from "react-native";
 
-import { NoteListContainer } from "../components/note-list";
 import { MonoText } from "../components/styled-text";
 import { TopBar } from "../components/top-bar";
 
@@ -40,7 +39,6 @@ export default class HomeScreen extends React.Component<{}, State> {
       <View style={styles.container}>
         <TopBar />
         <ScrollView style={styles.container}>
-          <NoteListContainer />
           <View style={styles.welcomeContainer}>
             <Image source={imgSource} style={styles.welcomeImage} />
           </View>
@@ -81,20 +79,19 @@ export default class HomeScreen extends React.Component<{}, State> {
             onClose={this.onCloseModal}
           >
             <View style={{ paddingVertical: 220 }}>
-              <Text style={{ textAlign: "center" }}>Content...</Text>
-              <Text style={{ textAlign: "center" }}>Content...</Text>
+              <Text style={{ textAlign: "center" }}>Hello! Welcome!</Text>
             </View>
             <Button
-              type="primary"
-              onClick={() => {
+              onPress={() => {
                 this.setState({ shouldDisplayModal: false });
               }}
             >
-              close modal
+              Cancel
             </Button>
           </Modal>
           <Button
-            onClick={() => {
+            type="primary"
+            onPress={() => {
               this.setState({ shouldDisplayModal: true });
             }}
           >

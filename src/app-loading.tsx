@@ -1,11 +1,9 @@
-import axios from "axios";
 //@ts-ignore
 import { AppLoading, Asset, Font, Icon } from "expo";
 import * as React from "react";
 import { connect, Provider } from "react-redux";
 import { Dispatch } from "redux";
 import { Action, actionUpdateReduxState, store } from "./components/store";
-import { API_BASE } from "./config";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return (
@@ -38,11 +36,7 @@ const AppLoadingContainer = connect<
 
   const loadResourcesAsync = async () => {
     try {
-      const { data } = await axios.get(`${API_BASE}notes/?offset=0&limit=5`);
-      actionUpdateReduxState({
-        postsByIDs: data.postsByIDs,
-        snippets: data.snippets
-      });
+      actionUpdateReduxState({});
     } catch (err) {
       // tslint:disable-next-line
       console.log(err);
