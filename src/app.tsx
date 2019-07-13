@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Icon } from "expo";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";

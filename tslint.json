@@ -10,7 +10,6 @@
     "node_modules/tslint-require-connnect-typing"
   ],
   "rules": {
-    "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
     "no-require-imports": false,
     "no-duplicate-imports": false,
     "no-shadowed-variable": false,
