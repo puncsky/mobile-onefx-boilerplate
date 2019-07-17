@@ -1,5 +1,8 @@
 //@ts-ignore
-import { AppLoading, Asset, Font, Icon } from "expo";
+import * as Icon from "@expo/vector-icons";
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
 import * as React from "react";
 import { connect, Provider } from "react-redux";
 import { Dispatch } from "redux";

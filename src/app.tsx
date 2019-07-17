@@ -1,11 +1,11 @@
+import { Provider as AntdProvider } from "@ant-design/react-native";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import { Provider as AntdProvider } from "@ant-design/react-native";
 import { AppLoaderRoot } from "./app-loading";
+import { antdTheme } from "./components/colors";
 import { store } from "./components/store";
 import AppNavigator from "./navigation/app-navigator";
-import { antdTheme } from "./components/colors";
 
 interface Props {
   skipLoadingScreen?: boolean;

@@ -1,5 +1,5 @@
 // @ts-ignore
-import { Icon } from "expo";
+import * as Icon from "@expo/vector-icons";
 import * as React from "react";
 
 import Colors from "../constants/colors";

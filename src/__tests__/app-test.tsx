@@ -16,8 +16,8 @@ describe("App snapshot", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // it('renders the root without loading screen', async () => {
-  //   const tree = renderer.create(<App skipLoadingScreen={true} />).toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it("renders the root without loading screen", async () => {
+    const tree = renderer.create(<App skipLoadingScreen={true} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

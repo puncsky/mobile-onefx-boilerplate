@@ -1,4 +1,4 @@
-import { Constants } from "expo";
+import Constants from "expo-constants";
 import * as React from "react";
 import { Image, StatusBar, Text, View } from "react-native";
 import { colors } from "./colors";
