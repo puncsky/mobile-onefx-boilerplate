@@ -2,18 +2,18 @@
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
 
-import Colors from "../constants/colors";
+import { colors } from "../constants/colors";
 
 interface Props {
   name: string;
   focused: boolean;
 }
 
-export default class TabBarIcon extends React.Component<Props> {
+export class TabBarIcon extends React.Component<Props> {
   public render(): JSX.Element {
     const color = this.props.focused
-      ? Colors.tabIconSelected
-      : Colors.tabIconDefault;
+      ? colors.tabIconSelected
+      : colors.tabIconDefault;
     return (
       <Icon.Ionicons
         name={this.props.name}

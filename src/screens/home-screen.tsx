@@ -1,4 +1,5 @@
-import { Button, Modal } from "@ant-design/react-native";
+import Button from "@ant-design/react-native/lib/button";
+import Modal from "@ant-design/react-native/lib/modal";
 import { WebBrowser } from "expo";
 import * as React from "react";
 import {
@@ -17,7 +18,7 @@ type State = {
   shouldDisplayModal: boolean;
 };
 
-export default class HomeScreen extends React.Component<{}, State> {
+export class HomeScreen extends React.Component<{}, State> {
   public static navigationOptions: { header: null } = {
     // tslint:disable-next-line
     header: null

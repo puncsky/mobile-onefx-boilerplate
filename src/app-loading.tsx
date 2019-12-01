@@ -4,16 +4,12 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
-import { connect, Provider } from "react-redux";
+import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import { Action, actionUpdateReduxState, store } from "./components/store";
+import { Action, actionUpdateReduxState } from "./common/root-reducer";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
-  return (
-    <Provider store={store}>
-      <AppLoadingContainer onFinish={onFinish} />
-    </Provider>
-  );
+  return <AppLoadingContainer onFinish={onFinish} />;
 }
 
 interface Props {

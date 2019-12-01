@@ -6,10 +6,10 @@ import {
   createStackNavigator
 } from "react-navigation";
 
-import TabBarIcon from "../components/tab-bar-icon";
-import HomeScreen from "../screens/home-screen";
-import LinksScreen from "../screens/links-screen";
-import SettingsScreen from "../screens/settings-screen";
+import { TabBarIcon } from "../components/tab-bar-icon";
+import { HomeScreen } from "../screens/home-screen";
+import { LinksScreen } from "../screens/links-screen";
+import { SettingsScreen } from "../screens/settings-screen";
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen
@@ -50,7 +50,7 @@ SettingsStack.navigationOptions = {
   }
 };
 
-export default createBottomTabNavigator({
+export const MainTabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack

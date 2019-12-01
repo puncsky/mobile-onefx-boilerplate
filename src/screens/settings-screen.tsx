@@ -2,7 +2,7 @@
 import { ExpoConfigView } from "@expo/samples";
 import * as React from "react";
 
-export default class SettingsScreen extends React.Component {
+export class SettingsScreen extends React.Component {
   public static navigationOptions: { title: string } = {
     title: "app.json"
   };
