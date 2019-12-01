@@ -1,17 +1,10 @@
 import { createStore } from "redux";
 
-export interface AppState {
-  snippets: Array<Snippet>;
-}
+export interface AppState {}
 
 export interface Action {
   type: string;
   payload: Object;
-}
-
-export interface Snippet {
-  title: string;
-  abstract: string;
 }
 
 const INITIAL_STATE: AppState = {
