@@ -128,7 +128,7 @@ export default class HomeScreen extends React.Component<{}, State> {
   private readonly handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync(
       "https://docs.expo.io/versions/latest/guides/development-mode"
-    ).catch(err => {
+    ).catch((err: Error) => {
       // tslint:disable-next-line:no-console
       console.error(`failed to handleLearnMorePress: ${err}`);
     });
@@ -137,7 +137,7 @@ export default class HomeScreen extends React.Component<{}, State> {
   private readonly handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
       "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
-    ).catch(err => {
+    ).catch((err: Error) => {
       // tslint:disable-next-line:no-console
       console.error(`failed to handleHelpPress: ${err}`);
     });

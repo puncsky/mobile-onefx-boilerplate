@@ -11,6 +11,7 @@
   ],
   "rules": {
     "no-require-imports": false,
+    "no-null-keyword": false,
     "no-duplicate-imports": false,
     "no-shadowed-variable": false,
     "no-import-side-effect": false,
@@ -25,6 +26,8 @@
     "no-default-export": false,
     "no-relative-imports": false,
     "no-empty-interfaces": false,
+    "use-simple-attributes": false,
+    "max-func-body-length": [true, 120],
     "import-name": false,
     "export-name": false,
     "react-tsx-curly-spacing": [
@@ -84,7 +87,8 @@
     "no-implicit-dependencies": false,
     "no-suspicious-comment": false,
     "no-use-before-declare": false,
-    "react-unused-props-and-state": false
+    "react-unused-props-and-state": false,
+    "member-access": false
   },
   "jsRules": {
     "quotemark": [true, "single", "jsx-double"],

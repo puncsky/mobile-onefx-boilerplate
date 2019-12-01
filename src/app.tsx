@@ -1,4 +1,4 @@
-import { Provider as AntdProvider } from "@ant-design/react-native";
+import AntdProvider from "@ant-design/react-native/lib/provider";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
