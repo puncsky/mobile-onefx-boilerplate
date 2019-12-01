@@ -1,7 +1,7 @@
 import Constants from "expo-constants";
 import * as React from "react";
 import { Image, StatusBar, Text, View } from "react-native";
-import { colors } from "./colors";
+import { colors } from "../common/colors";
 
 export function TopBar(): JSX.Element {
   return (

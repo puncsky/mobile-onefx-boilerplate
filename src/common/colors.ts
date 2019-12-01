@@ -19,7 +19,10 @@ export const colors = {
   information: "#5aaafa", //	Information
 
   nav01: "#011627", //	Global top bar
-  nav02: "#20232a" //	CTA footer
+  nav02: "#20232a", //	CTA footer
+
+  tabIconDefault: "#ccc",
+  tabIconSelected: "#2f95dc"
 };
 
 export const antdTheme = {

@@ -1,14 +1,14 @@
 import AntdProvider from "@ant-design/react-native/lib/provider";
 import * as React from "react";
+import { ApolloProvider } from "react-apollo";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
-import { AppLoaderRoot } from "./app-loading";
-import { antdTheme } from "./components/colors";
-import { AppNavigator } from "./navigation/app-navigator";
 import { PersistGate } from "redux-persist/integration/react";
-import { ApolloProvider } from "react-apollo";
-import { persistor, store } from "./common/store";
+import { AppLoaderRoot } from "./app-loading";
 import { apolloClient } from "./common/apollo-client";
+import { antdTheme } from "./common/colors";
+import { persistor, store } from "./common/store";
+import { AppNavigator } from "./navigation/app-navigator";
 
 interface Props {
   skipLoadingScreen?: boolean;

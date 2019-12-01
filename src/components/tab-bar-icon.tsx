@@ -2,7 +2,7 @@
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
 
-import { colors } from "../constants/colors";
+import { colors } from "../common/colors";
 
 interface Props {
   name: string;
