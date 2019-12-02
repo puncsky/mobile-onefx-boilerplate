@@ -2,11 +2,15 @@
 import { ExpoLinksView } from "@expo/samples";
 import * as React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-
+import { TFuncType } from "../types/screen-props";
 export class LinksScreen extends React.Component {
-  public static navigationOptions: { title: string } = {
-    title: "Links"
-  };
+  public static navigationOptions = ({
+    screenProps: { t }
+  }: {
+    screenProps: { t: TFuncType };
+  }) => ({
+    title: t("links")
+  });
 
   public render(): JSX.Element {
     return (

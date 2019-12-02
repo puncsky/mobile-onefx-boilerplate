@@ -13,16 +13,19 @@ import {
 
 import { MonoText } from "../components/styled-text";
 import { TopBar } from "../components/top-bar";
-
+import { TFuncType } from "../types/screen-props";
 type State = {
   shouldDisplayModal: boolean;
 };
 
 export class HomeScreen extends React.Component<{}, State> {
-  public static navigationOptions: { header: null } = {
-    // tslint:disable-next-line
-    header: null
-  };
+  public static navigationOptions = ({
+    screenProps: { t }
+  }: {
+    screenProps: { t: TFuncType };
+  }) => ({
+    title: t("home")
+  });
 
   public state: State = {
     shouldDisplayModal: false

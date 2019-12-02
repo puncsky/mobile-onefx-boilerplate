@@ -22,7 +22,8 @@ describe("App snapshot", () => {
   it("renders AppLoaderRoot", async () => {
     const tree = renderer
       .create(
-        <Provider store={store}>
+        /* tslint:disable:no-any */
+        <Provider store={store as any}>
           <AppLoaderRoot onFinish={() => null} />
         </Provider>
       )
