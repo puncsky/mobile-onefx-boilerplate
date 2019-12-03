@@ -1,5 +1,3 @@
-import en from "@ant-design/react-native/lib/locale-provider/en_US";
-import zh from "@ant-design/react-native/lib/locale-provider/zh_CN";
 import AntdProvider from "@ant-design/react-native/lib/provider";
 import { Notifications, SplashScreen } from "expo";
 import Constants from "expo-constants";
@@ -68,16 +66,8 @@ const AppNavigatorContainer = connect((state: AppState) => {
     };
 
     render(): JSX.Element {
-      let locale = this.state.locale;
-      if (!locale) {
-        locale = i18n.locale;
-      }
       return (
-        <AntdProvider
-          theme={antdTheme}
-          // @ts-ignore
-          locale={locale.startsWith("en") ? en : zh}
-        >
+        <AntdProvider theme={antdTheme}>
           <AppNavigator
             screenProps={{
               t: this.t,
