@@ -3,3 +3,5 @@
 exports[`App snapshot renders AppLoaderRoot 1`] = `null`;
 
 exports[`App snapshot renders the StatusBar 1`] = `null`;
+
+exports[`App snapshot renders the loading screen 1`] = `<View />`;
