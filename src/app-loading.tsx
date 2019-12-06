@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Action, actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
-import i18n from "./locale";
+import i18n from "./translations";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return <AppLoadingContainer onFinish={onFinish} />;
@@ -62,8 +62,7 @@ const AppLoadingContainer = connect<
         }),
         Font.loadAsync(
           "antoutline",
-          // eslint-disable-next-line
-          require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
+          require("@ant-design/icons-react-native/fonts/antoutline.ttf")
         )
       ]);
     } catch (error) {

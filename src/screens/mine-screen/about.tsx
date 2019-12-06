@@ -10,7 +10,7 @@ import { analytics } from "../../common/analytics";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
-import i18n from "../../locale";
+import i18n from "../../translations";
 import { ScreenProps } from "../../types/screen-props";
 import { AccountHeader } from "./account-header";
 import { actionLogout } from "./account-reducer";

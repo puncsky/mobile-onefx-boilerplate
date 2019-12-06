@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { apolloClient } from "../../common/apollo-client";
 import { colors } from "../../common/colors";
 import { AppState } from "../../common/store";
-import i18n from "../../locale";
+import i18n from "../../translations";
 import { LoginWebView } from "./login-web-view";
 
 const GET_CONTACT = gql`

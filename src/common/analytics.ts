@@ -1,13 +1,26 @@
 import { Analytics, Event, PageHit } from "expo-analytics";
 // @ts-ignore
 import ExpoMixpanelAnalytics from "expo-mixpanel-analytics";
+import { config } from "../config";
 
-const ga = new Analytics("UA-43072488-4", undefined, { debug: __DEV__ });
+const ga = __DEV__
+  ? // tslint:disable-next-line:no-any
+    ({} as any)
+  : new Analytics(config.analytics.googleTid, undefined, {
+      debug: __DEV__
+    });
 
-const mixpanel = new ExpoMixpanelAnalytics("f3b829bced93a826d535abd48077fb28");
+const mixpanel = __DEV__
+  ? // tslint:disable-next-line:no-any
+    ({} as any)
+  : new ExpoMixpanelAnalytics(config.analytics.mixpanelProjectToken);
 
 const analytics = {
   identify(id: string): void {
+    if (__DEV__) {
+      return;
+    }
+
     mixpanel.identify(id);
     // @ts-ignore
     ga.parameters.uid = id;
@@ -15,6 +28,10 @@ const analytics = {
 
   // tslint:disable-next-line:no-any
   async track(name: string, props: Record<string, any>): Promise<void> {
+    if (__DEV__) {
+      return;
+    }
+
     mixpanel.track(name, props);
     if (name.startsWith("page_view_")) {
       await ga.hit(new PageHit(name));
