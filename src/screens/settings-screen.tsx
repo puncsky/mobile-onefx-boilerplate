@@ -1,11 +1,15 @@
 // @ts-ignore
 import { ExpoConfigView } from "@expo/samples";
 import * as React from "react";
-
+import { TFuncType } from "../types/screen-props";
 export class SettingsScreen extends React.Component {
-  public static navigationOptions: { title: string } = {
-    title: "app.json"
-  };
+  public static navigationOptions = ({
+    screenProps: { t }
+  }: {
+    screenProps: { t: TFuncType };
+  }) => ({
+    title: t("settings")
+  });
 
   public render(): JSX.Element {
     /* Go ahead and delete ExpoConfigView and replace it with your

@@ -7,6 +7,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Action, actionUpdateReduxState } from "./common/root-reducer";
+import { AppState } from "./common/store";
+import i18n from "./locale";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return <AppLoadingContainer onFinish={onFinish} />;
@@ -15,6 +17,9 @@ export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
 interface Props {
   actionUpdateReduxState(payload: object): { type: string; payload: object };
   onFinish(): void;
+  mixpanelId?: string;
+  userId?: string;
+  locale?: string;
 }
 
 const AppLoadingContainer = connect<
@@ -24,35 +29,47 @@ const AppLoadingContainer = connect<
   ) => { actionUpdateReduxState(payload: Object): void },
   { onFinish(): void }
 >(
-  undefined,
+  (state: AppState) => ({
+    userId: state.base.userId,
+    mixpanelId: state.base.mixpanelId,
+    locale: state.base.locale
+  }),
   dispatch => ({
     actionUpdateReduxState(payload: Object): void {
       dispatch(actionUpdateReduxState(payload));
     }
   })
 )(function AppLoadingInner(props: Props): JSX.Element {
-  const { actionUpdateReduxState, onFinish } = props;
+  const { locale, onFinish } = props;
+
+  if (locale) {
+    i18n.locale = locale;
+  }
 
   const loadResourcesAsync = async () => {
     try {
-      actionUpdateReduxState({});
-    } catch (err) {
+      await Promise.all([
+        Asset.loadAsync([
+          require("./assets/images/robot-dev.png"),
+          require("./assets/images/robot-prod.png")
+        ]),
+        Font.loadAsync({
+          // This is the font that we are using for our tab bar
+          ...Icon.Ionicons.font,
+          // We include SpaceMono because we use it in HomeScreen.js. Feel free
+          // to remove this if you are not using it in your app
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+        }),
+        Font.loadAsync(
+          "antoutline",
+          // eslint-disable-next-line
+          require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
+        )
+      ]);
+    } catch (error) {
       // tslint:disable-next-line
-      console.log(err);
+      console.error(`failed to loadResourcesAsync: ${error}`);
     }
-    await Promise.all([
-      Asset.loadAsync([
-        require("./assets/images/robot-dev.png"),
-        require("./assets/images/robot-prod.png")
-      ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
-      })
-    ]);
   };
 
   const handleLoadingError = (error: Error) => {
@@ -66,6 +83,7 @@ const AppLoadingContainer = connect<
       startAsync={loadResourcesAsync}
       onError={handleLoadingError}
       onFinish={onFinish}
+      autoHideSplash={false}
     />
   );
 });
