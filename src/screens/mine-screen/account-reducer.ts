@@ -4,8 +4,7 @@ import { analytics } from "../../common/analytics";
 import { Action } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
 import fetch from "isomorphic-unfetch";
-import { headers } from "../../constants/request";
-import { getEndpoint } from "../../constants/request";
+import { getEndpoint, headers } from "../../common/request";
 
 const LOGOUT = "LOGOUT";
 
