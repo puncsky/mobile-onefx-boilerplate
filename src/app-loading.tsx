@@ -8,7 +8,9 @@ import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { Action, actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
+import { theme } from "./common/theme";
 import i18n from "./translations";
+import { ThemeProps } from "./types/theme-props";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   //@ts-ignore
@@ -21,6 +23,7 @@ interface Props {
   mixpanelId?: string;
   userId?: string;
   locale?: string;
+  currentTheme?: ThemeProps;
 }
 
 const AppLoadingContainer = connect<
@@ -33,7 +36,8 @@ const AppLoadingContainer = connect<
   (state: AppState) => ({
     userId: state.base.userId,
     mixpanelId: state.base.mixpanelId,
-    locale: state.base.locale
+    locale: state.base.locale,
+    currentTheme: state.base.currentTheme
   }),
   dispatch => ({
     actionUpdateReduxState(payload: Object): void {
@@ -41,10 +45,18 @@ const AppLoadingContainer = connect<
     }
   })
 )(function AppLoadingInner(props: Props): JSX.Element {
-  const { locale, onFinish } = props;
+  const { locale, onFinish, currentTheme, actionUpdateReduxState } = props;
 
   if (locale) {
     i18n.locale = locale;
+  }
+
+  if (!currentTheme) {
+    actionUpdateReduxState({
+      base: {
+        currentTheme: theme.light
+      }
+    });
   }
 
   const loadResourcesAsync = async () => {

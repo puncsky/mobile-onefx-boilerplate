@@ -8,5 +8,7 @@ if (config.sentryDsn) {
     enableInExpoDevelopment: true,
     debug: __DEV__
   });
-  Sentry.setRelease(Constants.manifest.revisionId);
+  Sentry.setRelease(
+    Constants.manifest.revisionId ? Constants.manifest.revisionId : ""
+  );
 }

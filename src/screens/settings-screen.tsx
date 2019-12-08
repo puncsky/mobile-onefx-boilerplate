@@ -1,18 +1,14 @@
 import * as React from "react";
 import { View } from "react-native";
-import { TFuncType } from "../types/screen-props";
-export class SettingsScreen extends React.Component {
-  public static navigationOptions = ({
-    screenProps: { t }
-  }: {
-    screenProps: { t: TFuncType };
-  }) => ({
-    title: t("settings")
-  });
+import { NavigationBar } from "../components/navigation-bar";
+import i18n from "../translations";
 
+export class SettingsScreen extends React.Component {
   public render(): JSX.Element {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <View />;
+    return (
+      <View>
+        <NavigationBar title={i18n.t("settings")} />
+      </View>
+    );
   }
 }

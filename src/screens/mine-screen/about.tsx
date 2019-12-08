@@ -10,8 +10,10 @@ import { analytics } from "../../common/analytics";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
+import { theme } from "../../common/theme";
 import i18n from "../../translations";
 import { ScreenProps } from "../../types/screen-props";
+import { ThemeProps } from "../../types/theme-props";
 import { AccountHeader } from "./account-header";
 import { actionLogout } from "./account-reducer";
 
@@ -25,12 +27,14 @@ type AboutProps = {
   actionLogout: Function;
   actionUpdateReduxState: Function;
   screenProps: ScreenProps;
+  currentTheme: ThemeProps;
 };
 
 export const About = connect(
   (state: AppState) => ({
     authToken: state.base.authToken,
-    locale: state.base.locale
+    locale: state.base.locale,
+    currentTheme: state.base.currentTheme
   }),
   dispatch => ({
     actionLogout(authToken: string): void {
@@ -51,7 +55,8 @@ export const About = connect(
         actionLogout,
         authToken,
         actionUpdateReduxState,
-        locale
+        locale,
+        currentTheme
       } = this.props;
       return (
         <List renderHeader={i18n.t("about")}>
@@ -91,6 +96,25 @@ export const About = connect(
                 : i18n.t("chinese")}
             </Brief>
           </Item>
+
+          <Item
+            disabled
+            extra={
+              <Switch
+                value={currentTheme.name === "dark"}
+                onValueChange={value => {
+                  const changeTo = value ? theme.dart : theme.light;
+                  actionUpdateReduxState({
+                    base: { currentTheme: changeTo }
+                  });
+                }}
+              />
+            }
+          >
+            {i18n.t("theme")}
+            <Brief>{currentTheme.name === "dark" ? "Dark" : "Light"}</Brief>
+          </Item>
+
           <Item disabled extra={Constants.nativeAppVersion}>
             {i18n.t("currentVersion")}
           </Item>

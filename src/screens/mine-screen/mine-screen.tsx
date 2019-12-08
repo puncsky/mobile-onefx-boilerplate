@@ -1,5 +1,8 @@
 import * as React from "react";
-import { ScreenProps, TFuncType } from "../../types/screen-props";
+import { View } from "react-native";
+import { NavigationBar } from "../../components/navigation-bar";
+import i18n from "../../translations";
+import { ScreenProps } from "../../types/screen-props";
 import { About } from "./about";
 
 type Props = {
@@ -7,15 +10,12 @@ type Props = {
 };
 
 export class MineScreen extends React.Component<Props> {
-  public static navigationOptions = ({
-    screenProps: { t }
-  }: {
-    screenProps: { t: TFuncType };
-  }) => ({
-    title: t("mine")
-  });
-
   public render(): JSX.Element {
-    return <About screenProps={this.props.screenProps} />;
+    return (
+      <View>
+        <NavigationBar title={i18n.t("mine")} />
+        <About screenProps={this.props.screenProps} />
+      </View>
+    );
   }
 }

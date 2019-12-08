@@ -2,20 +2,21 @@ import AntdProvider from "@ant-design/react-native/lib/provider";
 import { Scope, TranslateOptions } from "i18n-js";
 import * as React from "react";
 import { connect } from "react-redux";
-import { antdTheme } from "../common/colors";
 import { AppState } from "../common/store";
 import i18n from "../translations";
+import { ThemeProps } from "../types/theme-props";
 import { AppNavigator } from "./app-navigator";
 
 type InnerProps = {
   locale: string;
+  currentTheme: ThemeProps;
 };
 type InnerState = {
   locale: string;
 };
 
 export const AppNavigatorContainer = connect((state: AppState) => {
-  return { locale: state.base.locale };
+  return { locale: state.base.locale, currentTheme: state.base.currentTheme };
 })(
   class AppNavigatorContainerInner extends React.Component<
     InnerProps,
@@ -34,12 +35,14 @@ export const AppNavigatorContainer = connect((state: AppState) => {
     };
 
     render(): JSX.Element {
+      const { currentTheme, locale } = this.props;
       return (
-        <AntdProvider theme={antdTheme}>
+        <AntdProvider theme={currentTheme.antdTheme}>
           <AppNavigator
             screenProps={{
               t: this.t,
-              locale: this.props.locale,
+              locale,
+              currentTheme,
               setLocale: this.setLocale
             }}
           />

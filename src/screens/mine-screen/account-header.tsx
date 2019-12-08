@@ -9,8 +9,8 @@ import { apolloClient } from "../../common/apollo-client";
 import { colors } from "../../common/colors";
 import { AppState } from "../../common/store";
 import i18n from "../../translations";
+import { ThemeProps } from "../../types/theme-props";
 import { LoginWebView } from "./login-web-view";
-
 const GET_CONTACT = gql`
   query userProfile($userId: String!) {
     userProfile(userId: $userId) {
@@ -21,56 +21,72 @@ const GET_CONTACT = gql`
 
 export const AccountHeader = connect((state: AppState) => ({
   userId: state.base.userId,
-  authToken: state.base.authToken
-}))(({ userId, authToken }: { userId: string; authToken: string }) => {
-  return (
-    <View style={styles.titleContainer}>
-      {userId && authToken ? (
-        <>
-          <Query
-            query={GET_CONTACT}
-            variables={{
-              userId: userId
-            }}
-            client={apolloClient}
-          >
-            {({
-              data,
-              error,
-              loading
-            }: QueryResult<{
-              userProfile: {
-                email: string;
-              };
-            }>) => {
-              if (loading || error || !data || !data.userProfile) {
-                if (error) {
-                  Toast.fail(`failed to fetch user: ${error}`, 5);
+  authToken: state.base.authToken,
+  currentTheme: state.base.currentTheme
+}))(
+  ({
+    userId,
+    authToken,
+    currentTheme
+  }: {
+    userId: string;
+    authToken: string;
+    currentTheme: ThemeProps;
+  }) => {
+    return (
+      <View
+        style={[
+          styles.titleContainer,
+          { backgroundColor: currentTheme.theme.primary }
+        ]}
+      >
+        {userId && authToken ? (
+          <>
+            <Query
+              query={GET_CONTACT}
+              variables={{
+                userId: userId
+              }}
+              client={apolloClient}
+            >
+              {({
+                data,
+                error,
+                loading
+              }: QueryResult<{
+                userProfile: {
+                  email: string;
+                };
+              }>) => {
+                if (loading || error || !data || !data.userProfile) {
+                  if (error) {
+                    Toast.fail(`failed to fetch user: ${error}`, 5);
+                  }
+
+                  return <View />;
                 }
 
-                return <View />;
-              }
-
-              return (
-                <>
-                  <View>
-                    <Text style={styles.nameText} numberOfLines={1}>
-                      {data.userProfile.email}
-                    </Text>
-                  </View>
-                </>
-              );
-            }}
-          </Query>
-        </>
-      ) : (
-        <LoginOrSignUp>
-          <Text style={styles.loginSignUpText}>{i18n.t("login")}</Text>
-        </LoginOrSignUp>
-      )}
-    </View>
-  );
-});
+                return (
+                  <>
+                    <View>
+                      <Text style={styles.nameText} numberOfLines={1}>
+                        {data.userProfile.email}
+                      </Text>
+                    </View>
+                  </>
+                );
+              }}
+            </Query>
+          </>
+        ) : (
+          <LoginOrSignUp>
+            <Text style={styles.loginSignUpText}>{i18n.t("login")}</Text>
+          </LoginOrSignUp>
+        )}
+      </View>
+    );
+  }
+);
 
 type LoginOrSignUpProps = {
   children: JSX.Element;
