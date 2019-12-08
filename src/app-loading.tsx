@@ -11,6 +11,7 @@ import { AppState } from "./common/store";
 import i18n from "./translations";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
+  //@ts-ignore
   return <AppLoadingContainer onFinish={onFinish} />;
 }
 
@@ -62,7 +63,7 @@ const AppLoadingContainer = connect<
         }),
         Font.loadAsync(
           "antoutline",
-          require("@ant-design/icons-react-native/fonts/antoutline.ttf")
+          require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
         )
       ]);
     } catch (error) {

@@ -1,10 +1,10 @@
 /* tslint:disable:no-any */
 import { List } from "@ant-design/react-native";
-import { StoreReview } from "expo";
 import Constants from "expo-constants";
+import * as StoreReview from "expo-store-review";
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
-import { Alert, Platform, ScrollView, Switch } from "react-native";
+import { Alert, Platform, ScrollView, Switch, View } from "react-native";
 import { connect } from "react-redux";
 import { analytics } from "../../common/analytics";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
@@ -117,7 +117,7 @@ export const About = connect(
               {i18n.t("logout")}
             </Item>
           ) : (
-            <Item style={{ height: 0 }} />
+            <View />
           )}
         </List>
       );

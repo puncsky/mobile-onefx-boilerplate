@@ -1,6 +1,5 @@
-// @ts-ignore
-import { ExpoConfigView } from "@expo/samples";
 import * as React from "react";
+import { View } from "react-native";
 import { TFuncType } from "../types/screen-props";
 export class SettingsScreen extends React.Component {
   public static navigationOptions = ({
@@ -14,6 +13,6 @@ export class SettingsScreen extends React.Component {
   public render(): JSX.Element {
     /* Go ahead and delete ExpoConfigView and replace it with your
      * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return <View />;
   }
 }
