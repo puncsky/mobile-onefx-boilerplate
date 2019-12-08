@@ -61,7 +61,7 @@ const NavBar = connect((state: AppState) => ({
                 <Icon.Ionicons
                   name="ios-arrow-back"
                   size={29}
-                  color={currentTheme.theme.white}
+                  color={currentTheme.theme.navText}
                   style={{ paddingHorizontal: 10 }}
                 />
               </TouchableOpacity>
