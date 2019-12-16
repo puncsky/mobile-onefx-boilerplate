@@ -11,6 +11,6 @@ const isIphoneX =
 const statusBarHeight =
   Platform.OS === "ios" ? (isIphoneX ? 44 : 20) : androidStatusBarHeight;
 const navigationBarHeight =
-  Platform.OS === "ios" ? (isIphoneX ? 88 : 64) : 59 + androidStatusBarHeight;
+  Platform.OS === "ios" ? (isIphoneX ? 88 : 64) : androidStatusBarHeight + 59;
 const onePx = 1 / PixelRatio.get();
 export { statusBarHeight, navigationBarHeight, onePx };
