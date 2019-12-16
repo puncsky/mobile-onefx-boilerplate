@@ -19,7 +19,8 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.js.onefx.ios"
+      "bundleIdentifier": "org.js.onefx.ios",
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "versionCode": 10,

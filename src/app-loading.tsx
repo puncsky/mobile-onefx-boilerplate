@@ -3,6 +3,7 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
+import { Appearance } from "react-native-appearance";
 import { connect } from "react-redux";
 import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
@@ -38,6 +39,8 @@ const AppLoadingContainer = connect(
 )(function AppLoadingInner(props: Props): JSX.Element {
   const { locale, onFinish, currentTheme, actionUpdateReduxState } = props;
 
+  const colorScheme = Appearance.getColorScheme();
+
   if (locale) {
     i18n.locale = locale;
   }
@@ -45,7 +48,7 @@ const AppLoadingContainer = connect(
   if (!currentTheme) {
     actionUpdateReduxState({
       base: {
-        currentTheme: theme.light
+        currentTheme: colorScheme === "dark" ? theme.dark : theme.light
       }
     });
   }

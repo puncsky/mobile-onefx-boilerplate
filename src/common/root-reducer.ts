@@ -2,15 +2,12 @@
 import deepExtend from "deep-extend";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import { theme } from "../common/theme";
 import { accountReducer } from "../screens/mine-screen/account-reducer";
 import { AppState } from "./store";
 const UPDATE_REDUX_STATE = "UPDATE_REDUX_STATE";
 
 const INITIAL_STATE: AppState = {
-  base: {
-    currentTheme: theme.light
-  }
+  base: {}
 };
 
 export interface Action {

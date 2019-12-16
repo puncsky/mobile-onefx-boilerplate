@@ -103,7 +103,7 @@ export const About = connect(
               <Switch
                 value={currentTheme.name === "dark"}
                 onValueChange={value => {
-                  const changeTo = value ? theme.dart : theme.light;
+                  const changeTo = value ? theme.dark : theme.light;
                   actionUpdateReduxState({
                     base: { currentTheme: changeTo }
                   });

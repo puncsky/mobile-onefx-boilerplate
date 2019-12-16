@@ -80,5 +80,5 @@ const antdDarkTheme = {
 
 export const theme = {
   light: { name: "light", theme: lightTheme, antdTheme: antdLightTheme },
-  dart: { name: "dark", theme: darkTheme, antdTheme: antdDarkTheme }
+  dark: { name: "dark", theme: darkTheme, antdTheme: antdDarkTheme }
 };
