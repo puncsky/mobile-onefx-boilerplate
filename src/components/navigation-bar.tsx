@@ -1,4 +1,3 @@
-// @ts-ignore
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
 import { StatusBar, Text, TouchableOpacity, View } from "react-native";

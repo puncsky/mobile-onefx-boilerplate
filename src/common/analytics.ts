@@ -23,7 +23,10 @@ const analytics = {
 
     mixpanel.identify(id);
     // @ts-ignore
-    ga.parameters.uid = id;
+    if (ga && ga.parameters) {
+      // @ts-ignore
+      ga.parameters.uid = id;
+    }
   },
 
   // tslint:disable-next-line:no-any
@@ -33,6 +36,11 @@ const analytics = {
     }
 
     mixpanel.track(name, props);
+
+    if (!ga) {
+      return;
+    }
+
     if (name.startsWith("page_view_")) {
       await ga.hit(new PageHit(name));
     } else if (name.startsWith("tap_")) {

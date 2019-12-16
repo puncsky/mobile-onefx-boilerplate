@@ -1,19 +1,16 @@
-//@ts-ignore
 import * as Icon from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { Action, actionUpdateReduxState } from "./common/root-reducer";
+import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
 import { theme } from "./common/theme";
 import i18n from "./translations";
 import { ThemeProps } from "./types/theme-props";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
-  //@ts-ignore
   return <AppLoadingContainer onFinish={onFinish} />;
 }
 
@@ -26,13 +23,7 @@ interface Props {
   currentTheme?: ThemeProps;
 }
 
-const AppLoadingContainer = connect<
-  {},
-  (
-    dispatch: Dispatch<Action>
-  ) => { actionUpdateReduxState(payload: Object): void },
-  { onFinish(): void }
->(
+const AppLoadingContainer = connect(
   (state: AppState) => ({
     userId: state.base.userId,
     mixpanelId: state.base.mixpanelId,

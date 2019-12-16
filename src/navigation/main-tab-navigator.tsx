@@ -1,7 +1,6 @@
 import * as Haptics from "expo-haptics";
 import * as React from "react";
 import { Platform } from "react-native";
-// @ts-ignore
 import {
   createBottomTabNavigator,
   createStackNavigator,
