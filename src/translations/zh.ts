@@ -11,6 +11,7 @@ export const zh = {
   english: "英文",
   chinese: "中文",
   currentVersion: "当前版本",
+  theme: "主题",
   //logout alert
   logoutAlertMsg: "你确认要登出吗？",
   logoutAlertCancel: "取消",

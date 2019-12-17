@@ -10,23 +10,15 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+import i18n from "../translations";
 
+import { NavigationBar } from "../components/navigation-bar";
 import { MonoText } from "../components/styled-text";
-import { TopBar } from "../components/top-bar";
-import { TFuncType } from "../types/screen-props";
 type State = {
   shouldDisplayModal: boolean;
 };
 
 export class HomeScreen extends React.Component<{}, State> {
-  public static navigationOptions = ({
-    screenProps: { t }
-  }: {
-    screenProps: { t: TFuncType };
-  }) => ({
-    title: t("home")
-  });
-
   public state: State = {
     shouldDisplayModal: false
   };
@@ -41,7 +33,7 @@ export class HomeScreen extends React.Component<{}, State> {
       : require("../assets/images/robot-prod.png");
     return (
       <View style={styles.container}>
-        <TopBar />
+        <NavigationBar title={i18n.t("home")} />
         <ScrollView style={styles.container}>
           <View style={styles.welcomeContainer}>
             <Image source={imgSource} style={styles.welcomeImage} />

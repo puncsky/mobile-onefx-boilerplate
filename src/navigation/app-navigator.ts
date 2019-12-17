@@ -1,4 +1,8 @@
-import { createSwitchNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createStackNavigator,
+  createSwitchNavigator
+} from "react-navigation";
 
 import { MainTabNavigator } from "./main-tab-navigator";
 
@@ -6,11 +10,18 @@ const RootScreen = createSwitchNavigator({
   Main: MainTabNavigator
 });
 
-export const AppNavigator = createSwitchNavigator({
-  Root: {
-    screen: RootScreen,
-    navigationOptions: {
-      header: null
+const AppRoot = createStackNavigator(
+  {
+    Root: {
+      screen: RootScreen,
+      navigationOptions: {
+        header: null
+      }
     }
+  },
+  {
+    headerMode: "none"
   }
-});
+);
+
+export const AppNavigator = createAppContainer(AppRoot);

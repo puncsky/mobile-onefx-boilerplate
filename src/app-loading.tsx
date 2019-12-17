@@ -1,14 +1,15 @@
-//@ts-ignore
 import * as Icon from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
+import { Appearance } from "react-native-appearance";
 import { connect } from "react-redux";
-import { Dispatch } from "redux";
-import { Action, actionUpdateReduxState } from "./common/root-reducer";
+import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
+import { theme } from "./common/theme";
 import i18n from "./translations";
+import { ThemeProps } from "./types/theme-props";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return <AppLoadingContainer onFinish={onFinish} />;
@@ -20,19 +21,15 @@ interface Props {
   mixpanelId?: string;
   userId?: string;
   locale?: string;
+  currentTheme?: ThemeProps;
 }
 
-const AppLoadingContainer = connect<
-  {},
-  (
-    dispatch: Dispatch<Action>
-  ) => { actionUpdateReduxState(payload: Object): void },
-  { onFinish(): void }
->(
+const AppLoadingContainer = connect(
   (state: AppState) => ({
     userId: state.base.userId,
     mixpanelId: state.base.mixpanelId,
-    locale: state.base.locale
+    locale: state.base.locale,
+    currentTheme: state.base.currentTheme
   }),
   dispatch => ({
     actionUpdateReduxState(payload: Object): void {
@@ -40,10 +37,20 @@ const AppLoadingContainer = connect<
     }
   })
 )(function AppLoadingInner(props: Props): JSX.Element {
-  const { locale, onFinish } = props;
+  const { locale, onFinish, currentTheme, actionUpdateReduxState } = props;
+
+  const colorScheme = Appearance.getColorScheme();
 
   if (locale) {
     i18n.locale = locale;
+  }
+
+  if (!currentTheme) {
+    actionUpdateReduxState({
+      base: {
+        currentTheme: colorScheme === "dark" ? theme.dark : theme.light
+      }
+    });
   }
 
   const loadResourcesAsync = async () => {
@@ -62,7 +69,7 @@ const AppLoadingContainer = connect<
         }),
         Font.loadAsync(
           "antoutline",
-          require("@ant-design/icons-react-native/fonts/antoutline.ttf")
+          require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
         )
       ]);
     } catch (error) {

@@ -11,7 +11,7 @@ export const en = {
   chinese: "Chinese",
   english: "English",
   currentVersion: "Version",
-
+  theme: "Theme",
   //logout alert
   logoutAlertMsg: "Are you sure you want to log out?",
   logoutAlertCancel: "Cancel",

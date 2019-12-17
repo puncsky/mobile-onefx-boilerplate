@@ -1,12 +1,13 @@
 import * as Haptics from "expo-haptics";
 import * as React from "react";
 import { Platform } from "react-native";
-// @ts-ignore
 import {
   createBottomTabNavigator,
   createStackNavigator,
   NavigationScreenProp
 } from "react-navigation";
+import { ThemedBottomTabBar } from "../components/themed-bottom-tab-bar";
+
 import { TFuncType } from "../types/screen-props";
 
 import { TabBarIcon } from "../components/tab-bar-icon";
@@ -15,9 +16,14 @@ import { LinksScreen } from "../screens/links-screen";
 import { MineScreen } from "../screens/mine-screen/mine-screen";
 import { SettingsScreen } from "../screens/settings-screen";
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen
-});
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 HomeStack.navigationOptions = ({
   screenProps: { t }
@@ -42,9 +48,14 @@ HomeStack.navigationOptions = ({
   }
 });
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen
-});
+const LinksStack = createStackNavigator(
+  {
+    Links: LinksScreen
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 LinksStack.navigationOptions = ({
   screenProps: { t }
@@ -66,9 +77,14 @@ LinksStack.navigationOptions = ({
   }
 });
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
-});
+const SettingsStack = createStackNavigator(
+  {
+    Settings: SettingsScreen
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 SettingsStack.navigationOptions = ({
   screenProps: { t }
@@ -90,9 +106,14 @@ SettingsStack.navigationOptions = ({
   }
 });
 
-const MineStack = createStackNavigator({
-  Mine: MineScreen
-});
+const MineStack = createStackNavigator(
+  {
+    Mine: MineScreen
+  },
+  {
+    headerMode: "none"
+  }
+);
 
 MineStack.navigationOptions = ({
   screenProps: { t }
@@ -114,9 +135,17 @@ MineStack.navigationOptions = ({
   }
 });
 
-export const MainTabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-  MineStack
-});
+export const MainTabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    LinksStack,
+    SettingsStack,
+    MineStack
+  },
+  {
+    navigationOptions: {
+      header: null
+    },
+    tabBarComponent: props => <ThemedBottomTabBar {...props} />
+  }
+);

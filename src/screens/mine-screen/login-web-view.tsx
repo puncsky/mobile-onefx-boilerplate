@@ -1,10 +1,11 @@
+//@ts-ignore
 import jwtDecode from "jwt-decode";
 import React, { Component } from "react";
 import { Dimensions, View, WebView } from "react-native";
 import { connect } from "react-redux";
 import { analytics } from "../../common/analytics";
+import { getEndpoint, headers } from "../../common/request";
 import { actionUpdateReduxState } from "../../common/root-reducer";
-import { getEndpoint, headers } from "../../constants/request";
 
 const { height } = Dimensions.get("window");
 
