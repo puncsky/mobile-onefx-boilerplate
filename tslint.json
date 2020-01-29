@@ -22,8 +22,7 @@
     "max-classes-per-file": false,
     "interface-name": false,
     "missing-jsdoc": false,
-    "no-unused-variable": false,
-    "no-default-export": false,
+    "no-default-export": true,
     "no-relative-imports": false,
     "no-empty-interfaces": false,
     "use-simple-attributes": false,
@@ -88,11 +87,12 @@
     "no-suspicious-comment": false,
     "no-use-before-declare": false,
     "react-unused-props-and-state": false,
-    "member-access": false
+    "member-access": false,
+    "no-unused-variable": true
   },
   "jsRules": {
     "quotemark": [true, "single", "jsx-double"],
     "max-classes-per-file": false,
-    "no-unused-variable": false
+    "no-unused-variable": true
   }
 }

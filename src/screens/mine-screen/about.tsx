@@ -11,7 +11,7 @@ import { registerForPushNotificationAsync } from "../../common/register-push-tok
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
 import { theme } from "../../common/theme";
-import i18n from "../../translations";
+import { i18n } from "../../translations";
 import { ScreenProps } from "../../types/screen-props";
 import { ThemeProps } from "../../types/theme-props";
 import { AccountHeader } from "./account-header";

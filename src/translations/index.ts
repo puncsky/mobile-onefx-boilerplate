@@ -9,4 +9,4 @@ if (i18n) {
   i18n.locale = Locatization.locale;
 }
 
-export default i18n;
+export { i18n };

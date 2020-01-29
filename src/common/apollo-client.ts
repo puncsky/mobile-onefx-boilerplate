@@ -3,15 +3,8 @@ import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
+import { getEndpoint } from "./request";
 import { store } from "./store";
-
-export const ENDPOINT = "https://guigu.io/";
-
-export const headers: { [key: string]: string } = {
-  "x-app-id": "mobile-guiguio"
-};
-
-export const getEndpoint = (path: string) => `${ENDPOINT}${path}`;
 
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({

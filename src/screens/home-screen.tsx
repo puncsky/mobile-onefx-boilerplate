@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import i18n from "../translations";
+import { i18n } from "../translations";
 
 import { NavigationBar } from "../components/navigation-bar";
 import { MonoText } from "../components/styled-text";

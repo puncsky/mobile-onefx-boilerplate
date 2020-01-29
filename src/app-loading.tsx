@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
 import { theme } from "./common/theme";
-import i18n from "./translations";
+import { i18n } from "./translations";
 import { ThemeProps } from "./types/theme-props";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
