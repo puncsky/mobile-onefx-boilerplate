@@ -12,13 +12,22 @@ import {
 } from "react-native";
 import { i18n } from "../translations";
 
+import { withTheme } from "../common/with-theme";
 import { NavigationBar } from "../components/navigation-bar";
 import { MonoText } from "../components/styled-text";
+import { ThemeProps } from "../types/theme-props";
+
 type State = {
   shouldDisplayModal: boolean;
 };
 
-export class HomeScreen extends React.Component<{}, State> {
+@withTheme
+class HomeScreen extends React.Component<
+  {
+    theme: ThemeProps;
+  },
+  State
+> {
   public state: State = {
     shouldDisplayModal: false
   };
@@ -31,6 +40,8 @@ export class HomeScreen extends React.Component<{}, State> {
     const imgSource = __DEV__
       ? require("../assets/images/robot-dev.png")
       : require("../assets/images/robot-prod.png");
+    const { theme } = this.props;
+    const styles = styleFn(theme);
     return (
       <View style={styles.container}>
         <NavigationBar title={i18n.t("home")} />
@@ -99,6 +110,8 @@ export class HomeScreen extends React.Component<{}, State> {
   }
 
   private maybeRenderDevelopmentModeWarning(): JSX.Element {
+    const { theme } = this.props;
+    const styles = styleFn(theme);
     if (__DEV__) {
       const learnMoreButton = (
         <Text onPress={this.handleLearnMorePress} style={styles.helpLinkText}>
@@ -140,68 +153,70 @@ export class HomeScreen extends React.Component<{}, State> {
   };
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center"
-  },
-  welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: "contain",
-    marginTop: 3,
-    marginLeft: -10
-  },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center"
-  },
-  navigationFilename: {
-    marginTop: 5
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center"
-  },
-  helpLink: {
-    paddingVertical: 15
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: "#2e78b7"
-  }
-});
+export { HomeScreen };
+
+const styleFn = (theme: ThemeProps) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.theme.white
+    },
+    developmentModeText: {
+      marginBottom: 20,
+      color: theme.theme.text01,
+      fontSize: 14,
+      lineHeight: 19,
+      textAlign: "center"
+    },
+    welcomeContainer: {
+      alignItems: "center",
+      marginTop: 10,
+      marginBottom: 20
+    },
+    welcomeImage: {
+      width: 100,
+      height: 80,
+      resizeMode: "contain",
+      marginTop: 3,
+      marginLeft: -10
+    },
+    getStartedContainer: {
+      alignItems: "center",
+      marginHorizontal: 50
+    },
+    homeScreenFilename: {
+      marginVertical: 7
+    },
+    codeHighlightText: {
+      color: theme.theme.text01
+    },
+    codeHighlightContainer: {
+      borderRadius: 3,
+      paddingHorizontal: 4
+    },
+    getStartedText: {
+      fontSize: 17,
+      color: theme.theme.text01,
+      lineHeight: 24,
+      textAlign: "center"
+    },
+    tabBarInfoText: {
+      fontSize: 17,
+      color: theme.theme.text01,
+      textAlign: "center"
+    },
+    navigationFilename: {
+      marginTop: 5
+    },
+    helpContainer: {
+      marginTop: 15,
+      alignItems: "center"
+    },
+    helpLink: {
+      paddingVertical: 15
+    },
+    helpLinkText: {
+      fontSize: 14,
+      color: theme.theme.secondary
+    }
+  });

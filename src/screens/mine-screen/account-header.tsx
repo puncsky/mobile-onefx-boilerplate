@@ -6,7 +6,6 @@ import { Query, QueryResult } from "react-apollo";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { apolloClient } from "../../common/apollo-client";
-import { colors } from "../../common/colors";
 import { AppState } from "../../common/store";
 import { i18n } from "../../translations";
 import { ThemeProps } from "../../types/theme-props";
@@ -22,16 +21,20 @@ const GET_CONTACT = gql`
 export const AccountHeader = connect((state: AppState) => ({
   userId: state.base.userId,
   authToken: state.base.authToken,
-  currentTheme: state.base.currentTheme
+  currentTheme: state.base.currentTheme,
+  // tslint:disable-next-line:no-non-null-assertion
+  styles: getStyles(state.base.currentTheme!)
 }))(
   ({
     userId,
     authToken,
-    currentTheme
+    currentTheme,
+    styles
   }: {
     userId: string;
     authToken: string;
     currentTheme: ThemeProps;
+    styles: any;
   }) => {
     return (
       <View
@@ -79,7 +82,7 @@ export const AccountHeader = connect((state: AppState) => ({
             </Query>
           </>
         ) : (
-          <LoginOrSignUp>
+          <LoginOrSignUp styles={styles}>
             <Text style={styles.loginSignUpText}>{i18n.t("login")}</Text>
           </LoginOrSignUp>
         )}
@@ -90,6 +93,7 @@ export const AccountHeader = connect((state: AppState) => ({
 
 type LoginOrSignUpProps = {
   children: JSX.Element;
+  styles: any;
 };
 
 type LoginOrSignUpState = {
@@ -105,16 +109,8 @@ class LoginOrSignUp extends Component<LoginOrSignUpProps, LoginOrSignUpState> {
     this.setState({ shouldDisplayModal: false });
   };
 
-  public render():
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | string
-    | number
-    | {}
-    | React.ReactNodeArray
-    | React.ReactPortal
-    | boolean
-    | null
-    | undefined {
+  public render(): JSX.Element {
+    const { styles } = this.props;
     return (
       <View
         onTouchStart={() => {
@@ -140,35 +136,36 @@ class LoginOrSignUp extends Component<LoginOrSignUpProps, LoginOrSignUpState> {
   }
 }
 
-const styles = StyleSheet.create({
-  titleContainer: {
-    paddingHorizontal: 14,
-    paddingTop: 28,
-    paddingBottom: 28,
-    flexDirection: "row",
-    backgroundColor: colors.primary
-  },
-  nameText: {
-    color: colors.white,
-    fontWeight: "600",
-    fontSize: 24
-  },
-  loginSignUpText: {
-    fontSize: 24,
-    color: colors.white,
-    fontWeight: "600"
-  },
-  closeButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: colors.primary,
-    position: "absolute",
-    bottom: 10,
-    right: 10
-  },
-  closeText: {
-    color: colors.white,
-    fontSize: 24
-  }
-});
+const getStyles = (currentTheme: ThemeProps) =>
+  StyleSheet.create({
+    titleContainer: {
+      paddingHorizontal: 14,
+      paddingTop: 28,
+      paddingBottom: 28,
+      flexDirection: "row",
+      backgroundColor: currentTheme.theme.primary
+    },
+    nameText: {
+      color: currentTheme.theme.white,
+      fontWeight: "600",
+      fontSize: 24
+    },
+    loginSignUpText: {
+      fontSize: 24,
+      color: currentTheme.theme.white,
+      fontWeight: "600"
+    },
+    closeButton: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      backgroundColor: currentTheme.theme.primary,
+      position: "absolute",
+      bottom: 10,
+      right: 10
+    },
+    closeText: {
+      color: currentTheme.theme.primary,
+      fontSize: 24
+    }
+  });

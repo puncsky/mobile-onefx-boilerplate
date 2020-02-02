@@ -32,11 +32,11 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  primary: "blue",
+  primary: "#FBB03B",
   secondary: "#0C8DE4",
-  white: "#fff",
+  white: "#333333",
 
-  black: "#000000",
+  black: "#FFF",
   black90: "#333333",
   black80: "#999999",
   black60: "#CCCCCC",
@@ -44,7 +44,7 @@ const darkTheme = {
   black20: "#F0F0F0",
   black10: "#F7F7F7",
 
-  text01: "#4c4c4c", //		Primary text, Body copy
+  text01: "#FFF", //		Primary text, Body copy
 
   error: "#E54937", //	Error
   success: "#07A35A", //	Success
