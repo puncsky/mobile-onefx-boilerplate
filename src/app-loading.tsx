@@ -3,25 +3,22 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
-import { Appearance } from "react-native-appearance";
 import { connect } from "react-redux";
 import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
-import { theme } from "./common/theme";
+import { ktheme, setTheme } from "./common/theme";
 import { i18n } from "./translations";
-import { ThemeProps } from "./types/theme-props";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return <AppLoadingContainer onFinish={onFinish} />;
 }
 
 interface Props {
-  actionUpdateReduxState(payload: object): { type: string; payload: object };
   onFinish(): void;
   mixpanelId?: string;
   userId?: string;
   locale?: string;
-  currentTheme?: ThemeProps;
+  currentTheme?: "dark" | "light";
 }
 
 const AppLoadingContainer = connect(
@@ -37,20 +34,14 @@ const AppLoadingContainer = connect(
     }
   })
 )(function AppLoadingInner(props: Props): JSX.Element {
-  const { locale, onFinish, currentTheme, actionUpdateReduxState } = props;
-
-  const colorScheme = Appearance.getColorScheme();
+  const { locale, onFinish, currentTheme } = props;
 
   if (locale) {
     i18n.locale = locale;
   }
 
-  if (!currentTheme) {
-    actionUpdateReduxState({
-      base: {
-        currentTheme: colorScheme === "dark" ? theme.dark : theme.light
-      }
-    });
+  if (currentTheme !== ktheme.name) {
+    setTheme(currentTheme);
   }
 
   const loadResourcesAsync = async () => {

@@ -10,24 +10,17 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+import { ktheme } from "../common/theme";
 import { i18n } from "../translations";
 
-import { withTheme } from "../common/with-theme";
 import { NavigationBar } from "../components/navigation-bar";
 import { MonoText } from "../components/styled-text";
-import { ThemeProps } from "../types/theme-props";
 
 type State = {
   shouldDisplayModal: boolean;
 };
 
-@withTheme
-class HomeScreen extends React.Component<
-  {
-    theme: ThemeProps;
-  },
-  State
-> {
+class HomeScreen extends React.Component<{}, State> {
   public state: State = {
     shouldDisplayModal: false
   };
@@ -40,40 +33,41 @@ class HomeScreen extends React.Component<
     const imgSource = __DEV__
       ? require("../assets/images/robot-dev.png")
       : require("../assets/images/robot-prod.png");
-    const { theme } = this.props;
-    const styles = styleFn(theme);
     return (
-      <View style={styles.container}>
+      <View style={styles().container}>
         <NavigationBar title={i18n.t("home")} />
-        <ScrollView style={styles.container}>
-          <View style={styles.welcomeContainer}>
-            <Image source={imgSource} style={styles.welcomeImage} />
+        <ScrollView style={styles().container}>
+          <View style={styles().welcomeContainer}>
+            <Image source={imgSource} style={styles().welcomeImage} />
           </View>
 
-          <View style={styles.getStartedContainer}>
+          <View style={styles().getStartedContainer}>
             {this.maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+            <Text style={styles().getStartedText}>Get started by opening</Text>
 
             <View
-              style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
+              style={[
+                styles().codeHighlightContainer,
+                styles().homeScreenFilename
+              ]}
             >
-              <MonoText style={styles.codeHighlightText}>
+              <MonoText style={styles().codeHighlightText}>
                 screens/HomeScreen.js
               </MonoText>
             </View>
 
-            <Text style={styles.getStartedText}>
+            <Text style={styles().getStartedText}>
               Change this text and your app will automatically reload.
             </Text>
           </View>
 
-          <View style={styles.helpContainer}>
+          <View style={styles().helpContainer}>
             <TouchableOpacity
               onPress={this.handleHelpPress}
-              style={styles.helpLink}
+              style={styles().helpLink}
             >
-              <Text style={styles.helpLinkText}>
+              <Text style={styles().helpLinkText}>
                 Help, it didn’t automatically reload!
               </Text>
             </TouchableOpacity>
@@ -110,24 +104,22 @@ class HomeScreen extends React.Component<
   }
 
   private maybeRenderDevelopmentModeWarning(): JSX.Element {
-    const { theme } = this.props;
-    const styles = styleFn(theme);
     if (__DEV__) {
       const learnMoreButton = (
-        <Text onPress={this.handleLearnMorePress} style={styles.helpLinkText}>
+        <Text onPress={this.handleLearnMorePress} style={styles().helpLinkText}>
           Learn more
         </Text>
       );
 
       return (
-        <Text style={styles.developmentModeText}>
+        <Text style={styles().developmentModeText}>
           Development mode is enabled, your app will be slower but you can use
           useful development tools. {learnMoreButton}
         </Text>
       );
     } else {
       return (
-        <Text style={styles.developmentModeText}>
+        <Text style={styles().developmentModeText}>
           You are not in development mode, your app will run at full speed.
         </Text>
       );
@@ -155,15 +147,15 @@ class HomeScreen extends React.Component<
 
 export { HomeScreen };
 
-const styleFn = (theme: ThemeProps) =>
+const styles = () =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: theme.theme.white
+      backgroundColor: ktheme.white
     },
     developmentModeText: {
       marginBottom: 20,
-      color: theme.theme.text01,
+      color: ktheme.text01,
       fontSize: 14,
       lineHeight: 19,
       textAlign: "center"
@@ -188,7 +180,7 @@ const styleFn = (theme: ThemeProps) =>
       marginVertical: 7
     },
     codeHighlightText: {
-      color: theme.theme.text01
+      color: ktheme.text01
     },
     codeHighlightContainer: {
       borderRadius: 3,
@@ -196,13 +188,13 @@ const styleFn = (theme: ThemeProps) =>
     },
     getStartedText: {
       fontSize: 17,
-      color: theme.theme.text01,
+      color: ktheme.text01,
       lineHeight: 24,
       textAlign: "center"
     },
     tabBarInfoText: {
       fontSize: 17,
-      color: theme.theme.text01,
+      color: ktheme.text01,
       textAlign: "center"
     },
     navigationFilename: {
@@ -217,6 +209,6 @@ const styleFn = (theme: ThemeProps) =>
     },
     helpLinkText: {
       fontSize: 14,
-      color: theme.theme.secondary
+      color: ktheme.secondary
     }
   });

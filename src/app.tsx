@@ -5,6 +5,8 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoaderRoot } from "./app-loading";
 import { Providers } from "./common/providers";
 import "./common/sentry";
+import { ktheme } from "./common/theme";
+import { withTheme } from "./common/with-theme";
 import { AppNavigatorContainer } from "./navigation/app-navigator-container";
 
 interface Props {
@@ -56,18 +58,22 @@ export class App extends React.Component<Props, State> {
 
     return (
       <Providers>
-        <View style={styles.container}>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <AppNavigatorContainer />
-        </View>
+        <AppContent />
       </Providers>
     );
   }
 }
 
+const AppContent = withTheme(() => (
+  <View style={styles.container}>
+    {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+    <AppNavigatorContainer />
+  </View>
+));
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: ktheme.white
   }
 });

@@ -10,10 +10,9 @@ import { analytics } from "../../common/analytics";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
-import { theme } from "../../common/theme";
+import { ktheme, setTheme } from "../../common/theme";
 import { i18n } from "../../translations";
 import { ScreenProps } from "../../types/screen-props";
-import { ThemeProps } from "../../types/theme-props";
 import { AccountHeader } from "./account-header";
 import { actionLogout } from "./account-reducer";
 
@@ -27,7 +26,7 @@ type AboutProps = {
   actionLogout: Function;
   actionUpdateReduxState: Function;
   screenProps: ScreenProps;
-  currentTheme: ThemeProps;
+  currentTheme: "dark" | "light";
 };
 
 export const About = connect(
@@ -59,7 +58,14 @@ export const About = connect(
         currentTheme
       } = this.props;
       return (
-        <List renderHeader={i18n.t("about")}>
+        <List
+          renderHeader={i18n.t("about")}
+          style={{
+            backgroundColor: ktheme.white,
+            backfaceVisibility: "visible"
+          }}
+        >
+          <Item>{ktheme.white}</Item>
           <Item
             disabled
             extra={Platform.OS === "ios" ? "Apple Store" : "Google Play"}
@@ -101,18 +107,19 @@ export const About = connect(
             disabled
             extra={
               <Switch
-                value={currentTheme.name === "dark"}
+                value={currentTheme === "dark"}
                 onValueChange={value => {
-                  const changeTo = value ? theme.dark : theme.light;
+                  const mode = value ? "dark" : "light";
+                  setTheme(mode);
                   actionUpdateReduxState({
-                    base: { currentTheme: changeTo }
+                    base: { currentTheme: mode }
                   });
                 }}
               />
             }
           >
             {i18n.t("theme")}
-            <Brief>{currentTheme.name === "dark" ? "Dark" : "Light"}</Brief>
+            <Brief>{currentTheme === "dark" ? "Dark" : "Light"}</Brief>
           </Item>
 
           <Item disabled extra={Constants.nativeAppVersion}>
@@ -149,7 +156,7 @@ export const About = connect(
 
     render(): JSX.Element {
       return (
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: ktheme.black }}>
           <AccountHeader />
           {this.renderAppSection()}
         </ScrollView>

@@ -1,4 +1,10 @@
+import { Appearance } from "react-native-appearance";
+const colorScheme = Appearance.getColorScheme();
+const colorMode = colorScheme === "dark" ? "dark" : "light";
+
 const lightTheme = {
+  name: "light",
+
   primary: "#FBB03B",
   secondary: "#0C8DE4",
   white: "#fff",
@@ -32,6 +38,8 @@ const lightTheme = {
 };
 
 const darkTheme = {
+  name: "dark",
+
   primary: "#FBB03B",
   secondary: "#0C8DE4",
   white: "#333333",
@@ -64,21 +72,21 @@ const darkTheme = {
   navText: "#fff"
 };
 
-const antdLightTheme = {
+export let ktheme = colorMode === "dark" ? darkTheme : lightTheme;
+export function setTheme(mode: "dark" | "light" | undefined): void {
+  ktheme = mode === "dark" ? darkTheme : lightTheme;
+}
+
+export const antdLightTheme = {
   brand_primary: lightTheme.primary,
   color_link: lightTheme.primary,
   primary_button_fill: lightTheme.primary,
   primary_button_fill_tap: lightTheme.primary
 };
 
-const antdDarkTheme = {
+export const antdDarkTheme = {
   brand_primary: darkTheme.primary,
   color_link: darkTheme.primary,
   primary_button_fill: darkTheme.primary,
   primary_button_fill_tap: darkTheme.primary
-};
-
-export const theme = {
-  light: { name: "light", theme: lightTheme, antdTheme: antdLightTheme },
-  dark: { name: "dark", theme: darkTheme, antdTheme: antdDarkTheme }
 };
