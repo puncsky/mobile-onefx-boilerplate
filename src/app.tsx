@@ -3,11 +3,11 @@ import { EventSubscription } from "fbemitter";
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoaderRoot } from "./app-loading";
+import { AppNavigatorContainer } from "./common/navigation/app-navigator-container";
 import { Providers } from "./common/providers";
 import "./common/sentry";
 import { ktheme } from "./common/theme";
 import { withTheme } from "./common/with-theme";
-import { AppNavigatorContainer } from "./navigation/app-navigator-container";
 
 interface Props {
   skipLoadingScreen?: boolean;

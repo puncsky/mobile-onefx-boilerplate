@@ -13,8 +13,8 @@ import {
 import { ktheme } from "../common/theme";
 import { i18n } from "../translations";
 
-import { NavigationBar } from "../components/navigation-bar";
-import { MonoText } from "../components/styled-text";
+import { NavigationBar } from "../common/navigation-bar";
+import { MonoText } from "../common/styled-text";
 
 type State = {
   shouldDisplayModal: boolean;

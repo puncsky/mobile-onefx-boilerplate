@@ -1,8 +1,8 @@
 import { Scope, TranslateOptions } from "i18n-js";
 import * as React from "react";
 import { connect } from "react-redux";
-import { AppState } from "../common/store";
-import { i18n } from "../translations";
+import { i18n } from "../../translations";
+import { AppState } from "../store";
 import { AppNavigator } from "./app-navigator";
 
 type InnerProps = {

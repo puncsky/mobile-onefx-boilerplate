@@ -1,7 +1,7 @@
 import { Dimensions, PixelRatio, Platform } from "react-native";
 import { StatusBar } from "react-native";
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
+export const ScreenWidth = Dimensions.get("window").width;
+export const ScreenHeight = Dimensions.get("window").height;
 const androidStatusBarHeight = StatusBar.currentHeight
   ? StatusBar.currentHeight
   : 0;

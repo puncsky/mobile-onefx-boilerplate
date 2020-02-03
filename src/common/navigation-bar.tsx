@@ -3,13 +3,9 @@ import * as React from "react";
 import { StatusBar, Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp, withNavigation } from "react-navigation";
 import { connect } from "react-redux";
-import {
-  navigationBarHeight,
-  onePx,
-  statusBarHeight
-} from "../common/screen-util";
-import { AppState } from "../common/store";
-import { ktheme } from "../common/theme";
+import { navigationBarHeight, onePx, statusBarHeight } from "./screen-util";
+import { AppState } from "./store";
+import { ktheme } from "./theme";
 
 type Props = {
   currentTheme?: "light" | "dark";

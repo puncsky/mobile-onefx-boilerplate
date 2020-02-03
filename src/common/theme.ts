@@ -52,7 +52,7 @@ const darkTheme = {
   black20: "#F0F0F0",
   black10: "#F7F7F7",
 
-  text01: "#FFF", //		Primary text, Body copy
+  text01: "#FFFFFF", //		Primary text, Body copy
 
   error: "#E54937", //	Error
   success: "#07A35A", //	Success
@@ -78,6 +78,7 @@ export function setTheme(mode: "dark" | "light" | undefined): void {
 }
 
 export const antdLightTheme = {
+  color_text_base: lightTheme.text01,
   brand_primary: lightTheme.primary,
   color_link: lightTheme.primary,
   primary_button_fill: lightTheme.primary,
@@ -85,6 +86,7 @@ export const antdLightTheme = {
 };
 
 export const antdDarkTheme = {
+  color_text_base: darkTheme.text01,
   brand_primary: darkTheme.primary,
   color_link: darkTheme.primary,
   primary_button_fill: darkTheme.primary,

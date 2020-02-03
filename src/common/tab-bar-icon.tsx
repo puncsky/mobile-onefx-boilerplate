@@ -1,6 +1,6 @@
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
-import { ktheme } from "../common/theme";
+import { ktheme } from "./theme";
 
 interface Props {
   name: string;

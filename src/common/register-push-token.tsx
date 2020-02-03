@@ -1,7 +1,13 @@
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
+import gql from "graphql-tag";
 import { apolloClient } from "./apollo-client";
-import { ADD_PUSH_TOKEN } from "./gqls";
+
+export const ADD_PUSH_TOKEN = gql`
+  mutation addPushToken($pushToken: String) {
+    addPushToken(token: $pushToken)
+  }
+`;
 
 export const registerForPushNotificationAsync = async (): Promise<string> => {
   const { status: existingStatus } = await Permissions.getAsync(

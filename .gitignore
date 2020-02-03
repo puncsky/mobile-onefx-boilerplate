@@ -58,3 +58,6 @@ dump.rdb
 .vscode/
 package-lock.json
 yarn.lock
+
+*.apk
+*.ipa

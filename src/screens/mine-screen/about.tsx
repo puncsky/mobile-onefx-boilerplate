@@ -7,6 +7,7 @@ import React from "react";
 import { Alert, Platform, ScrollView, Switch, View } from "react-native";
 import { connect } from "react-redux";
 import { analytics } from "../../common/analytics";
+import { ListHeader } from "../../common/list-header";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
@@ -49,6 +50,7 @@ export const About = connect(
       await registerForPushNotificationAsync();
       await analytics.track("page_view_mine", {});
     }
+
     renderAppSection = () => {
       const {
         actionLogout,
@@ -57,19 +59,21 @@ export const About = connect(
         locale,
         currentTheme
       } = this.props;
+      const backgroundColor = {
+        backgroundColor: ktheme.white,
+        color: ktheme.text01
+      };
       return (
         <List
-          renderHeader={i18n.t("about")}
-          style={{
-            backgroundColor: ktheme.white,
-            backfaceVisibility: "visible"
-          }}
+          style={backgroundColor}
+          renderHeader={<ListHeader>{i18n.t("about")}</ListHeader>}
         >
-          <Item>{ktheme.white}</Item>
+          <Item style={backgroundColor}>{ktheme.white}</Item>
           <Item
             disabled
             extra={Platform.OS === "ios" ? "Apple Store" : "Google Play"}
             arrow="horizontal"
+            style={backgroundColor}
             onPress={async () => {
               const storeUrl = StoreReview.storeUrl();
               if (storeUrl) {
@@ -81,6 +85,7 @@ export const About = connect(
           </Item>
           <Item
             disabled
+            style={backgroundColor}
             extra={
               <Switch
                 value={String(locale).startsWith("en")}
@@ -104,6 +109,7 @@ export const About = connect(
           </Item>
 
           <Item
+            style={backgroundColor}
             disabled
             extra={
               <Switch
@@ -122,11 +128,16 @@ export const About = connect(
             <Brief>{currentTheme === "dark" ? "Dark" : "Light"}</Brief>
           </Item>
 
-          <Item disabled extra={Constants.nativeAppVersion}>
+          <Item
+            style={backgroundColor}
+            disabled
+            extra={Constants.nativeAppVersion}
+          >
             {i18n.t("currentVersion")}
           </Item>
           {authToken ? (
             <Item
+              style={backgroundColor}
               disabled
               onPress={() => {
                 Alert.alert(
@@ -156,7 +167,7 @@ export const About = connect(
 
     render(): JSX.Element {
       return (
-        <ScrollView style={{ backgroundColor: ktheme.black }}>
+        <ScrollView style={{ backgroundColor: ktheme.white }}>
           <AccountHeader />
           {this.renderAppSection()}
         </ScrollView>
