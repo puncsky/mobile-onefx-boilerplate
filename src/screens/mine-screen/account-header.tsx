@@ -7,9 +7,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { apolloClient } from "../../common/apollo-client";
 import { AppState } from "../../common/store";
+import { ktheme } from "../../common/theme";
 import { i18n } from "../../translations";
-import { ThemeProps } from "../../types/theme-props";
 import { LoginWebView } from "./login-web-view";
+
 const GET_CONTACT = gql`
   query userProfile($userId: String!) {
     userProfile(userId: $userId) {
@@ -20,76 +21,58 @@ const GET_CONTACT = gql`
 
 export const AccountHeader = connect((state: AppState) => ({
   userId: state.base.userId,
-  authToken: state.base.authToken,
-  currentTheme: state.base.currentTheme,
-  // tslint:disable-next-line:no-non-null-assertion
-  styles: getStyles(state.base.currentTheme!)
-}))(
-  ({
-    userId,
-    authToken,
-    currentTheme,
-    styles
-  }: {
-    userId: string;
-    authToken: string;
-    currentTheme: ThemeProps;
-    styles: any;
-  }) => {
-    return (
-      <View
-        style={[
-          styles.titleContainer,
-          { backgroundColor: currentTheme.theme.primary }
-        ]}
-      >
-        {userId && authToken ? (
-          <>
-            <Query
-              query={GET_CONTACT}
-              variables={{
-                userId: userId
-              }}
-              client={apolloClient}
-            >
-              {({
-                data,
-                error,
-                loading
-              }: QueryResult<{
-                userProfile: {
-                  email: string;
-                };
-              }>) => {
-                if (loading || error || !data || !data.userProfile) {
-                  if (error) {
-                    Toast.fail(`failed to fetch user: ${error}`, 5);
-                  }
-
-                  return <View />;
+  authToken: state.base.authToken
+}))(({ userId, authToken }: { userId: string; authToken: string }) => {
+  return (
+    <View
+      style={[getStyles().titleContainer, { backgroundColor: ktheme.primary }]}
+    >
+      {userId && authToken ? (
+        <>
+          <Query
+            query={GET_CONTACT}
+            variables={{
+              userId: userId
+            }}
+            client={apolloClient}
+          >
+            {({
+              data,
+              error,
+              loading
+            }: QueryResult<{
+              userProfile: {
+                email: string;
+              };
+            }>) => {
+              if (loading || error || !data || !data.userProfile) {
+                if (error) {
+                  Toast.fail(`failed to fetch user: ${error}`, 5);
                 }
 
-                return (
-                  <>
-                    <View>
-                      <Text style={styles.nameText} numberOfLines={1}>
-                        {data.userProfile.email}
-                      </Text>
-                    </View>
-                  </>
-                );
-              }}
-            </Query>
-          </>
-        ) : (
-          <LoginOrSignUp styles={styles}>
-            <Text style={styles.loginSignUpText}>{i18n.t("login")}</Text>
-          </LoginOrSignUp>
-        )}
-      </View>
-    );
-  }
-);
+                return <View />;
+              }
+
+              return (
+                <>
+                  <View>
+                    <Text style={getStyles().nameText} numberOfLines={1}>
+                      {data.userProfile.email}
+                    </Text>
+                  </View>
+                </>
+              );
+            }}
+          </Query>
+        </>
+      ) : (
+        <LoginOrSignUp styles={getStyles()}>
+          <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
+        </LoginOrSignUp>
+      )}
+    </View>
+  );
+});
 
 type LoginOrSignUpProps = {
   children: JSX.Element;
@@ -136,36 +119,36 @@ class LoginOrSignUp extends Component<LoginOrSignUpProps, LoginOrSignUpState> {
   }
 }
 
-const getStyles = (currentTheme: ThemeProps) =>
+const getStyles = () =>
   StyleSheet.create({
     titleContainer: {
       paddingHorizontal: 14,
       paddingTop: 28,
       paddingBottom: 28,
       flexDirection: "row",
-      backgroundColor: currentTheme.theme.primary
+      backgroundColor: ktheme.primary
     },
     nameText: {
-      color: currentTheme.theme.white,
+      color: ktheme.white,
       fontWeight: "600",
       fontSize: 24
     },
     loginSignUpText: {
       fontSize: 24,
-      color: currentTheme.theme.white,
+      color: ktheme.white,
       fontWeight: "600"
     },
     closeButton: {
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: currentTheme.theme.primary,
+      backgroundColor: ktheme.primary,
       position: "absolute",
       bottom: 10,
       right: 10
     },
     closeText: {
-      color: currentTheme.theme.primary,
+      color: ktheme.primary,
       fontSize: 24
     }
   });
