@@ -3,56 +3,61 @@ import { Analytics, Event, PageHit } from "expo-analytics";
 import ExpoMixpanelAnalytics from "expo-mixpanel-analytics";
 import { config } from "../config";
 
-const ga = __DEV__
-  ? // tslint:disable-next-line:no-any
-    ({} as any)
-  : new Analytics(config.analytics.googleTid, undefined, {
-      debug: __DEV__
-    });
+class MyAnalytics {
+  ga?: Analytics;
+  mixpanel?: ExpoMixpanelAnalytics;
 
-const mixpanel = __DEV__
-  ? // tslint:disable-next-line:no-any
-    ({} as any)
-  : new ExpoMixpanelAnalytics(config.analytics.mixpanelProjectToken);
+  constructor() {
+    if (config.analytics.googleTid) {
+      this.ga = new Analytics(config.analytics.googleTid, undefined, {
+        debug: __DEV__
+      });
+    }
 
-const analytics = {
+    if (config.analytics.mixpanelProjectToken) {
+      this.mixpanel = new ExpoMixpanelAnalytics(
+        config.analytics.mixpanelProjectToken
+      );
+    }
+  }
+
   identify(id: string): void {
-    if (__DEV__) {
-      return;
+    if (this.mixpanel) {
+      this.mixpanel.identify(id);
     }
-
-    mixpanel.identify(id);
     // @ts-ignore
-    if (ga && ga.parameters) {
+    if (this.ga && this.ga.parameters) {
       // @ts-ignore
-      ga.parameters.uid = id;
+      this.ga.parameters.uid = id;
     }
-  },
+  }
 
   // tslint:disable-next-line:no-any
   async track(name: string, props: Record<string, any>): Promise<void> {
-    if (__DEV__) {
-      return;
+    if (this.mixpanel) {
+      this.mixpanel.track(name, props);
     }
 
-    mixpanel.track(name, props);
-
-    if (!ga) {
+    if (!this.ga) {
       return;
     }
 
     if (name.startsWith("page_view_")) {
-      await ga.hit(new PageHit(name));
+      await this.ga.hit(new PageHit(name));
     } else if (name.startsWith("tap_")) {
-      await ga.event(new Event("tap", name, props.id));
+      await this.ga.event(new Event("tap", name, props.id));
     } else {
-      await ga.event(new Event(name, name));
+      await this.ga.event(new Event(name, name));
     }
-  },
+  }
 
   people_delete_user(): void {
-    mixpanel.people_delete_user();
+    if (this.mixpanel) {
+      this.mixpanel.people_delete_user();
+    }
   }
-};
+}
+
+const analytics = new MyAnalytics();
 
 export { analytics };
