@@ -5,7 +5,7 @@ import { NavigationScreenProp, withNavigation } from "react-navigation";
 import { connect } from "react-redux";
 import { navigationBarHeight, onePx, statusBarHeight } from "./screen-util";
 import { AppState } from "./store";
-import { ktheme } from "./theme";
+import { theme } from "./theme";
 
 type Props = {
   currentTheme?: "light" | "dark";
@@ -24,11 +24,13 @@ const NavBar = connect((state: AppState) => ({
         <View
           style={{
             height: navigationBarHeight,
-            backgroundColor: ktheme.navBg
+            backgroundColor: theme.navBg
           }}
         >
           <StatusBar
-            barStyle={currentTheme === "light" ? "default" : "light-content"}
+            barStyle={
+              currentTheme === "dark" ? "light-content" : "dark-content"
+            }
           />
           <View
             style={{
@@ -37,7 +39,7 @@ const NavBar = connect((state: AppState) => ({
               alignItems: "center",
               height: navigationBarHeight - statusBarHeight,
               borderBottomWidth: onePx,
-              borderBottomColor: ktheme.black80
+              borderBottomColor: theme.black80
             }}
           >
             {showBack && (
@@ -54,14 +56,14 @@ const NavBar = connect((state: AppState) => ({
                 <Icon.Ionicons
                   name="ios-arrow-back"
                   size={29}
-                  color={ktheme.navText}
+                  color={theme.navText}
                   style={{ paddingHorizontal: 10 }}
                 />
               </TouchableOpacity>
             )}
             <Text
               style={{
-                color: ktheme.navText,
+                color: theme.navText,
                 fontSize: 17,
                 fontWeight: "bold"
               }}

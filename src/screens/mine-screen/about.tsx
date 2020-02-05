@@ -11,7 +11,7 @@ import { ListHeader } from "../../common/list-header";
 import { registerForPushNotificationAsync } from "../../common/register-push-token";
 import { actionUpdateReduxState } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
-import { ktheme, setTheme } from "../../common/theme";
+import { setTheme, theme } from "../../common/theme";
 import { i18n } from "../../translations";
 import { ScreenProps } from "../../types/screen-props";
 import { AccountHeader } from "./account-header";
@@ -60,15 +60,15 @@ export const About = connect(
         currentTheme
       } = this.props;
       const backgroundColor = {
-        backgroundColor: ktheme.white,
-        color: ktheme.text01
+        backgroundColor: theme.white,
+        color: theme.text01
       };
       return (
         <List
           style={backgroundColor}
           renderHeader={<ListHeader>{i18n.t("about")}</ListHeader>}
         >
-          <Item style={backgroundColor}>{ktheme.white}</Item>
+          <Item style={backgroundColor}>{theme.white}</Item>
           <Item
             disabled
             extra={Platform.OS === "ios" ? "Apple Store" : "Google Play"}
@@ -167,7 +167,7 @@ export const About = connect(
 
     render(): JSX.Element {
       return (
-        <ScrollView style={{ backgroundColor: ktheme.white }}>
+        <ScrollView style={{ backgroundColor: theme.white }}>
           <AccountHeader />
           {this.renderAppSection()}
         </ScrollView>

@@ -6,7 +6,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
-import { ktheme, setTheme } from "./common/theme";
+import { setTheme, theme } from "./common/theme";
 import { i18n } from "./translations";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
@@ -40,7 +40,7 @@ const AppLoadingContainer = connect(
     i18n.locale = locale;
   }
 
-  if (currentTheme !== ktheme.name) {
+  if (currentTheme !== theme.name) {
     setTheme(currentTheme);
   }
 
