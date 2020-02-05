@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BottomTabBar } from "react-navigation";
 import { ThemeProps } from "../types/theme-props";
-import { ktheme } from "./theme";
+import { theme } from "./theme";
 
 type Props = {
   currentTheme: ThemeProps;
@@ -15,10 +15,10 @@ export const ThemedBottomTabBar = class ThemedBottomTabBarInner extends React.Co
       //@ts-ignore
       <BottomTabBar
         {...this.props}
-        activeTintColor={ktheme.activeTintColor}
-        inactiveTintColor={ktheme.inactiveTintColor}
+        activeTintColor={theme.activeTintColor}
+        inactiveTintColor={theme.inactiveTintColor}
         style={{
-          backgroundColor: ktheme.activeBackgroundColor
+          backgroundColor: theme.activeBackgroundColor
         }}
       />
     );

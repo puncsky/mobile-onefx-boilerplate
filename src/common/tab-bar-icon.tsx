@@ -1,6 +1,6 @@
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
-import { ktheme } from "./theme";
+import { theme } from "./theme";
 
 interface Props {
   name: string;
@@ -10,7 +10,7 @@ interface Props {
 export const TabBarIcon = class TabBarIconInner extends React.Component<Props> {
   public render(): JSX.Element {
     const { focused, name } = this.props;
-    const color = focused ? ktheme.tabIconSelected : ktheme.tabIconDefault;
+    const color = focused ? theme.tabIconSelected : theme.tabIconDefault;
     return (
       <Icon.Ionicons
         name={name}

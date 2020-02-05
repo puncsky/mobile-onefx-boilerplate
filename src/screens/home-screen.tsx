@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { ktheme } from "../common/theme";
+import { theme } from "../common/theme";
 import { i18n } from "../translations";
 
 import { NavigationBar } from "../common/navigation-bar";
@@ -151,11 +151,11 @@ const styles = () =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: ktheme.white
+      backgroundColor: theme.white
     },
     developmentModeText: {
       marginBottom: 20,
-      color: ktheme.text01,
+      color: theme.text01,
       fontSize: 14,
       lineHeight: 19,
       textAlign: "center"
@@ -180,7 +180,7 @@ const styles = () =>
       marginVertical: 7
     },
     codeHighlightText: {
-      color: ktheme.text01
+      color: theme.text01
     },
     codeHighlightContainer: {
       borderRadius: 3,
@@ -188,13 +188,13 @@ const styles = () =>
     },
     getStartedText: {
       fontSize: 17,
-      color: ktheme.text01,
+      color: theme.text01,
       lineHeight: 24,
       textAlign: "center"
     },
     tabBarInfoText: {
       fontSize: 17,
-      color: ktheme.text01,
+      color: theme.text01,
       textAlign: "center"
     },
     navigationFilename: {
@@ -209,6 +209,6 @@ const styles = () =>
     },
     helpLinkText: {
       fontSize: 14,
-      color: ktheme.secondary
+      color: theme.secondary
     }
   });

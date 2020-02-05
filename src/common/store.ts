@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import { persistedReducer } from "./root-reducer";
-import { ktheme } from "./theme";
+import { theme } from "./theme";
 
 export interface AppState {
   base: {
@@ -21,7 +21,7 @@ type Mode = "dark" | "light";
 const preloadedState: AppState = {
   base: {
     locale: Locatization.locale,
-    currentTheme: ktheme.name as Mode
+    currentTheme: theme.name as Mode
   }
 };
 

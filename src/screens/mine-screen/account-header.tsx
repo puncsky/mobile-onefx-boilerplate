@@ -7,7 +7,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { apolloClient } from "../../common/apollo-client";
 import { AppState } from "../../common/store";
-import { ktheme } from "../../common/theme";
+import { theme } from "../../common/theme";
 import { i18n } from "../../translations";
 import { LoginWebView } from "./login-web-view";
 
@@ -25,7 +25,7 @@ export const AccountHeader = connect((state: AppState) => ({
 }))(({ userId, authToken }: { userId: string; authToken: string }) => {
   return (
     <View
-      style={[getStyles().titleContainer, { backgroundColor: ktheme.primary }]}
+      style={[getStyles().titleContainer, { backgroundColor: theme.primary }]}
     >
       {userId && authToken ? (
         <>
@@ -126,29 +126,29 @@ const getStyles = () =>
       paddingTop: 28,
       paddingBottom: 28,
       flexDirection: "row",
-      backgroundColor: ktheme.primary
+      backgroundColor: theme.primary
     },
     nameText: {
-      color: ktheme.white,
+      color: theme.white,
       fontWeight: "600",
       fontSize: 24
     },
     loginSignUpText: {
       fontSize: 24,
-      color: ktheme.white,
+      color: theme.white,
       fontWeight: "600"
     },
     closeButton: {
       width: 60,
       height: 60,
       borderRadius: 30,
-      backgroundColor: ktheme.primary,
+      backgroundColor: theme.primary,
       position: "absolute",
       bottom: 10,
       right: 10
     },
     closeText: {
-      color: ktheme.primary,
+      color: theme.primary,
       fontSize: 24
     }
   });

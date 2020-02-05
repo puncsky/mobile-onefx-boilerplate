@@ -72,9 +72,10 @@ const darkTheme = {
   navText: "#fff"
 };
 
-export let ktheme = colorMode === "dark" ? darkTheme : lightTheme;
+export let theme = colorMode === "dark" ? darkTheme : lightTheme;
+
 export function setTheme(mode: "dark" | "light" | undefined): void {
-  ktheme = mode === "dark" ? darkTheme : lightTheme;
+  theme = mode === "dark" ? darkTheme : lightTheme;
 }
 
 export const antdLightTheme = {

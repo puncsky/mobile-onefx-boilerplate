@@ -6,7 +6,7 @@ import { AppLoaderRoot } from "./app-loading";
 import { AppNavigatorContainer } from "./common/navigation/app-navigator-container";
 import { Providers } from "./common/providers";
 import "./common/sentry";
-import { ktheme } from "./common/theme";
+import { theme } from "./common/theme";
 import { withTheme } from "./common/with-theme";
 
 interface Props {
@@ -66,7 +66,11 @@ export class App extends React.Component<Props, State> {
 
 const AppContent = withTheme(() => (
   <View style={styles.container}>
-    {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+    {Platform.OS === "ios" && (
+      <StatusBar
+        barStyle={theme.name === "dark" ? "light-content" : "dark-content"}
+      />
+    )}
     <AppNavigatorContainer />
   </View>
 ));
@@ -74,6 +78,6 @@ const AppContent = withTheme(() => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: ktheme.white
+    backgroundColor: theme.white
   }
 });
