@@ -1,5 +1,5 @@
-import { Dimensions, PixelRatio, Platform } from "react-native";
-import { StatusBar } from "react-native";
+import { Dimensions, PixelRatio, Platform, StatusBar } from "react-native";
+
 export const ScreenWidth = Dimensions.get("window").width;
 export const ScreenHeight = Dimensions.get("window").height;
 const androidStatusBarHeight = StatusBar.currentHeight
@@ -8,9 +8,11 @@ const androidStatusBarHeight = StatusBar.currentHeight
 const isIphoneX =
   Platform.OS === "ios" &&
   Number(`${ScreenHeight / ScreenWidth}`.substr(0, 4)) * 100 === 216;
+const BAR_HEIGHT = isIphoneX ? 44 : 20;
+const NAV_BAR_HEIGHT = isIphoneX ? 88 : 64;
 const statusBarHeight =
-  Platform.OS === "ios" ? (isIphoneX ? 44 : 20) : androidStatusBarHeight;
+  Platform.OS === "ios" ? BAR_HEIGHT : androidStatusBarHeight;
 const navigationBarHeight =
-  Platform.OS === "ios" ? (isIphoneX ? 88 : 64) : androidStatusBarHeight + 59;
+  Platform.OS === "ios" ? NAV_BAR_HEIGHT : androidStatusBarHeight + 59;
 const onePx = 1 / PixelRatio.get();
 export { statusBarHeight, navigationBarHeight, onePx };

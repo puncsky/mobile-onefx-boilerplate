@@ -1,10 +1,10 @@
 export const en = {
-  //bottom tab bar
+  // bottom tab bar
   home: "Home",
   links: "Links",
   settings: "Settings",
   mine: "Mine",
-  //mine
+  // mine
   reviewApp: "Like it? Give it a review :)",
   about: "About",
   currentLanguage: "Language",
@@ -12,7 +12,7 @@ export const en = {
   english: "English",
   currentVersion: "Version",
   theme: "Theme",
-  //logout alert
+  // logout alert
   logoutAlertMsg: "Are you sure you want to log out?",
   logoutAlertCancel: "Cancel",
   logoutAlertConfirm: "Log Out",

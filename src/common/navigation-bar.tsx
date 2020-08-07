@@ -1,7 +1,11 @@
 import * as Icon from "@expo/vector-icons";
 import * as React from "react";
 import { StatusBar, Text, TouchableOpacity, View } from "react-native";
-import { NavigationScreenProp, withNavigation } from "react-navigation";
+import {
+  NavigationRoute,
+  NavigationScreenProp,
+  withNavigation
+} from "react-navigation";
 import { connect } from "react-redux";
 import { navigationBarHeight, onePx, statusBarHeight } from "./screen-util";
 import { AppState } from "./store";
@@ -11,7 +15,7 @@ type Props = {
   currentTheme?: "light" | "dark";
   title: string;
   showBack: boolean;
-  navigation: NavigationScreenProp<string>;
+  navigation: NavigationScreenProp<NavigationRoute<unknown>, unknown>;
 };
 
 const NavBar = connect((state: AppState) => ({
@@ -77,5 +81,4 @@ const NavBar = connect((state: AppState) => ({
   }
 );
 
-//@ts-ignore
 export const NavigationBar = withNavigation(NavBar);

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface ThemeProps {
   name: string;
   antdTheme: AntdTheme;

@@ -31,7 +31,7 @@ HomeStack.navigationOptions = ({
   screenProps: { t: TFuncType };
 }) => ({
   tabBarLabel: t("home"),
-  tabBarIcon: ({ focused }: { focused: boolean }) => {
+  tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
     const name =
       Platform.OS === "ios"
         ? `ios-information-circle${focused ? "" : "-outline"}`
@@ -41,7 +41,7 @@ HomeStack.navigationOptions = ({
   tabBarOnPress: async ({
     navigation
   }: {
-    navigation: NavigationScreenProp<{}>;
+    navigation: NavigationScreenProp<unknown>;
   }) => {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Home");
@@ -63,14 +63,14 @@ LinksStack.navigationOptions = ({
   screenProps: { t: TFuncType };
 }) => ({
   tabBarLabel: t("links"),
-  tabBarIcon: ({ focused }: { focused: boolean }) => {
+  tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
     const name = Platform.OS === "ios" ? "ios-link" : "md-link";
     return <TabBarIcon focused={focused} name={name} />;
   },
   tabBarOnPress: async ({
     navigation
   }: {
-    navigation: NavigationScreenProp<{}>;
+    navigation: NavigationScreenProp<unknown>;
   }) => {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Links");
@@ -92,14 +92,14 @@ SettingsStack.navigationOptions = ({
   screenProps: { t: TFuncType };
 }) => ({
   tabBarLabel: t("settings"),
-  tabBarIcon: ({ focused }: { focused: boolean }) => {
+  tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
     const name = Platform.OS === "ios" ? "ios-options" : "md-options";
     return <TabBarIcon focused={focused} name={name} />;
   },
   tabBarOnPress: async ({
     navigation
   }: {
-    navigation: NavigationScreenProp<{}>;
+    navigation: NavigationScreenProp<unknown>;
   }) => {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Settings");
@@ -121,14 +121,14 @@ MineStack.navigationOptions = ({
   screenProps: { t: TFuncType };
 }) => ({
   tabBarLabel: t("mine"),
-  tabBarIcon: ({ focused }: { focused: boolean }) => {
+  tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
     const name = Platform.OS === "ios" ? "ios-contact" : "md-contact";
     return <TabBarIcon focused={focused} name={name} />;
   },
   tabBarOnPress: async ({
     navigation
   }: {
-    navigation: NavigationScreenProp<{}>;
+    navigation: NavigationScreenProp<unknown>;
   }) => {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Mine");
@@ -139,13 +139,15 @@ export const MainTabNavigator = createBottomTabNavigator(
   {
     HomeStack,
     LinksStack,
-    SettingsStack,
+    // SettingsStack,
     MineStack
   },
   {
     navigationOptions: {
       header: null
     },
-    tabBarComponent: props => <ThemedBottomTabBar {...props} />
+    tabBarComponent: function tabBarComponent(props) {
+      return <ThemedBottomTabBar {...props} />;
+    }
   }
 );

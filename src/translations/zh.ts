@@ -1,10 +1,10 @@
 export const zh = {
-  //bottom tab bar
+  // bottom tab bar
   home: "首页",
   links: "链接",
   settings: "设置",
   mine: "我的",
-  //mine
+  // mine
   reviewApp: "给个好评鼓励一下",
   about: "关于",
   currentLanguage: "当前语言",
@@ -12,7 +12,7 @@ export const zh = {
   chinese: "中文",
   currentVersion: "当前版本",
   theme: "主题",
-  //logout alert
+  // logout alert
   logoutAlertMsg: "你确认要登出吗？",
   logoutAlertCancel: "取消",
   logoutAlertConfirm: "确认",

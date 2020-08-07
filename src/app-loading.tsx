@@ -4,7 +4,6 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
 import { connect } from "react-redux";
-import { actionUpdateReduxState } from "./common/root-reducer";
 import { AppState } from "./common/store";
 import { setTheme, theme } from "./common/theme";
 import { i18n } from "./translations";
@@ -21,19 +20,12 @@ interface Props {
   currentTheme?: "dark" | "light";
 }
 
-const AppLoadingContainer = connect(
-  (state: AppState) => ({
-    userId: state.base.userId,
-    mixpanelId: state.base.mixpanelId,
-    locale: state.base.locale,
-    currentTheme: state.base.currentTheme
-  }),
-  dispatch => ({
-    actionUpdateReduxState(payload: Object): void {
-      dispatch(actionUpdateReduxState(payload));
-    }
-  })
-)(function AppLoadingInner(props: Props): JSX.Element {
+const AppLoadingContainer = connect((state: AppState) => ({
+  userId: state.base.userId,
+  mixpanelId: state.base.mixpanelId,
+  locale: state.base.locale,
+  currentTheme: state.base.currentTheme
+}))(function AppLoadingInner(props: Props): JSX.Element {
   const { locale, onFinish, currentTheme } = props;
 
   if (locale) {

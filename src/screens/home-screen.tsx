@@ -16,11 +16,77 @@ import { i18n } from "../translations";
 import { NavigationBar } from "../common/navigation-bar";
 import { MonoText } from "../common/styled-text";
 
+const styles = () =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.white
+    },
+    developmentModeText: {
+      marginBottom: 20,
+      color: theme.text01,
+      fontSize: 14,
+      lineHeight: 19,
+      textAlign: "center"
+    },
+    welcomeContainer: {
+      alignItems: "center",
+      marginTop: 10,
+      marginBottom: 20
+    },
+    welcomeImage: {
+      width: 100,
+      height: 80,
+      resizeMode: "contain",
+      marginTop: 3,
+      marginLeft: -10
+    },
+    getStartedContainer: {
+      alignItems: "center",
+      marginHorizontal: 50
+    },
+    homeScreenFilename: {
+      marginVertical: 7
+    },
+    codeHighlightText: {
+      color: theme.text01
+    },
+    codeHighlightContainer: {
+      borderRadius: 3,
+      paddingHorizontal: 4
+    },
+    getStartedText: {
+      fontSize: 17,
+      color: theme.text01,
+      lineHeight: 24,
+      textAlign: "center"
+    },
+    tabBarInfoText: {
+      fontSize: 17,
+      color: theme.text01,
+      textAlign: "center"
+    },
+    navigationFilename: {
+      marginTop: 5
+    },
+    helpContainer: {
+      marginTop: 15,
+      alignItems: "center"
+    },
+    helpLink: {
+      paddingVertical: 15
+    },
+    helpLinkText: {
+      fontSize: 14,
+      color: theme.secondary
+    }
+  });
+
 type State = {
   shouldDisplayModal: boolean;
 };
 
-class HomeScreen extends React.Component<{}, State> {
+class HomeScreen extends React.Component<unknown, State> {
   public state: State = {
     shouldDisplayModal: false
   };
@@ -117,13 +183,12 @@ class HomeScreen extends React.Component<{}, State> {
           useful development tools. {learnMoreButton}
         </Text>
       );
-    } else {
-      return (
-        <Text style={styles().developmentModeText}>
-          You are not in development mode, your app will run at full speed.
-        </Text>
-      );
     }
+    return (
+      <Text style={styles().developmentModeText}>
+        You are not in development mode, your app will run at full speed.
+      </Text>
+    );
   }
 
   private readonly handleLearnMorePress = () => {
@@ -146,69 +211,3 @@ class HomeScreen extends React.Component<{}, State> {
 }
 
 export { HomeScreen };
-
-const styles = () =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.white
-    },
-    developmentModeText: {
-      marginBottom: 20,
-      color: theme.text01,
-      fontSize: 14,
-      lineHeight: 19,
-      textAlign: "center"
-    },
-    welcomeContainer: {
-      alignItems: "center",
-      marginTop: 10,
-      marginBottom: 20
-    },
-    welcomeImage: {
-      width: 100,
-      height: 80,
-      resizeMode: "contain",
-      marginTop: 3,
-      marginLeft: -10
-    },
-    getStartedContainer: {
-      alignItems: "center",
-      marginHorizontal: 50
-    },
-    homeScreenFilename: {
-      marginVertical: 7
-    },
-    codeHighlightText: {
-      color: theme.text01
-    },
-    codeHighlightContainer: {
-      borderRadius: 3,
-      paddingHorizontal: 4
-    },
-    getStartedText: {
-      fontSize: 17,
-      color: theme.text01,
-      lineHeight: 24,
-      textAlign: "center"
-    },
-    tabBarInfoText: {
-      fontSize: 17,
-      color: theme.text01,
-      textAlign: "center"
-    },
-    navigationFilename: {
-      marginTop: 5
-    },
-    helpContainer: {
-      marginTop: 15,
-      alignItems: "center"
-    },
-    helpLink: {
-      paddingVertical: 15
-    },
-    helpLinkText: {
-      fontSize: 14,
-      color: theme.secondary
-    }
-  });

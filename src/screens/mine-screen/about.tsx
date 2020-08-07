@@ -17,15 +17,15 @@ import { ScreenProps } from "../../types/screen-props";
 import { AccountHeader } from "./account-header";
 import { actionLogout } from "./account-reducer";
 
-const Item = List.Item;
-const Brief = Item.Brief;
+const { Item } = List;
+const { Brief } = Item;
 
 type AboutProps = {
   // navigation: any;
   authToken: string;
   locale: string;
-  actionLogout: Function;
-  actionUpdateReduxState: Function;
+  logout: () => void;
+  updateReduxState: () => void;
   screenProps: ScreenProps;
   currentTheme: "dark" | "light";
 };
@@ -37,10 +37,10 @@ export const About = connect(
     currentTheme: state.base.currentTheme
   }),
   dispatch => ({
-    actionLogout(authToken: string): void {
+    logout(authToken: string): void {
       dispatch(actionLogout(authToken));
     },
-    actionUpdateReduxState(payload: Object): void {
+    updateReduxState(payload: { base: { locale: string } }): void {
       dispatch(actionUpdateReduxState(payload));
     }
   })
@@ -53,9 +53,9 @@ export const About = connect(
 
     renderAppSection = () => {
       const {
-        actionLogout,
+        logout,
         authToken,
-        actionUpdateReduxState,
+        updateReduxState,
         locale,
         currentTheme
       } = this.props;
@@ -91,7 +91,7 @@ export const About = connect(
                 value={String(locale).startsWith("en")}
                 onValueChange={value => {
                   const changeTo = value ? "en" : "zh";
-                  actionUpdateReduxState({
+                  updateReduxState({
                     base: { locale: changeTo }
                   });
                   i18n.locale = changeTo;
@@ -117,7 +117,7 @@ export const About = connect(
                 onValueChange={value => {
                   const mode = value ? "dark" : "light";
                   setTheme(mode);
-                  actionUpdateReduxState({
+                  updateReduxState({
                     base: { currentTheme: mode }
                   });
                 }}
@@ -148,7 +148,7 @@ export const About = connect(
                     {
                       text: i18n.t("logoutAlertConfirm"),
                       onPress: () => {
-                        actionLogout(authToken);
+                        logout(authToken);
                       }
                     }
                   ],

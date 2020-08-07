@@ -1,9 +1,9 @@
 /* tslint:disable */
 import { Dispatch } from "redux";
+import fetch from "isomorphic-unfetch";
 import { analytics } from "../../common/analytics";
 import { Action } from "../../common/root-reducer";
 import { AppState } from "../../common/store";
-import fetch from "isomorphic-unfetch";
 import { getEndpoint, headers } from "../../common/request";
 
 const LOGOUT = "LOGOUT";
@@ -19,7 +19,7 @@ export function actionLogout(authToken: string): any {
         method: "GET",
         headers: {
           ...headers,
-          ["authorization"]: `Bearer ${authToken}`
+          authorization: `Bearer ${authToken}`
         }
       });
       await analytics.track("logged_out", {});

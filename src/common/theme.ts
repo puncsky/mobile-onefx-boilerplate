@@ -1,4 +1,5 @@
 import { Appearance } from "react-native-appearance";
+
 const colorScheme = Appearance.getColorScheme();
 const colorMode = colorScheme === "dark" ? "dark" : "light";
 
@@ -72,6 +73,7 @@ const darkTheme = {
   navText: "#fff"
 };
 
+// eslint-disable-next-line import/no-mutable-exports
 export let theme = colorMode === "dark" ? darkTheme : lightTheme;
 
 export function setTheme(mode: "dark" | "light" | undefined): void {

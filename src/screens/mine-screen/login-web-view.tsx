@@ -1,7 +1,7 @@
-//@ts-ignore
 import jwtDecode from "jwt-decode";
 import React, { Component } from "react";
-import { Dimensions, View, WebView } from "react-native";
+import { Dimensions, View } from "react-native";
+import { WebView } from "react-native-webview";
 import { connect } from "react-redux";
 import { analytics } from "../../common/analytics";
 import { getEndpoint, headers } from "../../common/request";
@@ -9,33 +9,38 @@ import { actionUpdateReduxState } from "../../common/root-reducer";
 
 const { height } = Dimensions.get("window");
 
-type State = {};
-
 type Props = {
   isSignUp: boolean;
-  onClose: Function;
-  actionUpdateReduxState: Function;
+  onClose: () => void;
+  updateReduxState: (payload: {
+    base: { userId: string; authToken: string };
+  }) => void;
 };
 
 export const LoginWebView = connect(
   () => ({}),
   dispatch => ({
-    actionUpdateReduxState(payload: Object): void {
+    actionUpdateReduxState(payload: {
+      base: { userId: string; authToken: string };
+    }): void {
       dispatch(actionUpdateReduxState(payload));
     }
   })
 )(
-  class LoginWebViewInner extends Component<Props, State> {
-    public state: State = { actionHash: "" };
-
+  class LoginWebViewInner extends Component<Props> {
     public webViewRef: WebView | null;
 
     public render(): JSX.Element {
-      const { actionUpdateReduxState, isSignUp } = this.props;
-
+      const { updateReduxState, isSignUp } = this.props;
+      const injectedJavascript = `(function() {
+            window.postMessage = function(data) {
+          window.ReactNativeWebView.postMessage(data);
+        };
+      })()`;
       return (
         <View style={{ flex: 1, flexDirection: "column" }}>
           <WebView
+            injectedJavaScript={injectedJavascript}
             originWhitelist={["*"]}
             source={{
               // tslint:disable-next-line:no-http-string
@@ -47,7 +52,6 @@ export const LoginWebView = connect(
               marginTop: 0,
               height: height - 24
             }}
-            useWebKit={true}
             onMessage={async event => {
               try {
                 const msg = decodeURIComponent(
@@ -61,7 +65,7 @@ export const LoginWebView = connect(
                     isSignUp ? "signed_up" : "logged_in",
                     {}
                   );
-                  actionUpdateReduxState({
+                  updateReduxState({
                     base: { userId: sub, authToken: msgObj.authToken }
                   });
                   this.props.onClose();

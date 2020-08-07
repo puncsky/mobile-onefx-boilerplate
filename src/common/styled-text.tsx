@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Component } from "react";
-import { Text } from "react-native";
+import { StyleProp, Text, TextStyle } from "react-native";
 
 interface Props {
-  style?: object;
+  style?: StyleProp<TextStyle>;
   children: string;
 }
 

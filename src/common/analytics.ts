@@ -1,14 +1,18 @@
 import { Analytics, Event, PageHit } from "expo-analytics";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import ExpoMixpanelAnalytics from "expo-mixpanel-analytics";
 import { config } from "../config";
 
 class MyAnalytics {
-  ga?: Analytics;
+  ga?: Analytics & { parameters: { uid: string } };
+
   mixpanel?: ExpoMixpanelAnalytics;
 
   constructor() {
     if (config.analytics.googleTid) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.ga = new Analytics(config.analytics.googleTid, undefined, {
         debug: __DEV__
       });
@@ -25,14 +29,11 @@ class MyAnalytics {
     if (this.mixpanel) {
       this.mixpanel.identify(id);
     }
-    // @ts-ignore
     if (this.ga && this.ga.parameters) {
-      // @ts-ignore
       this.ga.parameters.uid = id;
     }
   }
 
-  // tslint:disable-next-line:no-any
   async track(name: string, props: Record<string, any>): Promise<void> {
     if (this.mixpanel) {
       this.mixpanel.track(name, props);
@@ -51,7 +52,7 @@ class MyAnalytics {
     }
   }
 
-  people_delete_user(): void {
+  peopleDeleteUser(): void {
     if (this.mixpanel) {
       this.mixpanel.people_delete_user();
     }

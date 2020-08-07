@@ -64,6 +64,13 @@ export class App extends React.Component<Props, State> {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: theme.white
+  }
+});
+
 const AppContent = withTheme(() => (
   <View style={styles.container}>
     {Platform.OS === "ios" && (
@@ -74,10 +81,3 @@ const AppContent = withTheme(() => (
     <AppNavigatorContainer />
   </View>
 ));
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.white
-  }
-});

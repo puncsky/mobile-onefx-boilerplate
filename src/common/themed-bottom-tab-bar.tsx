@@ -12,7 +12,8 @@ export const ThemedBottomTabBar = class ThemedBottomTabBarInner extends React.Co
 > {
   public render(): JSX.Element {
     return (
-      //@ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       <BottomTabBar
         {...this.props}
         activeTintColor={theme.activeTintColor}
