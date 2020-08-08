@@ -40,7 +40,7 @@ const getStyles = () =>
       right: 10
     },
     closeText: {
-      color: theme.primary,
+      color: theme.white,
       fontSize: 24
     }
   });
@@ -122,8 +122,20 @@ class LoginOrSignUp extends Component<LoginOrSignUpProps, LoginOrSignUpState> {
     shouldDisplayModal: false
   };
 
+  isCompMounted = false;
+
+  public componentDidMount(): void {
+    this.isCompMounted = true;
+  }
+
+  public componentWillUnmount(): void {
+    this.isCompMounted = false;
+  }
+
   private readonly onCloseModal = () => {
-    this.setState({ shouldDisplayModal: false });
+    if (this.isCompMounted) {
+      this.setState({ shouldDisplayModal: false });
+    }
   };
 
   public render(): JSX.Element {
