@@ -20,7 +20,7 @@ type Props = {
 export const LoginWebView = connect(
   () => ({}),
   dispatch => ({
-    actionUpdateReduxState(payload: {
+    updateReduxState(payload: {
       base: { userId: string; authToken: string };
     }): void {
       dispatch(actionUpdateReduxState(payload));

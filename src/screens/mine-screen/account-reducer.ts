@@ -23,7 +23,7 @@ export function actionLogout(authToken: string): any {
         }
       });
       await analytics.track("logged_out", {});
-      analytics.people_delete_user();
+      analytics.peopleDeleteUser();
     } catch (err) {
       // it is fine not to handle the server-side token invalidation
       console.log(`failed to request logout: ${err}`);
