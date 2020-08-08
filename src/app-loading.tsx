@@ -28,7 +28,7 @@ const AppLoadingContainer = connect((state: AppState) => ({
 }))(function AppLoadingInner(props: Props): JSX.Element {
   const { locale, onFinish, currentTheme } = props;
 
-  if (locale) {
+  if (locale && i18n) {
     i18n.locale = locale;
   }
 
