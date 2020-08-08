@@ -158,7 +158,7 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-react": "7.20.0",
     "husky": "3.0.0",
-    "jest": "24.8.0",
+    "jest": "^26.2.2",
     "jest-expo": "^38.0.0",
     "prettier": "1.16.4",
     "pretty-quick": "1.11.1",
