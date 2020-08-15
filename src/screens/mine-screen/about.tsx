@@ -68,7 +68,6 @@ export const About = connect(
           style={backgroundColor}
           renderHeader={<ListHeader>{i18n.t("about")}</ListHeader>}
         >
-          <Item style={backgroundColor}>{theme.white}</Item>
           <Item
             disabled
             extra={Platform.OS === "ios" ? "Apple Store" : "Google Play"}

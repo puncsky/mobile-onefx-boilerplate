@@ -5,7 +5,6 @@ import React, { Component } from "react";
 import { Query, QueryResult } from "react-apollo";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { apolloClient } from "../../common/apollo-client";
 import { AppState } from "../../common/store";
 import { theme } from "../../common/theme";
 import { i18n } from "../../translations";
@@ -68,7 +67,6 @@ export const AccountHeader = connect((state: AppState) => ({
             variables={{
               userId
             }}
-            client={apolloClient}
           >
             {({
               data,
