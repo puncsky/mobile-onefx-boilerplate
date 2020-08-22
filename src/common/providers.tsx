@@ -3,9 +3,9 @@ import React from "react";
 import { ApolloProvider } from "react-apollo";
 import { connect, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { apolloClient } from "./apollo-client";
-import { persistor, store } from "./store";
-import { antdDarkTheme, antdLightTheme } from "./theme";
+import { apolloClient } from "@/common/apollo-client";
+import { persistor, store } from "@/common/store";
+import { antdDarkTheme, antdLightTheme } from "@/common/theme";
 
 export function Providers({
   children

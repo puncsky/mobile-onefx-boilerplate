@@ -1,8 +1,8 @@
 import deepExtend from "deep-extend";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import { accountReducer } from "../screens/mine-screen/account-reducer";
-import { AppState } from "./store";
+import { accountReducer } from "@/screens/mine-screen/account-reducer";
+import { AppState } from "@/common/store";
 
 const UPDATE_REDUX_STATE = "UPDATE_REDUX_STATE";
 

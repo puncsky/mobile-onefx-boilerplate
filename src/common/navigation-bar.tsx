@@ -3,9 +3,13 @@ import * as React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
-import { navigationBarHeight, onePx, statusBarHeight } from "./screen-util";
-import { AppState } from "./store";
-import { theme } from "./theme";
+import {
+  navigationBarHeight,
+  onePx,
+  statusBarHeight
+} from "@/common/screen-util";
+import { AppState } from "@/common/store";
+import { theme } from "@/common/theme";
 
 type Props = {
   currentTheme?: "light" | "dark";
@@ -16,57 +20,54 @@ type Props = {
 
 export const NavigationBar = connect((state: AppState) => ({
   currentTheme: state.base.currentTheme
-}))(
-  function NavigationBarInner(props: Props): JSX.Element {
-
-    const { title, showBack, navigation } = props;
-    return (
+}))(function NavigationBarInner(props: Props): JSX.Element {
+  const { title, showBack, navigation } = props;
+  return (
+    <View
+      style={{
+        height: navigationBarHeight,
+        backgroundColor: theme.navBg
+      }}
+    >
       <View
         style={{
-          height: navigationBarHeight,
-          backgroundColor: theme.navBg
+          marginTop: statusBarHeight,
+          justifyContent: "center",
+          alignItems: "center",
+          height: navigationBarHeight - statusBarHeight,
+          borderBottomWidth: onePx,
+          borderBottomColor: theme.black80
         }}
       >
-        <View
+        {showBack && (
+          <TouchableOpacity
+            activeOpacity={0.9}
+            style={{
+              position: "absolute",
+              paddingHorizontal: 10,
+              paddingVertical: 6,
+              left: 0
+            }}
+            onPress={() => navigation && navigation.pop()}
+          >
+            <Ionicons
+              name="ios-arrow-back"
+              size={29}
+              color={theme.navText}
+              style={{ paddingHorizontal: 10 }}
+            />
+          </TouchableOpacity>
+        )}
+        <Text
           style={{
-            marginTop: statusBarHeight,
-            justifyContent: "center",
-            alignItems: "center",
-            height: navigationBarHeight - statusBarHeight,
-            borderBottomWidth: onePx,
-            borderBottomColor: theme.black80
+            color: theme.navText,
+            fontSize: 17,
+            fontWeight: "bold"
           }}
         >
-          {showBack && (
-            <TouchableOpacity
-              activeOpacity={0.9}
-              style={{
-                position: "absolute",
-                paddingHorizontal: 10,
-                paddingVertical: 6,
-                left: 0
-              }}
-              onPress={() => navigation && navigation.pop()}
-            >
-              <Ionicons
-                name="ios-arrow-back"
-                size={29}
-                color={theme.navText}
-                style={{ paddingHorizontal: 10 }}
-              />
-            </TouchableOpacity>
-          )}
-          <Text
-            style={{
-              color: theme.navText,
-              fontSize: 17,
-              fontWeight: "bold"
-            }}
-          >
-            {title}
-          </Text>
-        </View>
+          {title}
+        </Text>
       </View>
-    );
-  }
-);
+    </View>
+  );
+});

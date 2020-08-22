@@ -1,8 +1,8 @@
 import * as Icon from "@expo/vector-icons";
 import { Asset } from "expo-asset";
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import * as React from "react";
 
 export function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = React.useState(false);
@@ -13,13 +13,13 @@ export function useCachedResources() {
         SplashScreen.preventAutoHideAsync();
 
         await Asset.loadAsync([
-          require("../../assets/images/robot-dev.png"),
-          require("../../assets/images/robot-prod.png")
+          require("@/assets/images/robot-dev.png"),
+          require("@/assets/images/robot-prod.png")
         ]);
 
         await Font.loadAsync({
           ...Icon.Ionicons.font,
-          "space-mono": require("../../assets/fonts/SpaceMono-Regular.ttf"),
+          "space-mono": require("@/assets/fonts/SpaceMono-Regular.ttf"),
           antoutline: require("../../../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
         });
       } catch (e) {

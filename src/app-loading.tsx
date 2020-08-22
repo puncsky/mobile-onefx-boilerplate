@@ -4,9 +4,9 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import * as React from "react";
 import { connect } from "react-redux";
-import { AppState } from "./common/store";
-import { setTheme, theme } from "./common/theme";
-import { i18n } from "./translations";
+import { AppState } from "@/common/store";
+import { setTheme, theme } from "@/common/theme";
+import { i18n } from "@/translations";
 
 export function AppLoaderRoot({ onFinish }: { onFinish(): void }): JSX.Element {
   return <AppLoadingContainer onFinish={onFinish} />;
@@ -38,7 +38,6 @@ const AppLoadingContainer = connect((state: AppState) => ({
 
   const loadResourcesAsync = async () => {
     try {
-
       await Asset.loadAsync([
         require("./assets/images/robot-dev.png"),
         require("./assets/images/robot-prod.png")

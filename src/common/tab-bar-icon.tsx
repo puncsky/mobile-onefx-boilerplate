@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
-import { theme } from "./theme";
+import { theme } from "@/common/theme";
 
 interface Props {
   name: string;

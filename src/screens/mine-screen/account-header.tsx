@@ -5,11 +5,11 @@ import * as React from "react";
 import { Query, QueryResult } from "react-apollo";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { AppState } from "../../common/store";
-import { theme } from "../../common/theme";
-import { i18n } from "../../translations";
-import { LoginWebView } from "./login-web-view";
-import { useStateIfMounted } from "../../common/hooks/use-state-if-mounted";
+import { AppState } from "@/common/store";
+import { theme } from "@/common/theme";
+import { i18n } from "@/translations";
+import { LoginWebView } from "@/screens/mine-screen/login-web-view";
+import { useStateIfMounted } from "@/common/hooks/use-state-if-mounted";
 
 const getStyles = () =>
   StyleSheet.create({
@@ -99,14 +99,13 @@ export const AccountHeader = connect((state: AppState) => ({
           </Query>
         </>
       ) : (
-          <LoginOrSignUp>
-            <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
-          </LoginOrSignUp>
-        )}
+        <LoginOrSignUp>
+          <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
+        </LoginOrSignUp>
+      )}
     </View>
   );
 });
-
 
 const getLoginOrSignUpStyles = () =>
   StyleSheet.create({
@@ -130,9 +129,6 @@ type LoginOrSignUpProps = {
   isSignUp?: boolean;
 };
 
-
-
-
 export function LoginOrSignUp(props: LoginOrSignUpProps): JSX.Element {
   const [shouldDisplayModal, setShouldDisplayModal] = useStateIfMounted(false);
 
@@ -154,7 +150,10 @@ export function LoginOrSignUp(props: LoginOrSignUpProps): JSX.Element {
         animationType="slide-up"
         onClose={onCloseModal}
       >
-        <LoginWebView onClose={onCloseModal}  isSignUp={Boolean(props.isSignUp)} />
+        <LoginWebView
+          onClose={onCloseModal}
+          isSignUp={Boolean(props.isSignUp)}
+        />
         <Button style={styles.closeButton} onPress={onCloseModal}>
           <Text style={styles.closeText}>✕</Text>
         </Button>

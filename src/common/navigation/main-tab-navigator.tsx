@@ -6,15 +6,15 @@ import {
   createStackNavigator,
   NavigationScreenProp
 } from "react-navigation";
-import { ThemedBottomTabBar } from "../themed-bottom-tab-bar";
+import { ThemedBottomTabBar } from "@/common/themed-bottom-tab-bar";
 
-import { TFuncType } from "../../types/screen-props";
+import { TFuncType } from "@/types/screen-props";
 
-import { HomeScreen } from "../../screens/home-screen";
-import { LinksScreen } from "../../screens/links-screen";
-import { MineScreen } from "../../screens/mine-screen/mine-screen";
-import { SettingsScreen } from "../../screens/settings-screen";
-import { TabBarIcon } from "../tab-bar-icon";
+import { HomeScreen } from "@/screens/home-screen";
+import { LinksScreen } from "@/screens/links-screen";
+import { MineScreen } from "@/screens/mine-screen/mine-screen";
+import { SettingsScreen } from "@/screens/settings-screen";
+import { TabBarIcon } from "@/common/tab-bar-icon";
 
 const HomeStack = createStackNavigator(
   {

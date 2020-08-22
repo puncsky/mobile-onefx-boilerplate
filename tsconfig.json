@@ -5,7 +5,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "jsx": "react-native",
-    "lib": ["dom", "es2015", "es2016", "es2017"],
+    "lib": ["es2017"],
     "module": "commonjs",
     "noEmit": true,
     "noEmitHelpers": true,
@@ -19,7 +19,11 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es2017"
+    "target": "es2017",
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"]

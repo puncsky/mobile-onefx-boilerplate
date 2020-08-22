@@ -3,8 +3,8 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore } from "redux-persist";
 import thunk from "redux-thunk";
-import { persistedReducer } from "./root-reducer";
-import { theme } from "./theme";
+import { persistedReducer } from "@/common/root-reducer";
+import { theme } from "@/common/theme";
 
 export interface AppState {
   base: {

@@ -2,7 +2,7 @@ import { Analytics, Event, PageHit } from "expo-analytics";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import ExpoMixpanelAnalytics from "expo-mixpanel-analytics";
-import { config } from "../config";
+import { config } from "@/config";
 
 class MyAnalytics {
   ga?: Analytics & { parameters: { uid: string } };

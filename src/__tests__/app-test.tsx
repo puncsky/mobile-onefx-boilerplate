@@ -2,8 +2,8 @@ import * as React from "react";
 import { StatusBar } from "react-native";
 import * as renderer from "react-test-renderer";
 import { Provider } from "react-redux";
-import { AppLoaderRoot } from "../app-loading";
-import { store } from "../common/store";
+import { AppLoaderRoot } from "@/app-loading";
+import { store } from "@/common/store";
 
 describe("App snapshot", () => {
   beforeEach(() => {

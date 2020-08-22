@@ -1,7 +1,7 @@
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 import gql from "graphql-tag";
-import { apolloClient } from "./apollo-client";
+import { apolloClient } from "@/common/apollo-client";
 
 export const ADD_PUSH_TOKEN = gql`
   mutation addPushToken($pushToken: String) {

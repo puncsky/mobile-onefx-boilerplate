@@ -1,10 +1,10 @@
 /* tslint:disable */
 import { Dispatch } from "redux";
 import fetch from "isomorphic-unfetch";
-import { analytics } from "../../common/analytics";
-import { Action } from "../../common/root-reducer";
-import { AppState } from "../../common/store";
-import { getEndpoint, headers } from "../../common/request";
+import { analytics } from "@/common/analytics";
+import { Action } from "@/common/root-reducer";
+import { AppState } from "@/common/store";
+import { getEndpoint, headers } from "@/common/request";
 
 const LOGOUT = "LOGOUT";
 

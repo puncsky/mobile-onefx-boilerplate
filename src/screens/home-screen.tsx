@@ -1,7 +1,7 @@
 import Button from "@ant-design/react-native/lib/button";
 import Modal from "@ant-design/react-native/lib/modal";
 import { WebBrowser } from "expo";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { theme } from "../common/theme";
-import { i18n } from "../translations";
+import { theme } from "@/common/theme";
+import { i18n } from "@/translations";
 
-import { NavigationBar } from "../common/navigation-bar";
-import { MonoText } from "../common/styled-text";
+import { NavigationBar } from "@/common/navigation-bar";
+import { MonoText } from "@/common/styled-text";
 
 const styles = () =>
   StyleSheet.create({
@@ -82,38 +82,12 @@ const styles = () =>
     }
   });
 
-
-function HomeScreen():JSX.Element {
-
-  const [shouldDisplayModal,setShouldDisplayModal] = useState(false);
+function HomeScreen(): JSX.Element {
+  const [shouldDisplayModal, setShouldDisplayModal] = useState(false);
 
   const onCloseModal = () => {
     setShouldDisplayModal(false);
   };
-
-  
-
-  const maybeRenderDevelopmentModeWarning = ()=> {
-    if (__DEV__) {
-      const learnMoreButton = (
-        <Text onPress={this.handleLearnMorePress} style={styles().helpLinkText}>
-          Learn more
-        </Text>
-      );
-
-      return (
-        <Text style={styles().developmentModeText}>
-          Development mode is enabled, your app will be slower but you can use
-          useful development tools. {learnMoreButton}
-        </Text>
-      );
-    }
-    return (
-      <Text style={styles().developmentModeText}>
-        You are not in development mode, your app will run at full speed.
-      </Text>
-    );
-  }
 
   const handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync(
@@ -133,78 +107,96 @@ function HomeScreen():JSX.Element {
     });
   };
 
+  const maybeRenderDevelopmentModeWarning = () => {
+    if (__DEV__) {
+      const learnMoreButton = (
+        <Text onPress={handleLearnMorePress} style={styles().helpLinkText}>
+          Learn more
+        </Text>
+      );
+
+      return (
+        <Text style={styles().developmentModeText}>
+          Development mode is enabled, your app will be slower but you can use
+          useful development tools. {learnMoreButton}
+        </Text>
+      );
+    }
+    return (
+      <Text style={styles().developmentModeText}>
+        You are not in development mode, your app will run at full speed.
+      </Text>
+    );
+  };
 
   const imgSource = __DEV__
-      ? require("../assets/images/robot-dev.png")
-      : require("../assets/images/robot-prod.png");
-    return (
-      <View style={styles().container}>
-        <NavigationBar title={i18n.t("home")} />
-        <ScrollView style={styles().container}>
-          <View style={styles().welcomeContainer}>
-            <Image source={imgSource} style={styles().welcomeImage} />
-          </View>
+    ? require("@/assets/images/robot-dev.png")
+    : require("@/assets/images/robot-prod.png");
+  return (
+    <View style={styles().container}>
+      <NavigationBar title={i18n.t("home")} />
+      <ScrollView style={styles().container}>
+        <View style={styles().welcomeContainer}>
+          <Image source={imgSource} style={styles().welcomeImage} />
+        </View>
 
-          <View style={styles().getStartedContainer}>
-            {maybeRenderDevelopmentModeWarning()}
+        <View style={styles().getStartedContainer}>
+          {maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles().getStartedText}>Get started by opening</Text>
+          <Text style={styles().getStartedText}>Get started by opening</Text>
 
-            <View
-              style={[
-                styles().codeHighlightContainer,
-                styles().homeScreenFilename
-              ]}
-            >
-              <MonoText style={styles().codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
-            </View>
-
-            <Text style={styles().getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles().helpContainer}>
-            <TouchableOpacity
-              onPress={handleHelpPress}
-              style={styles().helpLink}
-            >
-              <Text style={styles().helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <Modal
-            transparent={false}
-            visible={shouldDisplayModal}
-            animationType="slide-up"
-            onClose={onCloseModal}
+          <View
+            style={[
+              styles().codeHighlightContainer,
+              styles().homeScreenFilename
+            ]}
           >
-            <View style={{ paddingVertical: 220 }}>
-              <Text style={{ textAlign: "center" }}>Hello! Welcome!</Text>
-            </View>
-            <Button
-              onPress={() => {
-                setShouldDisplayModal(false);
-              }}
-            >
-              Cancel
-            </Button>
-          </Modal>
+            <MonoText style={styles().codeHighlightText}>
+              screens/HomeScreen.js
+            </MonoText>
+          </View>
+
+          <Text style={styles().getStartedText}>
+            Change this text and your app will automatically reload.
+          </Text>
+        </View>
+
+        <View style={styles().helpContainer}>
+          <TouchableOpacity onPress={handleHelpPress} style={styles().helpLink}>
+            <Text style={styles().helpLinkText}>
+              Help, it didn’t automatically reload!
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <Modal
+          transparent={false}
+          visible={shouldDisplayModal}
+          animationType="slide-up"
+          onClose={onCloseModal}
+        >
+          <View style={{ paddingVertical: 220 }}>
+            <Text style={{ textAlign: "center" }}>Hello! Welcome!</Text>
+          </View>
           <Button
-            type="primary"
             onPress={() => {
-              setShouldDisplayModal(true);
+              setShouldDisplayModal(false);
             }}
           >
-            hey
+            Cancel
           </Button>
-        </ScrollView>
-      </View>
-    );
+        </Modal>
+        <Button
+          type="primary"
+          onPress={() => {
+            setShouldDisplayModal(true);
+          }}
+        >
+          hey
+        </Button>
+      </ScrollView>
+    </View>
+  );
 }
 
 export { HomeScreen };

@@ -1,7 +1,7 @@
 import * as Locatization from "expo-localization";
 import i18n from "i18n-js";
-import { en } from "./en";
-import { zh } from "./zh";
+import { en } from "@/translations/en";
+import { zh } from "@/translations/zh";
 
 if (i18n) {
   i18n.fallbacks = true;

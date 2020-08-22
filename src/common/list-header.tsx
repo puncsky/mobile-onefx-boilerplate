@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native";
-import { theme } from "./theme";
+import { theme } from "@/common/theme";
 
 export function ListHeader({ children }: { children: string }): JSX.Element {
   return (
