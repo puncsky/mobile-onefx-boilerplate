@@ -3,7 +3,7 @@ import { List } from "@ant-design/react-native";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
 import * as WebBrowser from "expo-web-browser";
-import React from "react";
+import React,{useEffect} from "react";
 import { Alert, Platform, ScrollView, Switch, View } from "react-native";
 import { connect } from "react-redux";
 import { analytics } from "../../common/analytics";
@@ -20,12 +20,13 @@ import { actionLogout } from "./account-reducer";
 const { Item } = List;
 const { Brief } = Item;
 
-type AboutProps = {
-  // navigation: any;
+type Props = {
   authToken: string;
   locale: string;
-  logout: () => void;
-  updateReduxState: () => void;
+  logout: (authToken: string) => void;
+  updateReduxState: (state: {
+    base: { locale?: string; currentTheme?: string };
+  }) => void;
   screenProps: ScreenProps;
   currentTheme: "dark" | "light";
 };
@@ -45,20 +46,26 @@ export const About = connect(
     }
   })
 )(
-  class AboutInner extends React.Component<AboutProps> {
-    async componentDidMount(): Promise<void> {
-      await registerForPushNotificationAsync();
-      await analytics.track("page_view_mine", {});
-    }
+  ({
+    authToken,
+    locale,
+    logout,
+    updateReduxState,
+    screenProps,
+    currentTheme
+  }: Props) => {
 
-    renderAppSection = () => {
-      const {
-        logout,
-        authToken,
-        updateReduxState,
-        locale,
-        currentTheme
-      } = this.props;
+
+    useEffect(() => {
+      async function init() {
+        await registerForPushNotificationAsync();
+      await analytics.track("page_view_mine", {});
+      }
+      init();
+    }, []);
+
+    const renderAppSection = () => {
+
       const backgroundColor = {
         backgroundColor: theme.white,
         color: theme.text01
@@ -94,7 +101,7 @@ export const About = connect(
                     base: { locale: changeTo }
                   });
                   i18n.locale = changeTo;
-                  this.props.screenProps.setLocale(changeTo);
+                  screenProps.setLocale(changeTo);
                 }}
               />
             }
@@ -164,13 +171,11 @@ export const About = connect(
       );
     };
 
-    render(): JSX.Element {
-      return (
-        <ScrollView style={{ backgroundColor: theme.white }}>
-          <AccountHeader />
-          {this.renderAppSection()}
-        </ScrollView>
-      );
-    }
+    return (
+      <ScrollView style={{ backgroundColor: theme.white }}>
+        <AccountHeader />
+        {renderAppSection()}
+      </ScrollView>
+    );
   }
 );

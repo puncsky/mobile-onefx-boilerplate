@@ -38,23 +38,17 @@ const AppLoadingContainer = connect((state: AppState) => ({
 
   const loadResourcesAsync = async () => {
     try {
-      await Promise.all([
-        Asset.loadAsync([
-          require("./assets/images/robot-dev.png"),
-          require("./assets/images/robot-prod.png")
-        ]),
-        Font.loadAsync({
-          // This is the font that we are using for our tab bar
-          ...Icon.Ionicons.font,
-          // We include SpaceMono because we use it in HomeScreen.js. Feel free
-          // to remove this if you are not using it in your app
-          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
-        }),
-        Font.loadAsync(
-          "antoutline",
-          require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
-        )
+
+      await Asset.loadAsync([
+        require("./assets/images/robot-dev.png"),
+        require("./assets/images/robot-prod.png")
       ]);
+
+      await Font.loadAsync({
+        ...Icon.Ionicons.font,
+        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+        antoutline: require("../node_modules/@ant-design/icons-react-native/fonts/antoutline.ttf")
+      });
     } catch (error) {
       // tslint:disable-next-line
       console.error(`failed to loadResourcesAsync: ${error}`);
@@ -62,8 +56,6 @@ const AppLoadingContainer = connect((state: AppState) => ({
   };
 
   const handleLoadingError = (error: Error) => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
     console.warn(error);
   };
 

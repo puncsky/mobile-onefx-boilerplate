@@ -1,11 +1,7 @@
-import * as Icon from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
-import { StatusBar, Text, TouchableOpacity, View } from "react-native";
-import {
-  NavigationRoute,
-  NavigationScreenProp,
-  withNavigation
-} from "react-navigation";
+import { Text, TouchableOpacity, View } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { navigationBarHeight, onePx, statusBarHeight } from "./screen-util";
 import { AppState } from "./store";
@@ -14,71 +10,63 @@ import { theme } from "./theme";
 type Props = {
   currentTheme?: "light" | "dark";
   title: string;
-  showBack: boolean;
-  navigation: NavigationScreenProp<NavigationRoute<unknown>, unknown>;
+  showBack?: boolean;
+  navigation?: NavigationScreenProp<string>;
 };
 
-const NavBar = connect((state: AppState) => ({
+export const NavigationBar = connect((state: AppState) => ({
   currentTheme: state.base.currentTheme
 }))(
-  class NavBarInner extends React.Component<Props> {
-    public render(): JSX.Element {
-      const { currentTheme, title, showBack, navigation } = this.props;
-      return (
+  function NavigationBarInner(props: Props): JSX.Element {
+
+    const { title, showBack, navigation } = props;
+    return (
+      <View
+        style={{
+          height: navigationBarHeight,
+          backgroundColor: theme.navBg
+        }}
+      >
         <View
           style={{
-            height: navigationBarHeight,
-            backgroundColor: theme.navBg
+            marginTop: statusBarHeight,
+            justifyContent: "center",
+            alignItems: "center",
+            height: navigationBarHeight - statusBarHeight,
+            borderBottomWidth: onePx,
+            borderBottomColor: theme.black80
           }}
         >
-          <StatusBar
-            barStyle={
-              currentTheme === "dark" ? "light-content" : "dark-content"
-            }
-          />
-          <View
+          {showBack && (
+            <TouchableOpacity
+              activeOpacity={0.9}
+              style={{
+                position: "absolute",
+                paddingHorizontal: 10,
+                paddingVertical: 6,
+                left: 0
+              }}
+              onPress={() => navigation && navigation.pop()}
+            >
+              <Ionicons
+                name="ios-arrow-back"
+                size={29}
+                color={theme.navText}
+                style={{ paddingHorizontal: 10 }}
+              />
+            </TouchableOpacity>
+          )}
+          <Text
             style={{
-              marginTop: statusBarHeight,
-              justifyContent: "center",
-              alignItems: "center",
-              height: navigationBarHeight - statusBarHeight,
-              borderBottomWidth: onePx,
-              borderBottomColor: theme.black80
+              color: theme.navText,
+              fontSize: 17,
+              fontWeight: "bold"
             }}
           >
-            {showBack && (
-              <TouchableOpacity
-                activeOpacity={0.9}
-                style={{
-                  position: "absolute",
-                  paddingHorizontal: 10,
-                  paddingVertical: 6,
-                  left: 0
-                }}
-                onPress={() => navigation.pop()}
-              >
-                <Icon.Ionicons
-                  name="ios-arrow-back"
-                  size={29}
-                  color={theme.navText}
-                  style={{ paddingHorizontal: 10 }}
-                />
-              </TouchableOpacity>
-            )}
-            <Text
-              style={{
-                color: theme.navText,
-                fontSize: 17,
-                fontWeight: "bold"
-              }}
-            >
-              {title}
-            </Text>
-          </View>
+            {title}
+          </Text>
         </View>
-      );
-    }
+      </View>
+    );
   }
 );
-
-export const NavigationBar = withNavigation(NavBar);

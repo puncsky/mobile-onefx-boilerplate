@@ -11,18 +11,16 @@ type Props = {
   screenProps: ScreenProps;
 };
 
-export class MineScreen extends React.Component<Props> {
-  public render(): JSX.Element {
-    return (
-      <View
-        style={{
-          backgroundColor: theme.white,
-          height: ScreenHeight
-        }}
-      >
-        <NavigationBar title={i18n.t("mine")} />
-        <About screenProps={this.props.screenProps} />
-      </View>
-    );
-  }
+export function MineScreen(props: Props): JSX.Element {
+  return (
+    <View
+      style={{
+        backgroundColor: theme.white,
+        height: ScreenHeight
+      }}
+    >
+      <NavigationBar title={i18n.t("mine")} />
+      <About screenProps={props.screenProps} />
+    </View>
+  );
 }

@@ -1,7 +1,7 @@
 import Button from "@ant-design/react-native/lib/button";
 import Modal from "@ant-design/react-native/lib/modal";
 import { WebBrowser } from "expo";
-import * as React from "react";
+import React,{useState} from "react";
 import {
   Image,
   ScrollView,
@@ -82,94 +82,18 @@ const styles = () =>
     }
   });
 
-type State = {
-  shouldDisplayModal: boolean;
-};
 
-class HomeScreen extends React.Component<unknown, State> {
-  public state: State = {
-    shouldDisplayModal: false
+function HomeScreen():JSX.Element {
+
+  const [shouldDisplayModal,setShouldDisplayModal] = useState(false);
+
+  const onCloseModal = () => {
+    setShouldDisplayModal(false);
   };
 
-  private readonly onCloseModal = () => {
-    this.setState({ shouldDisplayModal: false });
-  };
+  
 
-  public render(): JSX.Element {
-    const imgSource = __DEV__
-      ? require("../assets/images/robot-dev.png")
-      : require("../assets/images/robot-prod.png");
-    return (
-      <View style={styles().container}>
-        <NavigationBar title={i18n.t("home")} />
-        <ScrollView style={styles().container}>
-          <View style={styles().welcomeContainer}>
-            <Image source={imgSource} style={styles().welcomeImage} />
-          </View>
-
-          <View style={styles().getStartedContainer}>
-            {this.maybeRenderDevelopmentModeWarning()}
-
-            <Text style={styles().getStartedText}>Get started by opening</Text>
-
-            <View
-              style={[
-                styles().codeHighlightContainer,
-                styles().homeScreenFilename
-              ]}
-            >
-              <MonoText style={styles().codeHighlightText}>
-                screens/HomeScreen.js
-              </MonoText>
-            </View>
-
-            <Text style={styles().getStartedText}>
-              Change this text and your app will automatically reload.
-            </Text>
-          </View>
-
-          <View style={styles().helpContainer}>
-            <TouchableOpacity
-              onPress={this.handleHelpPress}
-              style={styles().helpLink}
-            >
-              <Text style={styles().helpLinkText}>
-                Help, it didn’t automatically reload!
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          <Modal
-            transparent={false}
-            visible={this.state.shouldDisplayModal}
-            animationType="slide-up"
-            onClose={this.onCloseModal}
-          >
-            <View style={{ paddingVertical: 220 }}>
-              <Text style={{ textAlign: "center" }}>Hello! Welcome!</Text>
-            </View>
-            <Button
-              onPress={() => {
-                this.setState({ shouldDisplayModal: false });
-              }}
-            >
-              Cancel
-            </Button>
-          </Modal>
-          <Button
-            type="primary"
-            onPress={() => {
-              this.setState({ shouldDisplayModal: true });
-            }}
-          >
-            hey
-          </Button>
-        </ScrollView>
-      </View>
-    );
-  }
-
-  private maybeRenderDevelopmentModeWarning(): JSX.Element {
+  const maybeRenderDevelopmentModeWarning = ()=> {
     if (__DEV__) {
       const learnMoreButton = (
         <Text onPress={this.handleLearnMorePress} style={styles().helpLinkText}>
@@ -191,7 +115,7 @@ class HomeScreen extends React.Component<unknown, State> {
     );
   }
 
-  private readonly handleLearnMorePress = () => {
+  const handleLearnMorePress = () => {
     WebBrowser.openBrowserAsync(
       "https://docs.expo.io/versions/latest/guides/development-mode"
     ).catch((err: Error) => {
@@ -200,7 +124,7 @@ class HomeScreen extends React.Component<unknown, State> {
     });
   };
 
-  private readonly handleHelpPress = () => {
+  const handleHelpPress = () => {
     WebBrowser.openBrowserAsync(
       "https://docs.expo.io/versions/latest/guides/up-and-running.html#can-t-see-your-changes"
     ).catch((err: Error) => {
@@ -208,6 +132,79 @@ class HomeScreen extends React.Component<unknown, State> {
       console.error(`failed to handleHelpPress: ${err}`);
     });
   };
+
+
+  const imgSource = __DEV__
+      ? require("../assets/images/robot-dev.png")
+      : require("../assets/images/robot-prod.png");
+    return (
+      <View style={styles().container}>
+        <NavigationBar title={i18n.t("home")} />
+        <ScrollView style={styles().container}>
+          <View style={styles().welcomeContainer}>
+            <Image source={imgSource} style={styles().welcomeImage} />
+          </View>
+
+          <View style={styles().getStartedContainer}>
+            {maybeRenderDevelopmentModeWarning()}
+
+            <Text style={styles().getStartedText}>Get started by opening</Text>
+
+            <View
+              style={[
+                styles().codeHighlightContainer,
+                styles().homeScreenFilename
+              ]}
+            >
+              <MonoText style={styles().codeHighlightText}>
+                screens/HomeScreen.js
+              </MonoText>
+            </View>
+
+            <Text style={styles().getStartedText}>
+              Change this text and your app will automatically reload.
+            </Text>
+          </View>
+
+          <View style={styles().helpContainer}>
+            <TouchableOpacity
+              onPress={handleHelpPress}
+              style={styles().helpLink}
+            >
+              <Text style={styles().helpLinkText}>
+                Help, it didn’t automatically reload!
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <Modal
+            transparent={false}
+            visible={shouldDisplayModal}
+            animationType="slide-up"
+            onClose={onCloseModal}
+          >
+            <View style={{ paddingVertical: 220 }}>
+              <Text style={{ textAlign: "center" }}>Hello! Welcome!</Text>
+            </View>
+            <Button
+              onPress={() => {
+                setShouldDisplayModal(false);
+              }}
+            >
+              Cancel
+            </Button>
+          </Modal>
+          <Button
+            type="primary"
+            onPress={() => {
+              setShouldDisplayModal(true);
+            }}
+          >
+            hey
+          </Button>
+        </ScrollView>
+      </View>
+    );
 }
 
 export { HomeScreen };
