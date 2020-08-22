@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useIsComponentMounted } from "./use-is-component-mounted";
+import { useIsComponentMounted } from "@/common/hooks/use-is-component-mounted";
 
 export function useStateIfMounted(initialValue: any): Array<any> {
   const isComponentMounted = useIsComponentMounted();

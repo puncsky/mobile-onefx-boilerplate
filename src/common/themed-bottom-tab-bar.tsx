@@ -1,7 +1,7 @@
 import * as React from "react";
 import { BottomTabBar } from "react-navigation";
-import { ThemeProps } from "../types/theme-props";
-import { theme } from "./theme";
+import { ThemeProps } from "@/types/theme-props";
+import { theme } from "@/common/theme";
 
 type Props = {
   currentTheme: ThemeProps;

@@ -4,7 +4,7 @@ import {
   createSwitchNavigator
 } from "react-navigation";
 
-import { MainTabNavigator } from "./main-tab-navigator";
+import { MainTabNavigator } from "@/common/navigation/main-tab-navigator";
 
 const RootScreen = createSwitchNavigator({
   Main: MainTabNavigator

@@ -3,18 +3,18 @@ import { List } from "@ant-design/react-native";
 import Constants from "expo-constants";
 import * as StoreReview from "expo-store-review";
 import * as WebBrowser from "expo-web-browser";
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Alert, Platform, ScrollView, Switch, View } from "react-native";
 import { connect } from "react-redux";
-import { analytics } from "../../common/analytics";
-import { ListHeader } from "../../common/list-header";
-import { registerForPushNotificationAsync } from "../../common/register-push-token";
-import { actionUpdateReduxState } from "../../common/root-reducer";
-import { AppState } from "../../common/store";
-import { setTheme, theme } from "../../common/theme";
-import { i18n } from "../../translations";
-import { ScreenProps } from "../../types/screen-props";
-import { AccountHeader } from "./account-header";
+import { analytics } from "@/common/analytics";
+import { ListHeader } from "@/common/list-header";
+import { registerForPushNotificationAsync } from "@/common/register-push-token";
+import { actionUpdateReduxState } from "@/common/root-reducer";
+import { AppState } from "@/common/store";
+import { setTheme, theme } from "@/common/theme";
+import { i18n } from "@/translations";
+import { ScreenProps } from "@/types/screen-props";
+import { AccountHeader } from "@/screens/mine-screen/account-header";
 import { actionLogout } from "./account-reducer";
 
 const { Item } = List;
@@ -54,18 +54,15 @@ export const About = connect(
     screenProps,
     currentTheme
   }: Props) => {
-
-
     useEffect(() => {
       async function init() {
         await registerForPushNotificationAsync();
-      await analytics.track("page_view_mine", {});
+        await analytics.track("page_view_mine", {});
       }
       init();
     }, []);
 
     const renderAppSection = () => {
-
       const backgroundColor = {
         backgroundColor: theme.white,
         color: theme.text01

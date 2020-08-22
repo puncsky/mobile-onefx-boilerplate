@@ -1,11 +1,11 @@
 import * as React from "react";
 import { View } from "react-native";
-import { NavigationBar } from "../../common/navigation-bar";
-import { ScreenHeight } from "../../common/screen-util";
-import { theme } from "../../common/theme";
-import { i18n } from "../../translations";
-import { ScreenProps } from "../../types/screen-props";
-import { About } from "./about";
+import { NavigationBar } from "@/common/navigation-bar";
+import { ScreenHeight } from "@/common/screen-util";
+import { theme } from "@/common/theme";
+import { i18n } from "@/translations";
+import { ScreenProps } from "@/types/screen-props";
+import { About } from "@/screens/mine-screen/about";
 
 type Props = {
   screenProps: ScreenProps;

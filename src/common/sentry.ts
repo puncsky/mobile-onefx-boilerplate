@@ -1,6 +1,6 @@
 import Constants from "expo-constants";
 import * as Sentry from "sentry-expo";
-import { config } from "../config";
+import { config } from "@/config";
 
 if (config.sentryDsn) {
   Sentry.init({

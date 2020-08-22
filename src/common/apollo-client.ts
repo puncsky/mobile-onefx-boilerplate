@@ -3,8 +3,8 @@ import { ApolloClient } from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
-import { getEndpoint } from "./request";
-import { store } from "./store";
+import { getEndpoint } from "@/common/request";
+import { store } from "@/common/store";
 
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
