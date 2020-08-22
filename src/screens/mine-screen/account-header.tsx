@@ -1,7 +1,7 @@
 /* tslint:disable:no-any */
 import { Button, Modal, Toast } from "@ant-design/react-native";
 import gql from "graphql-tag";
-import React, { Component } from "react";
+import * as React from "react";
 import { Query, QueryResult } from "react-apollo";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import { AppState } from "../../common/store";
 import { theme } from "../../common/theme";
 import { i18n } from "../../translations";
 import { LoginWebView } from "./login-web-view";
+import { useStateIfMounted } from "../../common/hooks/use-state-if-mounted";
 
 const getStyles = () =>
   StyleSheet.create({
@@ -98,67 +99,68 @@ export const AccountHeader = connect((state: AppState) => ({
           </Query>
         </>
       ) : (
-        <LoginOrSignUp styles={getStyles()}>
-          <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
-        </LoginOrSignUp>
-      )}
+          <LoginOrSignUp>
+            <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
+          </LoginOrSignUp>
+        )}
     </View>
   );
 });
 
+
+const getLoginOrSignUpStyles = () =>
+  StyleSheet.create({
+    closeButton: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      backgroundColor: theme.primary,
+      position: "absolute",
+      bottom: 10,
+      right: 10
+    },
+    closeText: {
+      color: theme.white,
+      fontSize: 24
+    }
+  });
+
 type LoginOrSignUpProps = {
   children: JSX.Element;
-  styles: any;
+  isSignUp?: boolean;
 };
 
-type LoginOrSignUpState = {
-  shouldDisplayModal: boolean;
-};
 
-class LoginOrSignUp extends Component<LoginOrSignUpProps, LoginOrSignUpState> {
-  public state: LoginOrSignUpState = {
-    shouldDisplayModal: false
+
+
+export function LoginOrSignUp(props: LoginOrSignUpProps): JSX.Element {
+  const [shouldDisplayModal, setShouldDisplayModal] = useStateIfMounted(false);
+
+  const onCloseModal = () => {
+    setShouldDisplayModal(false);
   };
 
-  isCompMounted = false;
-
-  public componentDidMount(): void {
-    this.isCompMounted = true;
-  }
-
-  public componentWillUnmount(): void {
-    this.isCompMounted = false;
-  }
-
-  private readonly onCloseModal = () => {
-    if (this.isCompMounted) {
-      this.setState({ shouldDisplayModal: false });
-    }
-  };
-
-  public render(): JSX.Element {
-    const { styles } = this.props;
-    return (
-      <View
-        onTouchStart={() => {
-          this.setState({ shouldDisplayModal: true });
-        }}
+  const styles = getLoginOrSignUpStyles();
+  return (
+    <View
+      onTouchStart={() => {
+        setShouldDisplayModal(true);
+      }}
+    >
+      <Modal
+        popup
+        transparent={false}
+        visible={shouldDisplayModal}
+        animationType="slide-up"
+        onClose={onCloseModal}
       >
-        <Modal
-          popup
-          transparent={false}
-          visible={this.state.shouldDisplayModal}
-          animationType="slide-up"
-          onClose={this.onCloseModal}
-        >
-          <LoginWebView onClose={this.onCloseModal} isSignUp={false} />
-          <Button style={styles.closeButton} onPress={this.onCloseModal}>
-            <Text style={styles.closeText}>✕</Text>
-          </Button>
-        </Modal>
+        <LoginWebView onClose={onCloseModal}  isSignUp={Boolean(props.isSignUp)} />
+        <Button style={styles.closeButton} onPress={onCloseModal}>
+          <Text style={styles.closeText}>✕</Text>
+        </Button>
+      </Modal>
 
-        {this.props.children}
-      </View>
-    );
-  }
+      {props.children}
+    </View>
+  );
 }

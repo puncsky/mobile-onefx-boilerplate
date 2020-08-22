@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import { ThemeProps } from "../types/theme-props";
 
@@ -13,16 +13,14 @@ export const withTheme = (InnerComponent: any): any => {
   return connect((state: { base: { currentTheme: ThemeProps } }) => ({
     theme: state.base.currentTheme
   }))(
-    class HOC extends PureComponent<Props> {
-      static displayName = `WithTheme(${InnerComponent.displayName ||
+    function HOC(innerProps: Props): JSX.Element {
+      const displayName = `WithTheme(${InnerComponent.displayName ||
         InnerComponent.name ||
         "Component"})`;
 
-      render(): JSX.Element {
-        const { forwardedRef, theme, ...props } = this.props;
+      const { forwardedRef, theme, ...props } = innerProps;
 
-        return <InnerComponent theme={theme} ref={forwardedRef} {...props} />;
-      }
+      return <InnerComponent displayName={displayName} theme={theme} ref={forwardedRef} {...props} />;
     }
   );
 };

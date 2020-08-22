@@ -1,68 +1,15 @@
-import { Notifications, SplashScreen } from "expo";
-import { EventSubscription } from "fbemitter";
-import * as React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoaderRoot } from "./app-loading";
+import { Notifications } from "expo";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { StyleSheet, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { AppNavigatorContainer } from "./common/navigation/app-navigator-container";
 import { Providers } from "./common/providers";
 import "./common/sentry";
-import { theme } from "./common/theme";
 import { withTheme } from "./common/with-theme";
-
-interface Props {
-  skipLoadingScreen?: boolean;
-}
-
-interface State {
-  isLoadingComplete?: boolean;
-}
-
-export class App extends React.Component<Props, State> {
-  public state: State = {
-    isLoadingComplete: false
-  };
-
-  notificationSubscription: EventSubscription;
-
-  public componentDidMount(): void {
-    this.notificationSubscription = Notifications.addListener(
-      this.handleNotification
-    );
-  }
-
-  // tslint:disable-next-line
-  handleNotification = (notification: any) => {
-    // tslint:disable-next-line
-    console.log(notification, "notification");
-  };
-
-  public componentWillUnmount(): void {
-    if (this.notificationSubscription) {
-      this.notificationSubscription.remove();
-    }
-  }
-
-  public render(): JSX.Element {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <Providers>
-          <AppLoaderRoot
-            onFinish={() => {
-              SplashScreen.hide();
-              this.setState({ isLoadingComplete: true });
-            }}
-          />
-        </Providers>
-      );
-    }
-
-    return (
-      <Providers>
-        <AppContent />
-      </Providers>
-    );
-  }
-}
+import { useCachedResources } from "./common/hooks/use-cached-resource";
+import { setTheme, theme } from "./common/theme";
+import { i18n } from "./translations";
 
 const styles = StyleSheet.create({
   container: {
@@ -71,13 +18,60 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppContent = withTheme(() => (
-  <View style={styles.container}>
-    {Platform.OS === "ios" && (
-      <StatusBar
-        barStyle={theme.name === "dark" ? "light-content" : "dark-content"}
-      />
-    )}
-    <AppNavigatorContainer />
-  </View>
-));
+
+export function App() {
+
+  const isLoadingComplete = useCachedResources();
+
+  useEffect(() => {
+    // tslint:disable-next-line
+    function handleNotification(notification: any) {
+      // tslint:disable-next-line
+      console.log(notification, "notification");
+    }
+    const notificationSubscription = Notifications.addListener(
+      handleNotification
+    );
+    return function cleanup() {
+      notificationSubscription.remove();
+    };
+  }, []);
+
+
+  if (!isLoadingComplete) {
+    return null;
+  }
+
+  return (
+    <Providers>
+      <AppContent />
+    </Providers>
+  );
+}
+
+
+const AppContent = withTheme(
+  connect((state: { base: { locale: string; currentTheme: string } }) => ({
+    locale: state.base.locale,
+    currentTheme: state.base.currentTheme
+  }))((props: { locale: string; currentTheme: "dark" | "light"; }) => {
+
+    const { locale, currentTheme } = props;
+
+    if (locale && i18n) {
+      i18n.locale = locale;
+    }
+
+    if (currentTheme !== theme.name) {
+      setTheme(currentTheme);
+    }
+
+
+    return (
+      <View style={styles.container}>
+        <StatusBar style={theme.name === "dark" ? "light" : "dark"} />
+        <AppNavigatorContainer />
+      </View>
+    );
+  })
+);

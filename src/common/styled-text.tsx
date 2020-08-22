@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Component } from "react";
 import { StyleProp, Text, TextStyle } from "react-native";
 
 interface Props {
@@ -7,16 +6,14 @@ interface Props {
   children: string;
 }
 
-export class MonoText extends Component<Props> {
-  public render(): JSX.Element {
-    const { children } = this.props;
-    return (
-      <Text
-        {...this.props}
-        style={[this.props.style, { fontFamily: "space-mono" }]}
-      >
-        {children}
-      </Text>
-    );
-  }
+export function MonoText(props: Props): JSX.Element {
+  const { children } = props;
+  return (
+    <Text
+      {...props}
+      style={[props.style, { fontFamily: "space-mono" }]}
+    >
+      {children}
+    </Text>
+  );
 }

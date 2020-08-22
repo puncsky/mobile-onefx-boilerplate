@@ -7,21 +7,17 @@ type Props = {
   currentTheme: ThemeProps;
 };
 
-export const ThemedBottomTabBar = class ThemedBottomTabBarInner extends React.Component<
-  Props
-> {
-  public render(): JSX.Element {
-    return (
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      <BottomTabBar
-        {...this.props}
-        activeTintColor={theme.activeTintColor}
-        inactiveTintColor={theme.inactiveTintColor}
-        style={{
-          backgroundColor: theme.activeBackgroundColor
-        }}
-      />
-    );
-  }
-};
+export function ThemedBottomTabBar(props: Props): JSX.Element {
+  return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    <BottomTabBar
+      {...props}
+      activeTintColor={theme.activeTintColor}
+      inactiveTintColor={theme.inactiveTintColor}
+      style={{
+        backgroundColor: theme.activeBackgroundColor
+      }}
+    />
+  );
+}
