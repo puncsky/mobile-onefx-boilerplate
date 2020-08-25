@@ -5,6 +5,7 @@ import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 import { getEndpoint } from "@/common/request";
 import { store } from "@/common/store";
+import { onErrorLink } from "@/common/apollo-error-handling";
 
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
@@ -15,10 +16,13 @@ const middlewareLink = new ApolloLink((operation, forward) => {
 
 // use with apollo-client
 const link = middlewareLink.concat(
-  new HttpLink({
-    uri: getEndpoint("api-gateway/"),
-    fetch
-  })
+  ApolloLink.from([
+    onErrorLink,
+    new HttpLink({
+      uri: getEndpoint("api-gateway/"),
+      fetch
+    })
+  ])
 );
 
 export const apolloClient = new ApolloClient({
