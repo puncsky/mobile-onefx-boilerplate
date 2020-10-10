@@ -14,7 +14,9 @@ import { AppState } from "@/common/store";
 import { setTheme, theme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { ScreenProps } from "@/types/screen-props";
+import { InviteSection } from "@/screens/referral-screen/components/invite-section";
 import { AccountHeader } from "@/screens/mine-screen/account-header";
+import { NavigationScreenProp } from "react-navigation";
 import { actionLogout } from "./account-reducer";
 
 const { Item } = List;
@@ -29,6 +31,7 @@ type Props = {
   }) => void;
   screenProps: ScreenProps;
   currentTheme: "dark" | "light";
+  navigation: NavigationScreenProp<string>;
 };
 
 export const About = connect(
@@ -52,7 +55,8 @@ export const About = connect(
     logout,
     updateReduxState,
     screenProps,
-    currentTheme
+    currentTheme,
+    navigation
   }: Props) => {
     useEffect(() => {
       async function init() {
@@ -171,6 +175,7 @@ export const About = connect(
     return (
       <ScrollView style={{ backgroundColor: theme.white }}>
         <AccountHeader />
+        <InviteSection navigation={navigation} />
         {renderAppSection()}
       </ScrollView>
     );

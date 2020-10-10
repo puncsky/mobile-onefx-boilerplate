@@ -15,4 +15,5 @@ const statusBarHeight =
 const navigationBarHeight =
   Platform.OS === "ios" ? NAV_BAR_HEIGHT : androidStatusBarHeight + 59;
 const onePx = 1 / PixelRatio.get();
-export { statusBarHeight, navigationBarHeight, onePx };
+const contentPadding = 16;
+export { statusBarHeight, navigationBarHeight, onePx, contentPadding };
