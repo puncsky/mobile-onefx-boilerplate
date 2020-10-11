@@ -61,3 +61,6 @@ yarn.lock
 
 *.apk
 *.ipa
+
+__generated__
+schema.json
