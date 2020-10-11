@@ -17,5 +17,21 @@ export const zh = {
   logoutAlertCancel: "取消",
   logoutAlertConfirm: "确认",
   logout: "登出",
-  login: "登录 / 注册"
+  login: "登录 / 注册",
+  inviteFriends: "邀请好友",
+  invite: "邀请",
+  inviteSummary: "分享你理财的秘密武器，帮助朋友们实现财富增长!",
+  referral: "推荐",
+  copy: "复制",
+  copied: "已复制",
+  inviteFromContacts: "通过联系人邀请",
+  share: "分享",
+  rewardSummary: "邀请好友",
+  rewardDetail: "分享你理财的秘密武器，帮助朋友们实现财富增长!",
+  recommend: "这是我管钱的秘密武器，希望它也能够帮你增长财富 ：）",
+  shareError: "分享失败",
+  thanksShare: "感谢分享!!",
+  loading: "加载中...",
+  noContactPermission: "没有访问通讯录的权限.",
+  inputKeyword: "请输入关键字"
 };
