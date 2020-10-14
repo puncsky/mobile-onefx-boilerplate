@@ -1,15 +1,16 @@
 /* tslint:disable:no-any */
 import { Button, Modal, Toast } from "@ant-design/react-native";
-import gql from "graphql-tag";
 import * as React from "react";
-import { Query, QueryResult } from "react-apollo";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { AppState } from "@/common/store";
 import { theme } from "@/common/theme";
 import { i18n } from "@/translations";
+import { ScreenWidth } from "@/common/screen-util";
 import { LoginWebView } from "@/screens/mine-screen/login-web-view";
 import { useStateIfMounted } from "@/common/hooks/use-state-if-mounted";
+import { useUserProfile } from "@/screens/mine-screen/hooks/use-user-profile";
+import { LoadingTile } from "@/common/loading-tile";
 
 const getStyles = () =>
   StyleSheet.create({
@@ -45,67 +46,39 @@ const getStyles = () =>
     }
   });
 
-const GET_CONTACT = gql`
-  query userProfile($userId: String!) {
-    userProfile(userId: $userId) {
-      email
+export const EmailHeader = ({ userId }: { userId: string }) => {
+  const { email, loading, error } = useUserProfile(userId);
+  if (loading || error || !email) {
+    if (error) {
+      Toast.fail(`failed to fetch user: ${error}`, 5);
     }
+    return <LoadingTile style={{ height: 24, width: ScreenWidth - 14 * 2 }} />;
   }
-`;
+  return (
+    <View>
+      <Text style={getStyles().nameText} numberOfLines={1}>
+        {email}
+      </Text>
+    </View>
+  );
+};
 
 export const AccountHeader = connect((state: AppState) => ({
   userId: state.base.userId,
   authToken: state.base.authToken
-}))(({ userId, authToken }: { userId: string; authToken: string }) => {
-  return (
-    <View
-      style={[getStyles().titleContainer, { backgroundColor: theme.primary }]}
-    >
-      {userId && authToken ? (
-        <>
-          <Query
-            query={GET_CONTACT}
-            variables={{
-              userId
-            }}
-          >
-            {({
-              data,
-              error,
-              loading
-            }: QueryResult<{
-              userProfile: {
-                email: string;
-              };
-            }>) => {
-              if (loading || error || !data || !data.userProfile) {
-                if (error) {
-                  Toast.fail(`failed to fetch user: ${error}`, 5);
-                }
-
-                return <View />;
-              }
-
-              return (
-                <>
-                  <View>
-                    <Text style={getStyles().nameText} numberOfLines={1}>
-                      {data.userProfile.email}
-                    </Text>
-                  </View>
-                </>
-              );
-            }}
-          </Query>
-        </>
-      ) : (
-        <LoginOrSignUp>
-          <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
-        </LoginOrSignUp>
-      )}
-    </View>
-  );
-});
+}))(({ userId, authToken }: { userId: string; authToken: string }) => (
+  <View
+    style={[getStyles().titleContainer, { backgroundColor: theme.primary }]}
+  >
+    {userId && authToken ? (
+      <EmailHeader userId={userId} />
+    ) : (
+      <LoginOrSignUp>
+        <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
+      </LoginOrSignUp>
+    )}
+  </View>
+));
 
 const getLoginOrSignUpStyles = () =>
   StyleSheet.create({
