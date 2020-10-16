@@ -4,7 +4,8 @@ import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
 import { AppState } from "@/common/store";
-import { theme } from "@/common/theme";
+import { ColorTheme } from "@/types/theme-props";
+import { useTheme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { ScreenWidth } from "@/common/screen-util";
 import { LoginWebView } from "@/screens/mine-screen/login-web-view";
@@ -12,7 +13,7 @@ import { useStateIfMounted } from "@/common/hooks/use-state-if-mounted";
 import { useUserProfile } from "@/screens/mine-screen/hooks/use-user-profile";
 import { LoadingTile } from "@/common/loading-tile";
 
-const getStyles = () =>
+const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     titleContainer: {
       paddingHorizontal: 14,
@@ -48,6 +49,8 @@ const getStyles = () =>
 
 export const EmailHeader = ({ userId }: { userId: string }) => {
   const { email, loading, error } = useUserProfile(userId);
+  const theme = useTheme();
+  const styles = getStyles(theme);
   if (loading || error || !email) {
     if (error) {
       Toast.fail(`failed to fetch user: ${error}`, 5);
@@ -56,7 +59,7 @@ export const EmailHeader = ({ userId }: { userId: string }) => {
   }
   return (
     <View>
-      <Text style={getStyles().nameText} numberOfLines={1}>
+      <Text style={styles.nameText} numberOfLines={1}>
         {email}
       </Text>
     </View>
@@ -66,21 +69,23 @@ export const EmailHeader = ({ userId }: { userId: string }) => {
 export const AccountHeader = connect((state: AppState) => ({
   userId: state.base.userId,
   authToken: state.base.authToken
-}))(({ userId, authToken }: { userId: string; authToken: string }) => (
-  <View
-    style={[getStyles().titleContainer, { backgroundColor: theme.primary }]}
-  >
-    {userId && authToken ? (
-      <EmailHeader userId={userId} />
-    ) : (
-      <LoginOrSignUp>
-        <Text style={getStyles().loginSignUpText}>{i18n.t("login")}</Text>
-      </LoginOrSignUp>
-    )}
-  </View>
-));
+}))(({ userId, authToken }: { userId: string; authToken: string }) => {
+  const theme = useTheme();
+  const styles = getStyles(theme);
+  return (
+    <View style={[styles.titleContainer, { backgroundColor: theme.primary }]}>
+      {userId && authToken ? (
+        <EmailHeader userId={userId} />
+      ) : (
+        <LoginOrSignUp>
+          <Text style={styles.loginSignUpText}>{i18n.t("login")}</Text>
+        </LoginOrSignUp>
+      )}
+    </View>
+  );
+});
 
-const getLoginOrSignUpStyles = () =>
+const getLoginOrSignUpStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     closeButton: {
       width: 60,
@@ -109,7 +114,8 @@ export function LoginOrSignUp(props: LoginOrSignUpProps): JSX.Element {
     setShouldDisplayModal(false);
   };
 
-  const styles = getLoginOrSignUpStyles();
+  const theme = useTheme();
+  const styles = getLoginOrSignUpStyles(theme);
   return (
     <View
       onTouchStart={() => {

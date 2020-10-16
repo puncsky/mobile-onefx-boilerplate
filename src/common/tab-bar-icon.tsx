@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
 
 interface Props {
   name: string;
@@ -9,6 +9,7 @@ interface Props {
 
 export function TabBarIcon(props: Props) {
   const { focused, name } = props;
+  const theme = useTheme();
   const color = focused ? theme.tabIconSelected : theme.tabIconDefault;
   return (
     <Ionicons

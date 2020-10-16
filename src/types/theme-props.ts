@@ -13,6 +13,7 @@ export interface AntdTheme {
 }
 
 export interface ColorTheme {
+  name: string;
   black: string;
   black10: string;
   black20: string;

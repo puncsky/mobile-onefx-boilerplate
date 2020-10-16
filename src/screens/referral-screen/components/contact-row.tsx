@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { contentPadding } from "@/common/screen-util";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
+import { ColorTheme } from "@/types/theme-props";
 import { MaterialIcons } from "@expo/vector-icons";
 import { CommonMargin } from "@/common/common-margin";
 
@@ -12,7 +13,7 @@ type ContactRowProps = {
   selected: boolean;
 };
 
-const styles = () =>
+const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     rowContainer: {
       paddingHorizontal: contentPadding,
@@ -30,9 +31,11 @@ export function ContactRow({
   emailOrNumber,
   selected
 }: ContactRowProps): JSX.Element {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
-      <View style={styles().rowContainer}>
+      <View style={styles.rowContainer}>
         <MaterialIcons
           name={`radio-button-${selected ? "" : "un"}checked`}
           size={24}
@@ -40,9 +43,9 @@ export function ContactRow({
         />
         <CommonMargin />
         <View style={{ flex: 1 }}>
-          <Text style={styles().name}>{name || emailOrNumber}</Text>
+          <Text style={styles.name}>{name || emailOrNumber}</Text>
           {name.length > 0 && (
-            <Text style={styles().emailOrNum}> {emailOrNumber} </Text>
+            <Text style={styles.emailOrNum}> {emailOrNumber} </Text>
           )}
         </View>
       </View>

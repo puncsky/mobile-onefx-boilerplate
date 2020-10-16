@@ -5,16 +5,15 @@ import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { AppNavigatorContainer } from "@/common/navigation/app-navigator-container";
 import "@/common/sentry";
-import { withTheme } from "@/common/with-theme";
+import { actionUpdateReduxState } from "@/common/root-reducer";
 import { useCachedResources } from "@/common/hooks/use-cached-resource";
-import { setTheme, theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { Providers } from "./common/providers";
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: theme.white
+    flex: 1
   }
 });
 
@@ -46,19 +45,33 @@ export function App() {
   );
 }
 
-const AppContent = withTheme(
-  connect((state: { base: { locale: string; currentTheme: string } }) => ({
+const AppContent = connect(
+  (state: { base: { locale: string; currentTheme: string } }) => ({
     locale: state.base.locale,
     currentTheme: state.base.currentTheme
-  }))((props: { locale: string; currentTheme: "dark" | "light" }) => {
-    const { locale, currentTheme } = props;
+  }),
+  dispatch => ({
+    updateReduxState(payload: { base: { currentTheme: string } }): void {
+      dispatch(actionUpdateReduxState(payload));
+    }
+  })
+)(
+  (props: {
+    locale: string;
+    currentTheme: "dark" | "light";
+    updateReduxState: (state: { base: { currentTheme: string } }) => void;
+  }) => {
+    const { locale, currentTheme, updateReduxState } = props;
+    const theme = useTheme();
 
     if (locale && i18n) {
       i18n.locale = locale;
     }
 
     if (currentTheme !== theme.name) {
-      setTheme(currentTheme);
+      updateReduxState({
+        base: { currentTheme }
+      });
     }
 
     return (
@@ -67,5 +80,5 @@ const AppContent = withTheme(
         <AppNavigatorContainer />
       </View>
     );
-  })
+  }
 );

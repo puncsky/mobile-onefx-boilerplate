@@ -1,4 +1,6 @@
 import { Appearance } from "react-native-appearance";
+import { createTheming, ThemingType } from "@callstack/react-theme-provider";
+import { ColorTheme } from "@/types/theme-props";
 
 const colorScheme = Appearance.getColorScheme();
 const colorMode = colorScheme === "dark" ? "dark" : "light";
@@ -73,12 +75,18 @@ const darkTheme = {
   navText: "#fff"
 };
 
-// eslint-disable-next-line import/no-mutable-exports
-export let theme = colorMode === "dark" ? darkTheme : lightTheme;
+export const themes: { [key: string]: ColorTheme } = {
+  light: lightTheme,
+  dark: darkTheme
+};
 
-export function setTheme(mode: "dark" | "light" | undefined): void {
-  theme = mode === "dark" ? darkTheme : lightTheme;
-}
+const {
+  ThemeProvider,
+  withTheme,
+  useTheme
+}: ThemingType<ColorTheme> = createTheming(themes[colorMode]);
+
+export { ThemeProvider, withTheme, useTheme, colorMode };
 
 export const antdLightTheme = {
   color_text_base: lightTheme.text01,

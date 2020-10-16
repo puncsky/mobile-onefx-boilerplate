@@ -101,6 +101,7 @@
   },
   "dependencies": {
     "@ant-design/react-native": "^4.0.4",
+    "@callstack/react-theme-provider": "^2.1.0",
     "@expo/vector-icons": "^10.2.0",
     "@react-native-community/async-storage": "1.11.0",
     "@react-native-community/cameraroll": "^4.0.0",
