@@ -37,7 +37,61 @@ const lightTheme = {
   activeBackgroundColor: "#fff",
   inactiveBackgroundColor: "#fff",
   navBg: "#fff",
-  navText: "#000"
+  navText: "#000",
+  // 字体尺寸
+  fontSizeIconText: 10,
+  fontSizeCaptionSm: 12,
+  fontSizeBase: 14,
+  fontSizeSubhead: 15,
+  fontSizeCaption: 16,
+  fontSizeHeading: 17,
+  // 圆角
+  radiusXs: 2,
+  radiusSm: 3,
+  radiusMd: 5,
+  radiusLg: 7,
+  // 边框尺寸
+  borderWidthSm: 0.5,
+  borderWidthMd: 1,
+  borderWidthLg: 2,
+  // 间距
+  // 水平间距
+  hSpacingSm: 5,
+  hSpacingMd: 8,
+  hSpacingLg: 15,
+  // 垂直间距
+  vSpacingXs: 3,
+  vSpacingSm: 6,
+  vSpacingMd: 8,
+  vSpacingLg: 15,
+  vSpacingXl: 21,
+  // 高度
+  lineHeightBase: 1, // 单行行高
+  lineHeightParagraph: 1.5, // 多行行高
+  // 图标尺寸
+  iconSizeXxs: 15,
+  iconSizeXs: 18,
+  iconSizeSm: 21,
+  iconSizeMd: 22, // 导航条上的图标
+  iconSizeLg: 36,
+  // button
+  buttonHeight: 47,
+  buttonFontSize: 18,
+  buttonHeightSm: 23,
+  buttonFontSizeSm: 12,
+  // modal
+  modalFontSizeHeading: 18,
+  modalButtonFontSize: 18, // 按钮字号
+  modalButtonHeight: 50, // 按钮高度
+  // list
+  listTitleHeight: 30,
+  listItemHeightSm: 35,
+  listItemHeight: 44,
+  // input
+  inputFontSize: 16,
+  // tabs
+  tabsHeight: 42,
+  tabsFontSizeHeading: 15
 };
 
 const darkTheme = {
@@ -72,7 +126,61 @@ const darkTheme = {
   activeBackgroundColor: "#2E3235",
   inactiveBackgroundColor: "#2E3235",
   navBg: "#2E3235",
-  navText: "#fff"
+  navText: "#fff",
+  // 字体尺寸
+  fontSizeIconText: 10,
+  fontSizeCaptionSm: 12,
+  fontSizeBase: 14,
+  fontSizeSubhead: 15,
+  fontSizeCaption: 16,
+  fontSizeHeading: 17,
+  // 圆角
+  radiusXs: 2,
+  radiusSm: 3,
+  radiusMd: 5,
+  radiusLg: 7,
+  // 边框尺寸
+  borderWidthSm: 0.5,
+  borderWidthMd: 1,
+  borderWidthLg: 2,
+  // 间距
+  // 水平间距
+  hSpacingSm: 5,
+  hSpacingMd: 8,
+  hSpacingLg: 15,
+  // 垂直间距
+  vSpacingXs: 3,
+  vSpacingSm: 6,
+  vSpacingMd: 8,
+  vSpacingLg: 15,
+  vSpacingXl: 21,
+  // 高度
+  lineHeightBase: 1, // 单行行高
+  lineHeightParagraph: 1.5, // 多行行高
+  // 图标尺寸
+  iconSizeXxs: 15,
+  iconSizeXs: 18,
+  iconSizeSm: 21,
+  iconSizeMd: 22, // 导航条上的图标
+  iconSizeLg: 36,
+  // button
+  buttonHeight: 47,
+  buttonFontSize: 18,
+  buttonHeightSm: 23,
+  buttonFontSizeSm: 12,
+  // modal
+  modalFontSizeHeading: 18,
+  modalButtonFontSize: 18, // 按钮字号
+  modalButtonHeight: 50, // 按钮高度
+  // list
+  listTitleHeight: 30,
+  listItemHeightSm: 35,
+  listItemHeight: 44,
+  // input
+  inputFontSize: 16,
+  // tabs
+  tabsHeight: 42,
+  tabsFontSizeHeading: 15
 };
 
 export const themes: { [key: string]: ColorTheme } = {
