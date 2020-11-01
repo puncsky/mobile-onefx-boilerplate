@@ -13,7 +13,8 @@ import { isAvailableAsync, sendSMSAsync } from "expo-sms";
 import { NavigationScreenProp, SafeAreaView } from "react-navigation";
 import { Button, Toast, SearchBar } from "@ant-design/react-native";
 import { contentPadding } from "@/common/screen-util";
-import { theme } from "@/common/theme";
+import { ColorTheme } from "@/types/theme-props";
+import { useTheme } from "@/common/theme";
 import { CommonMargin } from "@/common/common-margin";
 import { groupBy } from "lodash";
 import { useContacts } from "@/screens/referral-screen/hooks/use-contacts";
@@ -36,7 +37,7 @@ type Props = {
   navigation: NavigationScreenProp<string>;
 };
 
-const styles = () =>
+const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     container: { flex: 1, backgroundColor: theme.white },
     bodyContainer: { flex: 1, alignItems: "center", justifyContent: "center" },
@@ -77,6 +78,9 @@ export function InviteScreen(props: Props) {
 
   const [selectedContacts, setSelectedContacts] = React.useState<RowItem[]>([]);
   const [keyword, setKeyword] = React.useState("");
+
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
   const sections = React.useMemo(() => {
     return Object.entries(
@@ -182,10 +186,10 @@ export function InviteScreen(props: Props) {
   const renderBody = () => {
     if (contacts.loading) {
       return (
-        <View style={styles().bodyContainer}>
+        <View style={styles.bodyContainer}>
           <ActivityIndicator size="large" color={theme.primary} />
           <CommonMargin />
-          <Text style={styles().loadingOrErrText}>{i18n.t("loading")}</Text>
+          <Text style={styles.loadingOrErrText}>{i18n.t("loading")}</Text>
         </View>
       );
     }
@@ -195,23 +199,23 @@ export function InviteScreen(props: Props) {
           ? i18n.t("noContactPermission")
           : String(contacts.error.message);
       return (
-        <View style={styles().bodyContainer}>
+        <View style={styles.bodyContainer}>
           <MaterialIcons name="error" size={48} color={theme.primary} />
           <CommonMargin />
-          <Text style={styles().loadingOrErrText}>{errMsg}</Text>
+          <Text style={styles.loadingOrErrText}>{errMsg}</Text>
         </View>
       );
     }
 
     return (
-      <View style={styles().flex1}>
+      <View style={styles.flex1}>
         <SearchBar
           styles={{
             wrapper: {
               backgroundColor: theme.white
             }
           }}
-          style={styles().searchInput}
+          style={styles.searchInput}
           placeholder={i18n.t("inputKeyword")}
           value={keyword}
           onCancel={() => {
@@ -226,8 +230,8 @@ export function InviteScreen(props: Props) {
           bounces={false}
           sections={filteredSection}
           renderSectionHeader={({ section }) => (
-            <View style={styles().sectionHeaderContainer}>
-              <Text style={styles().sectionHeaderText}>
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeaderText}>
                 {section.key!.toUpperCase()}
               </Text>
             </View>
@@ -255,15 +259,15 @@ export function InviteScreen(props: Props) {
             );
           }}
           extraData={selectedContacts}
-          contentContainerStyle={styles().contentContainerStyle}
+          contentContainerStyle={styles.contentContainerStyle}
         />
-        <SafeAreaView style={styles().bottomButtonContainer}>
+        <SafeAreaView style={styles.bottomButtonContainer}>
           <Button
-            style={styles().button}
+            style={styles.button}
             onPress={onInvitePress}
             disabled={selectedContacts.length === 0}
           >
-            <Text style={styles().buttonText}>{`${i18n.t("invite")} (${
+            <Text style={styles.buttonText}>{`${i18n.t("invite")} (${
               selectedContacts.length
             })`}</Text>
           </Button>
@@ -273,7 +277,7 @@ export function InviteScreen(props: Props) {
   };
 
   return (
-    <View style={styles().container}>
+    <View style={styles.container}>
       <NavigationBar
         title={i18n.t("inviteFriends")}
         showBack

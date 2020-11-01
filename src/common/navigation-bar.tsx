@@ -9,7 +9,7 @@ import {
   statusBarHeight
 } from "@/common/screen-util";
 import { AppState } from "@/common/store";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
 
 type Props = {
   currentTheme?: "light" | "dark";
@@ -22,6 +22,7 @@ export const NavigationBar = connect((state: AppState) => ({
   currentTheme: state.base.currentTheme
 }))(function NavigationBarInner(props: Props): JSX.Element {
   const { title, showBack, navigation } = props;
+  const theme = useTheme();
   return (
     <View
       style={{

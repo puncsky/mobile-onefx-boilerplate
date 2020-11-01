@@ -5,7 +5,12 @@ import { connect, Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { apolloClient } from "@/common/apollo-client";
 import { persistor, store } from "@/common/store";
-import { antdDarkTheme, antdLightTheme } from "@/common/theme";
+import {
+  antdDarkTheme,
+  antdLightTheme,
+  themes,
+  ThemeProvider
+} from "@/common/theme";
 
 export function Providers({
   children
@@ -14,16 +19,16 @@ export function Providers({
 }): JSX.Element {
   return (
     <Provider store={store}>
-      <AntdProviderContainer>
+      <AntdThemeProviderContainer>
         <PersistGate persistor={persistor}>
           <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
         </PersistGate>
-      </AntdProviderContainer>
+      </AntdThemeProviderContainer>
     </Provider>
   );
 }
 
-const AntdProviderContainer = connect(
+const AntdThemeProviderContainer = connect(
   (state: { base: { currentTheme: string } }) => {
     return {
       currentTheme: state.base.currentTheme
@@ -37,10 +42,12 @@ const AntdProviderContainer = connect(
   children: JSX.Element | Array<JSX.Element>;
 }): JSX.Element {
   return (
-    <AntdProvider
-      theme={currentTheme === "dark" ? antdDarkTheme : antdLightTheme}
-    >
-      {children}
-    </AntdProvider>
+    <ThemeProvider theme={themes[currentTheme]}>
+      <AntdProvider
+        theme={currentTheme === "dark" ? antdDarkTheme : antdLightTheme}
+      >
+        {children}
+      </AntdProvider>
+    </ThemeProvider>
   );
 });
