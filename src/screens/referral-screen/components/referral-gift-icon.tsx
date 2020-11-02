@@ -20,7 +20,7 @@ export function ReferralGiftIcon(): JSX.Element {
         >
           <Polygon
             id="Fill-1"
-            fill={theme.white}
+            fill={theme.colorTheme.white}
             points="1 475.94 499 475.94 499 -4 1 -4"
           />
           <Path
@@ -34,7 +34,7 @@ export function ReferralGiftIcon(): JSX.Element {
           <G
             id="Group-2"
             transform="translate(135.000000, 294.234000)"
-            stroke={theme.success}
+            stroke={theme.colorTheme.success}
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"

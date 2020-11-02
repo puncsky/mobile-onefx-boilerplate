@@ -11,7 +11,6 @@ import { ListHeader } from "@/common/list-header";
 import { registerForPushNotificationAsync } from "@/common/register-push-token";
 import { actionUpdateReduxState } from "@/common/root-reducer";
 import { AppState } from "@/common/store";
-// import { setTheme, theme } from "@/common/theme";
 import { useTheme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { ScreenProps } from "@/types/screen-props";
@@ -71,8 +70,8 @@ export const About = connect(
 
     const renderAppSection = () => {
       const backgroundColor = {
-        backgroundColor: theme.white,
-        color: theme.text01
+        backgroundColor: theme.colorTheme.white,
+        color: theme.colorTheme.text01
       };
       return (
         <List
@@ -176,7 +175,7 @@ export const About = connect(
     };
 
     return (
-      <ScrollView style={{ backgroundColor: theme.white }}>
+      <ScrollView style={{ backgroundColor: theme.colorTheme.white }}>
         <AccountHeader />
         <InviteSection navigation={navigation} />
         {renderAppSection()}

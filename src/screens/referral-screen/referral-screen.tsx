@@ -107,7 +107,7 @@ export const ReferralScreen = connect(
     Platform.OS
   }&by=${userId}`;
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   return (
     <View style={styles.container}>
       <NavigationBar

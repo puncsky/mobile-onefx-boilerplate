@@ -10,7 +10,9 @@ interface Props {
 export function TabBarIcon(props: Props) {
   const { focused, name } = props;
   const theme = useTheme();
-  const color = focused ? theme.tabIconSelected : theme.tabIconDefault;
+  const color = focused
+    ? theme.colorTheme.tabIconSelected
+    : theme.colorTheme.tabIconDefault;
   return (
     <Ionicons
       name={name}

@@ -2,7 +2,8 @@
 export interface ThemeProps {
   name: string;
   antdTheme: AntdTheme;
-  theme: ColorTheme;
+  colorTheme: ColorTheme;
+  sizing: Array<number>;
 }
 
 export interface AntdTheme {
@@ -13,7 +14,6 @@ export interface AntdTheme {
 }
 
 export interface ColorTheme {
-  name: string;
   black: string;
   black10: string;
   black20: string;
@@ -39,45 +39,4 @@ export interface ColorTheme {
   inactiveBackgroundColor: string;
   navBg: string;
   navText: string;
-  fontSizeIconText: number;
-  fontSizeCaptionSm: number;
-  fontSizeBase: number;
-  fontSizeSubhead: number;
-  fontSizeCaption: number;
-  fontSizeHeading: number;
-  radiusXs: number;
-  radiusSm: number;
-  radiusMd: number;
-  radiusLg: number;
-  borderWidthSm: number;
-  borderWidthMd: number;
-  borderWidthLg: number;
-  hSpacingSm: number;
-  hSpacingMd: number;
-  hSpacingLg: number;
-  vSpacingXs: number;
-  vSpacingSm: number;
-  vSpacingMd: number;
-  vSpacingLg: number;
-  vSpacingXl: number;
-  lineHeightBase: number;
-  lineHeightParagraph: number;
-  iconSizeXxs: number;
-  iconSizeXs: number;
-  iconSizeSm: number;
-  iconSizeMd: number;
-  iconSizeLg: number;
-  buttonHeight: number;
-  buttonFontSize: number;
-  buttonHeightSm: number;
-  buttonFontSizeSm: number;
-  modalFontSizeHeading: number;
-  modalButtonFontSize: number;
-  modalButtonHeight: number;
-  listTitleHeight: number;
-  listItemHeightSm: number;
-  listItemHeight: number;
-  inputFontSize: number;
-  tabsHeight: number;
-  tabsFontSizeHeading: number;
 }

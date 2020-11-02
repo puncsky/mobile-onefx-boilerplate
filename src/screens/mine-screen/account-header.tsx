@@ -50,7 +50,7 @@ const getStyles = (theme: ColorTheme) =>
 export const EmailHeader = ({ userId }: { userId: string }) => {
   const { email, loading, error } = useUserProfile(userId);
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   if (loading || error || !email) {
     if (error) {
       Toast.fail(`failed to fetch user: ${error}`, 5);
@@ -71,9 +71,14 @@ export const AccountHeader = connect((state: AppState) => ({
   authToken: state.base.authToken
 }))(({ userId, authToken }: { userId: string; authToken: string }) => {
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   return (
-    <View style={[styles.titleContainer, { backgroundColor: theme.primary }]}>
+    <View
+      style={[
+        styles.titleContainer,
+        { backgroundColor: theme.colorTheme.primary }
+      ]}
+    >
       {userId && authToken ? (
         <EmailHeader userId={userId} />
       ) : (
@@ -115,7 +120,7 @@ export function LoginOrSignUp(props: LoginOrSignUpProps): JSX.Element {
   };
 
   const theme = useTheme();
-  const styles = getLoginOrSignUpStyles(theme);
+  const styles = getLoginOrSignUpStyles(theme.colorTheme);
   return (
     <View
       onTouchStart={() => {

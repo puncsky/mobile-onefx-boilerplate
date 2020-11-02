@@ -10,7 +10,7 @@ export function SettingsScreen(): JSX.Element {
     <View
       style={{
         flex: 1,
-        backgroundColor: theme.white
+        backgroundColor: theme.colorTheme.white
       }}
     >
       <NavigationBar title={i18n.t("settings")} />

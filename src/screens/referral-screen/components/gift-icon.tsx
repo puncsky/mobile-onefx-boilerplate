@@ -14,7 +14,7 @@ export function GiftIcon(): JSX.Element {
         >
           <Polygon
             id="Fill-1"
-            fill={theme.white}
+            fill={theme.colorTheme.white}
             points="0 479.94 498 479.94 498 0 0 0"
           />
           <Path
@@ -28,7 +28,7 @@ export function GiftIcon(): JSX.Element {
           <G
             id="Group"
             transform="translate(45.000000, 116.000000)"
-            stroke={theme.success}
+            stroke={theme.colorTheme.success}
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"

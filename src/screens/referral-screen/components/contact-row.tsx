@@ -32,14 +32,14 @@ export function ContactRow({
   selected
 }: ContactRowProps): JSX.Element {
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
       <View style={styles.rowContainer}>
         <MaterialIcons
           name={`radio-button-${selected ? "" : "un"}checked`}
           size={24}
-          color={theme.primary}
+          color={theme.colorTheme.primary}
         />
         <CommonMargin />
         <View style={{ flex: 1 }}>
