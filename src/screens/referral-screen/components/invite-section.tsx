@@ -51,7 +51,7 @@ const getStyles = (theme: ColorTheme) =>
 
 export function InviteSection(props: Props): JSX.Element {
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{i18n.t("inviteFriends")}</Text>

@@ -27,7 +27,7 @@ export const NavigationBar = connect((state: AppState) => ({
     <View
       style={{
         height: navigationBarHeight,
-        backgroundColor: theme.navBg
+        backgroundColor: theme.colorTheme.navBg
       }}
     >
       <View
@@ -37,7 +37,7 @@ export const NavigationBar = connect((state: AppState) => ({
           alignItems: "center",
           height: navigationBarHeight - statusBarHeight,
           borderBottomWidth: onePx,
-          borderBottomColor: theme.black80
+          borderBottomColor: theme.colorTheme.black80
         }}
       >
         {showBack && (
@@ -54,14 +54,14 @@ export const NavigationBar = connect((state: AppState) => ({
             <Ionicons
               name="ios-arrow-back"
               size={29}
-              color={theme.navText}
+              color={theme.colorTheme.navText}
               style={{ paddingHorizontal: 10 }}
             />
           </TouchableOpacity>
         )}
         <Text
           style={{
-            color: theme.navText,
+            color: theme.colorTheme.navText,
             fontSize: 17,
             fontWeight: "bold"
           }}

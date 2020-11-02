@@ -14,10 +14,10 @@ export function ThemedBottomTabBar(props: Props): JSX.Element {
     // @ts-ignore
     <BottomTabBar
       {...props}
-      activeTintColor={theme.activeTintColor}
-      inactiveTintColor={theme.inactiveTintColor}
+      activeTintColor={theme.colorTheme.activeTintColor}
+      inactiveTintColor={theme.colorTheme.inactiveTintColor}
       style={{
-        backgroundColor: theme.activeBackgroundColor
+        backgroundColor: theme.colorTheme.activeBackgroundColor
       }}
     />
   );

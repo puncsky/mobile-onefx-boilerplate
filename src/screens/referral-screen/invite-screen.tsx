@@ -80,7 +80,7 @@ export function InviteScreen(props: Props) {
   const [keyword, setKeyword] = React.useState("");
 
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
 
   const sections = React.useMemo(() => {
     return Object.entries(
@@ -187,7 +187,7 @@ export function InviteScreen(props: Props) {
     if (contacts.loading) {
       return (
         <View style={styles.bodyContainer}>
-          <ActivityIndicator size="large" color={theme.primary} />
+          <ActivityIndicator size="large" color={theme.colorTheme.primary} />
           <CommonMargin />
           <Text style={styles.loadingOrErrText}>{i18n.t("loading")}</Text>
         </View>
@@ -200,7 +200,11 @@ export function InviteScreen(props: Props) {
           : String(contacts.error.message);
       return (
         <View style={styles.bodyContainer}>
-          <MaterialIcons name="error" size={48} color={theme.primary} />
+          <MaterialIcons
+            name="error"
+            size={48}
+            color={theme.colorTheme.primary}
+          />
           <CommonMargin />
           <Text style={styles.loadingOrErrText}>{errMsg}</Text>
         </View>
@@ -212,7 +216,7 @@ export function InviteScreen(props: Props) {
         <SearchBar
           styles={{
             wrapper: {
-              backgroundColor: theme.white
+              backgroundColor: theme.colorTheme.white
             }
           }}
           style={styles.searchInput}

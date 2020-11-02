@@ -18,7 +18,7 @@ export function MineScreen(props: Props): JSX.Element {
   return (
     <View
       style={{
-        backgroundColor: theme.white,
+        backgroundColor: theme.colorTheme.white,
         height: ScreenHeight
       }}
     >

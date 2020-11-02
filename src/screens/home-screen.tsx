@@ -1,6 +1,6 @@
 import Button from "@ant-design/react-native/lib/button";
 import Modal from "@ant-design/react-native/lib/modal";
-import { WebBrowser } from "expo";
+import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
 import {
   Image,
@@ -86,7 +86,7 @@ const getStyles = (theme: ColorTheme) =>
 function HomeScreen(): JSX.Element {
   const [shouldDisplayModal, setShouldDisplayModal] = useState(false);
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles(theme.colorTheme);
   const onCloseModal = () => {
     setShouldDisplayModal(false);
   };
