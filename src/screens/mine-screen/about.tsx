@@ -18,7 +18,7 @@ import { InviteSection } from "@/screens/referral-screen/components/invite-secti
 import { AccountHeader } from "@/screens/mine-screen/account-header";
 //import { NavigationStackProp } from "@react-navigation/stack";
 import { actionLogout } from "./account-reducer";
-import { LocalizationContext } from "@/common/navigation/app-navigator-container";
+import { LocalizationContext } from "@/app";
 
 const { Item } = List;
 const { Brief } = Item;
@@ -49,9 +49,7 @@ export const About = connect(
       dispatch(actionUpdateReduxState(payload));
     }
   })
-)(({ authToken, //locale,
-  logout, updateReduxState, //screenProps,
-  currentTheme }: //navigation
+)(({ authToken, logout, updateReduxState, currentTheme }: //navigation //locale, //screenProps,
 Props) => {
   const { locale, setLocale } = React.useContext(LocalizationContext);
 

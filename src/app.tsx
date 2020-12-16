@@ -10,6 +10,9 @@ import { useCachedResources } from "@/common/hooks/use-cached-resource";
 import { setTheme, theme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { Providers } from "./common/providers";
+import { Scope, TranslateOptions } from "i18n-js";
+const defaultValue: any = {};
+export const LocalizationContext = React.createContext(defaultValue);
 
 const styles = StyleSheet.create({
   container: {
@@ -35,14 +38,27 @@ export function App() {
     };
   }, []);
 
+  const [locale, setLocale] = React.useState(i18n.locale);
+  const localizationContext = React.useMemo(
+    () => ({
+      t: (scope: Scope, options: TranslateOptions) =>
+        i18n.t(scope, { locale, ...options }),
+      locale,
+      setLocale
+    }),
+    [locale]
+  );
+
   if (!isLoadingComplete) {
     return null;
   }
 
   return (
-    <Providers>
-      <AppContent />
-    </Providers>
+    <LocalizationContext.Provider value={localizationContext}>
+      <Providers>
+        <AppContent />
+      </Providers>
+    </LocalizationContext.Provider>
   );
 }
 
