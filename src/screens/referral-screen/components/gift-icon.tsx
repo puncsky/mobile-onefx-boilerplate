@@ -1,8 +1,9 @@
 import { G, Path, Svg, Polygon } from "react-native-svg";
 import * as React from "react";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
 
 export function GiftIcon(): JSX.Element {
+  const theme = useTheme();
   return (
     <Svg width="50px" height="52px" viewBox="0 0 50 52">
       <G id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd">
@@ -13,7 +14,7 @@ export function GiftIcon(): JSX.Element {
         >
           <Polygon
             id="Fill-1"
-            fill={theme.white}
+            fill={theme.colorTheme.white}
             points="0 479.94 498 479.94 498 0 0 0"
           />
           <Path
@@ -27,7 +28,7 @@ export function GiftIcon(): JSX.Element {
           <G
             id="Group"
             transform="translate(45.000000, 116.000000)"
-            stroke={theme.success}
+            stroke={theme.colorTheme.success}
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"

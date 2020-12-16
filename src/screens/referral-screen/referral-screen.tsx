@@ -13,7 +13,8 @@ import { contentPadding, ScreenWidth } from "@/common/screen-util";
 import { CommonMargin } from "@/common/common-margin";
 import { ReferralGiftIcon } from "@/screens/referral-screen/components/referral-gift-icon";
 import { NavigationScreenProp } from "react-navigation";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
+import { ColorTheme } from "@/types/theme-props";
 import { i18n } from "@/translations";
 import { Button, Toast } from "@ant-design/react-native";
 import { connect } from "react-redux";
@@ -24,7 +25,7 @@ type Props = {
   userId: string;
 };
 
-const styles = () =>
+const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     container: {
       backgroundColor: theme.white,
@@ -105,50 +106,51 @@ export const ReferralScreen = connect(
   const shareLink = `${getEndpoint("sign-up")}/?src=${
     Platform.OS
   }&by=${userId}`;
-
+  const theme = useTheme();
+  const styles = getStyles(theme.colorTheme);
   return (
-    <View style={styles().container}>
+    <View style={styles.container}>
       <NavigationBar
         title={i18n.t("referral")}
         showBack
         navigation={props.navigation}
       />
-      <View style={styles().body}>
+      <View style={styles.body}>
         <CommonMargin />
         <CommonMargin />
         <ReferralGiftIcon />
         <CommonMargin />
-        <Text style={styles().title}>{i18n.t("rewardSummary")}</Text>
+        <Text style={styles.title}>{i18n.t("rewardSummary")}</Text>
         <CommonMargin />
-        <Text style={styles().summary}>{i18n.t("rewardDetail")}</Text>
+        <Text style={styles.summary}>{i18n.t("rewardDetail")}</Text>
         <CommonMargin />
         <CommonMargin />
-        <View style={styles().shareLinkContainer}>
-          <Text numberOfLines={1} style={styles().shareLink}>
+        <View style={styles.shareLinkContainer}>
+          <Text numberOfLines={1} style={styles.shareLink}>
             {shareLink}
           </Text>
           <TouchableOpacity
-            style={styles().copyBtn}
+            style={styles.copyBtn}
             onPress={() => {
               Clipboard.setString(shareLink);
               Toast.show(i18n.t("copied"), 1);
             }}
           >
-            <Text style={styles().copy}>{i18n.t("copy")}</Text>
+            <Text style={styles.copy}>{i18n.t("copy")}</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flex: 1 }} />
         <Button
-          style={styles().inviteBtn}
+          style={styles.inviteBtn}
           onPress={() => {
             props.navigation.navigate("Invite", { shareLink });
           }}
         >
-          <Text style={styles().invite}>{i18n.t("inviteFromContacts")}</Text>
+          <Text style={styles.invite}>{i18n.t("inviteFromContacts")}</Text>
         </Button>
         <CommonMargin />
         <Button
-          style={styles().shareBtn}
+          style={styles.shareBtn}
           onPress={() => {
             Share.share({
               message: `${i18n.t("recommend")} ${shareLink}`
@@ -169,7 +171,7 @@ export const ReferralScreen = connect(
               });
           }}
         >
-          <Text style={styles().share}>{i18n.t("share")}</Text>
+          <Text style={styles.share}>{i18n.t("share")}</Text>
         </Button>
         <CommonMargin />
       </View>

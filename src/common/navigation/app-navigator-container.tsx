@@ -4,28 +4,17 @@ import { connect } from "react-redux";
 import { i18n } from "@/translations";
 import { AppState } from "@/common/store";
 import { AppNavigator } from "@/common/navigation/app-navigator";
+import { LocalizationContext } from "@/translations";
 
 type Props = {
   locale: string;
-  currentTheme?: "dark" | "light";
 };
 
 export const AppNavigatorContainer = connect((state: AppState) => {
-  return { locale: state.base.locale, currentTheme: state.base.currentTheme };
+  return { locale: state.base.locale };
 })(function AppNavigatorContainerInner(props: Props): JSX.Element {
-  // const [locale, setLocale] = useState(props.locale);
-  // const localizationContext = React.useMemo(
-  //   () => ({
-  //     t: (scope: Scope, options: TranslateOptions) =>
-  //       i18n.t(scope, { locale, ...options }),
-  //     locale,
-  //     setLocale
-  //   }),
-  //   [locale]
-  // );
-  // const t = (scope: Scope, options: TranslateOptions) => {
-  //   return i18n.t(scope, { locale, ...options });
-  // };
-  //const { currentTheme } = props;
+  const { locale, setLocale } = React.useContext(LocalizationContext);
+  i18n.locale = locale;
+  setLocale(props.locale);
   return <AppNavigator />;
 });

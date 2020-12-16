@@ -1,6 +1,6 @@
 import Button from "@ant-design/react-native/lib/button";
 import Modal from "@ant-design/react-native/lib/modal";
-import { WebBrowser } from "expo";
+import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
 import {
   Image,
@@ -10,13 +10,14 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import { theme } from "@/common/theme";
+import { useTheme } from "@/common/theme";
+import { ColorTheme } from "@/types/theme-props";
 import { i18n } from "@/translations";
 
 import { NavigationBar } from "@/common/navigation-bar";
 import { MonoText } from "@/common/styled-text";
 
-const styles = () =>
+const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     container: {
       flex: 1,
@@ -84,7 +85,8 @@ const styles = () =>
 
 function HomeScreen(): JSX.Element {
   const [shouldDisplayModal, setShouldDisplayModal] = useState(false);
-
+  const theme = useTheme();
+  const styles = getStyles(theme.colorTheme);
   const onCloseModal = () => {
     setShouldDisplayModal(false);
   };
@@ -110,20 +112,20 @@ function HomeScreen(): JSX.Element {
   const maybeRenderDevelopmentModeWarning = () => {
     if (__DEV__) {
       const learnMoreButton = (
-        <Text onPress={handleLearnMorePress} style={styles().helpLinkText}>
+        <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
           Learn more
         </Text>
       );
 
       return (
-        <Text style={styles().developmentModeText}>
+        <Text style={styles.developmentModeText}>
           Development mode is enabled, your app will be slower but you can use
           useful development tools. {learnMoreButton}
         </Text>
       );
     }
     return (
-      <Text style={styles().developmentModeText}>
+      <Text style={styles.developmentModeText}>
         You are not in development mode, your app will run at full speed.
       </Text>
     );
@@ -133,37 +135,34 @@ function HomeScreen(): JSX.Element {
     ? require("@/assets/images/robot-dev.png")
     : require("@/assets/images/robot-prod.png");
   return (
-    <View style={styles().container}>
+    <View style={styles.container}>
       <NavigationBar title={i18n.t("home")} />
-      <ScrollView style={styles().container}>
-        <View style={styles().welcomeContainer}>
-          <Image source={imgSource} style={styles().welcomeImage} />
+      <ScrollView style={styles.container}>
+        <View style={styles.welcomeContainer}>
+          <Image source={imgSource} style={styles.welcomeImage} />
         </View>
 
-        <View style={styles().getStartedContainer}>
+        <View style={styles.getStartedContainer}>
           {maybeRenderDevelopmentModeWarning()}
 
-          <Text style={styles().getStartedText}>Get started by opening</Text>
+          <Text style={styles.getStartedText}>Get started by opening</Text>
 
           <View
-            style={[
-              styles().codeHighlightContainer,
-              styles().homeScreenFilename
-            ]}
+            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}
           >
-            <MonoText style={styles().codeHighlightText}>
+            <MonoText style={styles.codeHighlightText}>
               screens/HomeScreen.js
             </MonoText>
           </View>
 
-          <Text style={styles().getStartedText}>
+          <Text style={styles.getStartedText}>
             Change this text and your app will automatically reload.
           </Text>
         </View>
 
-        <View style={styles().helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles().helpLink}>
-            <Text style={styles().helpLinkText}>
+        <View style={styles.helpContainer}>
+          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>
               Help, it didn’t automatically reload!
             </Text>
           </TouchableOpacity>

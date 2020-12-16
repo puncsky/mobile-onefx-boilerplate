@@ -1,11 +1,11 @@
 import { Appearance } from "react-native-appearance";
+import { createTheming, ThemingType } from "@callstack/react-theme-provider";
+import { ThemeProps } from "@/types/theme-props";
 
 const colorScheme = Appearance.getColorScheme();
 const colorMode = colorScheme === "dark" ? "dark" : "light";
 
 const lightTheme = {
-  name: "light",
-
   primary: "#FBB03B",
   secondary: "#0C8DE4",
   white: "#fff",
@@ -39,8 +39,6 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  name: "dark",
-
   primary: "#FBB03B",
   secondary: "#0C8DE4",
   white: "#333333",
@@ -73,14 +71,7 @@ const darkTheme = {
   navText: "#fff"
 };
 
-// eslint-disable-next-line import/no-mutable-exports
-export let theme = colorMode === "dark" ? darkTheme : lightTheme;
-
-export function setTheme(mode: "dark" | "light" | undefined): void {
-  theme = mode === "dark" ? darkTheme : lightTheme;
-}
-
-export const antdLightTheme = {
+const antdLightTheme = {
   color_text_base: lightTheme.text01,
   brand_primary: lightTheme.primary,
   color_link: lightTheme.primary,
@@ -88,10 +79,33 @@ export const antdLightTheme = {
   primary_button_fill_tap: lightTheme.primary
 };
 
-export const antdDarkTheme = {
+const antdDarkTheme = {
   color_text_base: darkTheme.text01,
   brand_primary: darkTheme.primary,
   color_link: darkTheme.primary,
   primary_button_fill: darkTheme.primary,
   primary_button_fill_tap: darkTheme.primary
 };
+
+export const themes: { [key: string]: ThemeProps } = {
+  light: {
+    name: "light",
+    colorTheme: lightTheme,
+    antdTheme: antdLightTheme,
+    sizing: [2, 6, 8, 10, 16, 24, 32]
+  },
+  dark: {
+    name: "dark",
+    colorTheme: darkTheme,
+    antdTheme: antdDarkTheme,
+    sizing: [2, 6, 8, 10, 16, 24, 32]
+  }
+};
+
+const {
+  ThemeProvider,
+  withTheme,
+  useTheme
+}: ThemingType<ThemeProps> = createTheming(themes[colorMode]);
+
+export { ThemeProvider, withTheme, useTheme, colorMode };

@@ -4,18 +4,20 @@ import {
   BottomTabBarOptions,
   BottomTabBarProps
 } from "@react-navigation/bottom-tabs";
-import { theme } from "@/common/theme";
+
+import { useTheme } from "@/common/theme";
 
 export function ThemedBottomTabBar(
   props: BottomTabBarProps<BottomTabBarOptions>
 ): JSX.Element {
+  const theme = useTheme();
   return (
     <BottomTabBar
       {...props}
-      activeTintColor={theme.activeTintColor}
-      inactiveTintColor={theme.inactiveTintColor}
+      activeTintColor={theme.colorTheme.activeTintColor}
+      inactiveTintColor={theme.colorTheme.inactiveTintColor}
       style={{
-        backgroundColor: theme.activeBackgroundColor
+        backgroundColor: theme.colorTheme.activeBackgroundColor
       }}
     />
   );

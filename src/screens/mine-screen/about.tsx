@@ -11,14 +11,13 @@ import { ListHeader } from "@/common/list-header";
 import { registerForPushNotificationAsync } from "@/common/register-push-token";
 import { actionUpdateReduxState } from "@/common/root-reducer";
 import { AppState } from "@/common/store";
-import { setTheme, theme } from "@/common/theme";
-import { i18n } from "@/translations";
+import { useTheme } from "@/common/theme";
+import { i18n, LocalizationContext } from "@/translations";
 import { ScreenProps } from "@/types/screen-props";
 import { InviteSection } from "@/screens/referral-screen/components/invite-section";
 import { AccountHeader } from "@/screens/mine-screen/account-header";
-//import { NavigationStackProp } from "@react-navigation/stack";
+
 import { actionLogout } from "./account-reducer";
-import { LocalizationContext } from "@/app";
 
 const { Item } = List;
 const { Brief } = Item;
@@ -32,13 +31,13 @@ type Props = {
   }) => void;
   //screenProps: ScreenProps;
   currentTheme: "dark" | "light";
-  //navigation: NavigationStackProp<string>;
+  //navigation: NavigationScreenProp<string>;
 };
 
 export const About = connect(
   (state: AppState) => ({
     authToken: state.base.authToken,
-    locale: state.base.locale,
+    //locale: state.base.locale,
     currentTheme: state.base.currentTheme
   }),
   dispatch => ({
@@ -49,10 +48,10 @@ export const About = connect(
       dispatch(actionUpdateReduxState(payload));
     }
   })
-)(({ authToken, logout, updateReduxState, currentTheme }: //navigation //locale, //screenProps,
+)(({ authToken, //locale,
+  logout, updateReduxState, //screenProps,
+  currentTheme }: //navigation
 Props) => {
-  const { locale, setLocale } = React.useContext(LocalizationContext);
-
   useEffect(() => {
     async function init() {
       await registerForPushNotificationAsync();
@@ -60,11 +59,13 @@ Props) => {
     }
     init();
   }, []);
+  const { locale, setLocale } = React.useContext(LocalizationContext);
+  const theme = useTheme();
 
   const renderAppSection = () => {
     const backgroundColor = {
-      backgroundColor: theme.white,
-      color: theme.text01
+      backgroundColor: theme.colorTheme.white,
+      color: theme.colorTheme.text01
     };
     return (
       <List
@@ -118,7 +119,7 @@ Props) => {
               value={currentTheme === "dark"}
               onValueChange={value => {
                 const mode = value ? "dark" : "light";
-                setTheme(mode);
+                // setTheme(mode);
                 updateReduxState({
                   base: { currentTheme: mode }
                 });
@@ -168,7 +169,7 @@ Props) => {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: theme.white }}>
+    <ScrollView style={{ backgroundColor: theme.colorTheme.white }}>
       <AccountHeader />
       {/* <InviteSection navigation={navigation} /> */}
       {renderAppSection()}

@@ -2,7 +2,8 @@
 export interface ThemeProps {
   name: string;
   antdTheme: AntdTheme;
-  theme: ColorTheme;
+  colorTheme: ColorTheme;
+  sizing: Array<number>;
 }
 
 export interface AntdTheme {

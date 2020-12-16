@@ -1,4 +1,3 @@
-import * as Haptics from "expo-haptics";
 import * as React from "react";
 import { Platform } from "react-native";
 import {
@@ -12,149 +11,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ThemedBottomTabBar } from "@/common/themed-bottom-tab-bar";
 
-import { TFuncType } from "@/types/screen-props";
-
 import { HomeScreen } from "@/screens/home-screen";
 import { LinksScreen } from "@/screens/links-screen";
 import { MineScreen } from "@/screens/mine-screen/mine-screen";
-import { SettingsScreen } from "@/screens/settings-screen";
 import { TabBarIcon } from "@/common/tab-bar-icon";
-
-// const HomeStack = createStackNavigator(
-//   {
-//     Home: HomeScreen
-//   },
-//   {
-//     headerMode: "none"
-//   }
-// );
-
-// HomeStack.navigationOptions = ({
-//   screenProps: { t }
-// }: {
-//   screenProps: { t: TFuncType };
-// }) => ({
-//   tabBarLabel: t("home"),
-//   tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
-//     const name =
-//       Platform.OS === "ios"
-//         ? `ios-information-circle${focused ? "" : "-outline"}`
-//         : "md-information-circle";
-//     return <TabBarIcon focused={focused} name={name} />;
-//   },
-//   tabBarOnPress: async ({
-//     navigation
-//   }: {
-//     navigation: NavigationScreenProp<unknown>;
-//   }) => {
-//     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-//     navigation.navigate("Home");
-//   }
-// });
-
-// const LinksStack = createStackNavigator(
-//   {
-//     Links: LinksScreen
-//   },
-//   {
-//     headerMode: "none"
-//   }
-// );
-
-// LinksStack.navigationOptions = ({
-//   screenProps: { t }
-// }: {
-//   screenProps: { t: TFuncType };
-// }) => ({
-//   tabBarLabel: t("links"),
-//   tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
-//     const name = Platform.OS === "ios" ? "ios-link" : "md-link";
-//     return <TabBarIcon focused={focused} name={name} />;
-//   },
-//   tabBarOnPress: async ({
-//     navigation
-//   }: {
-//     navigation: NavigationScreenProp<unknown>;
-//   }) => {
-//     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-//     navigation.navigate("Links");
-//   }
-// });
-
-// const SettingsStack = createStackNavigator(
-//   {
-//     Settings: SettingsScreen
-//   },
-//   {
-//     headerMode: "none"
-//   }
-// );
-
-// SettingsStack.navigationOptions = ({
-//   screenProps: { t }
-// }: {
-//   screenProps: { t: TFuncType };
-// }) => ({
-//   tabBarLabel: t("settings"),
-//   tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
-//     const name = Platform.OS === "ios" ? "ios-options" : "md-options";
-//     return <TabBarIcon focused={focused} name={name} />;
-//   },
-//   tabBarOnPress: async ({
-//     navigation
-//   }: {
-//     navigation: NavigationScreenProp<unknown>;
-//   }) => {
-//     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-//     navigation.navigate("Settings");
-//   }
-// });
-
-// const MineStack = createStackNavigator(
-//   {
-//     Mine: MineScreen
-//   },
-//   {
-//     headerMode: "none"
-//   }
-// );
-
-// MineStack.navigationOptions = ({
-//   screenProps: { t }
-// }: {
-//   screenProps: { t: TFuncType };
-// }) => ({
-//   tabBarLabel: t("mine"),
-//   tabBarIcon: function TabBarIconWrapper({ focused }: { focused: boolean }) {
-//     const name = Platform.OS === "ios" ? "ios-contact" : "md-contact";
-//     return <TabBarIcon focused={focused} name={name} />;
-//   },
-//   tabBarOnPress: async ({
-//     navigation
-//   }: {
-//     navigation: NavigationScreenProp<unknown>;
-//   }) => {
-//     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-//     navigation.navigate("Mine");
-//   }
-// });
-
-// export const MainTabNavigator = createBottomTabNavigator(
-//   {
-//     HomeStack,
-//     LinksStack,
-//     // SettingsStack,
-//     MineStack
-//   },
-//   {
-//     navigationOptions: {
-//       header: null
-//     },
-//     tabBarComponent: function tabBarComponent(props) {
-//       return <ThemedBottomTabBar {...props} />;
-//     }
-//   }
-// );
+import { LocalizationContext } from "@/translations";
 
 const HomeStack = createStackNavigator<HomeParamList>();
 
@@ -189,6 +50,7 @@ function MineNavigator() {
 const MainTab = createBottomTabNavigator<MainTabParamList>();
 
 export function MainTabNavigator() {
+  const { t } = React.useContext(LocalizationContext);
   return (
     <MainTab.Navigator
       tabBar={props => <ThemedBottomTabBar {...props} />}
@@ -198,6 +60,7 @@ export function MainTabNavigator() {
         name="Home"
         component={HomeNavigator}
         options={{
+          tabBarLabel: t("home"),
           tabBarIcon: ({ focused }) => {
             const name =
               Platform.OS === "ios"
@@ -211,6 +74,7 @@ export function MainTabNavigator() {
         name="Link"
         component={LinkNavigator}
         options={{
+          tabBarLabel: t("links"),
           tabBarIcon: ({ focused }) => {
             const name = Platform.OS === "ios" ? "ios-link" : "md-link";
             return <TabBarIcon name={name} focused={focused} />;
@@ -221,6 +85,7 @@ export function MainTabNavigator() {
         name="Mine"
         component={MineNavigator}
         options={{
+          tabBarLabel: t("mine"),
           tabBarIcon: ({ focused }) => {
             const name = Platform.OS === "ios" ? "ios-apps" : "md-apps";
             return <TabBarIcon name={name} focused={focused} />;

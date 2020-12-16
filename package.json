@@ -101,6 +101,7 @@
   },
   "dependencies": {
     "@ant-design/react-native": "^4.0.4",
+    "@callstack/react-theme-provider": "^2.1.0",
     "@expo/vector-icons": "^12.0.0",
     "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/cameraroll": "^4.0.0",
@@ -170,7 +171,8 @@
     "redux-devtools-extension": "2.13.8",
     "redux-persist": "5.10.0",
     "redux-thunk": "2.3.0",
-    "sentry-expo": "~2.1.2"
+    "sentry-expo": "~2.1.2",
+    "expo-notifications": "~0.7.2"
   },
   "devDependencies": {
     "@puncsky/eslint-config-onefx": "^2.3.0",
