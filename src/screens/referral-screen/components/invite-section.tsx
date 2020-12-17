@@ -3,12 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "@/common/theme";
 import { ColorTheme } from "@/types/theme-props";
 import { contentPadding, ScreenWidth, onePx } from "@/common/screen-util";
-import { NavigationScreenProp } from "react-navigation";
-import { i18n } from "@/translations";
 import { GiftIcon } from "@/screens/referral-screen/components/gift-icon";
+import { i18n } from "@/translations";
 
 type Props = {
-  navigation: NavigationScreenProp<string>;
+  navigation: any;
 };
 
 const getStyles = (theme: ColorTheme) =>

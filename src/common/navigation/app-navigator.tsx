@@ -4,8 +4,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { RootStackParamList } from "@/types/navigation-param";
 
 import { MainTabNavigator } from "@/common/navigation/main-tab-navigator";
-// import { ReferralScreen } from "@/screens/referral-screen/referral-screen";
-// import { InviteScreen } from "@/screens/referral-screen/invite-screen";
+import { ReferralScreen } from "@/screens/referral-screen/referral-screen";
+import { InviteScreen } from "@/screens/referral-screen/invite-screen";
 
 // const RootScreen = createSwitchNavigator({
 //   Main: MainTabNavigator
@@ -35,8 +35,8 @@ function RootNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={MainTabNavigator} />
-      {/* <Stack.Screen name="Referral" component={ReferralScreen} />
-      <Stack.Screen name="Invite" component={InviteScreen} /> */}
+      <Stack.Screen name="Referral" component={ReferralScreen} />
+      <Stack.Screen name="Invite" component={InviteScreen} />
     </Stack.Navigator>
   );
 }

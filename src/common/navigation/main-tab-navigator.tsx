@@ -61,12 +61,13 @@ export function MainTabNavigator() {
         component={HomeNavigator}
         options={{
           tabBarLabel: t("home"),
-          tabBarIcon: ({ focused }) => {
+          tabBarIcon: ({ focused }: { focused: boolean }) => {
             const name =
               Platform.OS === "ios"
                 ? `ios-information-circle${focused ? "" : "-outline"}`
                 : "md-information-circle";
-            return <TabBarIcon name={name} focused={focused} />;
+            const tabIcon = <TabBarIcon name={name} focused={focused} />;
+            return tabIcon;
           }
         }}
       />
@@ -75,9 +76,10 @@ export function MainTabNavigator() {
         component={LinkNavigator}
         options={{
           tabBarLabel: t("links"),
-          tabBarIcon: ({ focused }) => {
+          tabBarIcon: ({ focused }: { focused: boolean }) => {
             const name = Platform.OS === "ios" ? "ios-link" : "md-link";
-            return <TabBarIcon name={name} focused={focused} />;
+            const tabIcon = <TabBarIcon name={name} focused={focused} />;
+            return tabIcon;
           }
         }}
       />
@@ -86,9 +88,10 @@ export function MainTabNavigator() {
         component={MineNavigator}
         options={{
           tabBarLabel: t("mine"),
-          tabBarIcon: ({ focused }) => {
+          tabBarIcon: ({ focused }: { focused: boolean }) => {
             const name = Platform.OS === "ios" ? "ios-apps" : "md-apps";
-            return <TabBarIcon name={name} focused={focused} />;
+            const tabIcon = <TabBarIcon name={name} focused={focused} />;
+            return tabIcon;
           }
         }}
       />

@@ -6,10 +6,9 @@ import { useTheme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { ScreenProps } from "@/types/screen-props";
 import { About } from "@/screens/mine-screen/about";
-import { NavigationScreenProp } from "react-navigation";
 
 type Props = {
-  navigation: NavigationScreenProp<string>;
+  navigation: any;
   screenProps: ScreenProps;
 };
 
@@ -23,7 +22,7 @@ export function MineScreen(props: Props): JSX.Element {
       }}
     >
       <NavigationBar title={i18n.t("mine")} />
-      <About screenProps={props.screenProps} navigation={props.navigation} />
+      <About navigation={props.navigation} />
     </View>
   );
 }

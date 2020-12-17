@@ -12,7 +12,6 @@ import { NavigationBar } from "@/common/navigation-bar";
 import { contentPadding, ScreenWidth } from "@/common/screen-util";
 import { CommonMargin } from "@/common/common-margin";
 import { ReferralGiftIcon } from "@/screens/referral-screen/components/referral-gift-icon";
-import { NavigationScreenProp } from "react-navigation";
 import { useTheme } from "@/common/theme";
 import { ColorTheme } from "@/types/theme-props";
 import { i18n } from "@/translations";
@@ -21,7 +20,7 @@ import { connect } from "react-redux";
 import { getEndpoint } from "@/common/request";
 
 type Props = {
-  navigation: NavigationScreenProp<string>;
+  navigation: any;
   userId: string;
 };
 

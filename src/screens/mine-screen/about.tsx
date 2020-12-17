@@ -28,7 +28,6 @@ type Props = {
   updateReduxState: (state: {
     base: { locale?: string; currentTheme?: string };
   }) => void;
-  //screenProps: ScreenProps;
   currentTheme: "dark" | "light";
   navigation: any;
 };

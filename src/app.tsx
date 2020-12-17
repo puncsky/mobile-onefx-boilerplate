@@ -9,8 +9,8 @@ import { actionUpdateReduxState } from "@/common/root-reducer";
 import { useCachedResources } from "@/common/hooks/use-cached-resource";
 import { useTheme } from "@/common/theme";
 import { i18n, LocalizationContext } from "@/translations";
-import { Providers } from "./common/providers";
 import { Scope, TranslateOptions } from "i18n-js";
+import { Providers } from "./common/providers";
 
 const styles = StyleSheet.create({
   container: {

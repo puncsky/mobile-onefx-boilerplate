@@ -37,6 +37,8 @@ export function ContactRow({
     <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
       <View style={styles.rowContainer}>
         <MaterialIcons
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           name={`radio-button-${selected ? "" : "un"}checked`}
           size={24}
           color={theme.colorTheme.primary}

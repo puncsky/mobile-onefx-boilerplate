@@ -4,13 +4,13 @@ import {
   View,
   StyleSheet,
   SectionList,
+  SafeAreaView,
   ActivityIndicator
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { composeAsync } from "expo-mail-composer";
 import { NavigationBar } from "@/common/navigation-bar";
 import { isAvailableAsync, sendSMSAsync } from "expo-sms";
-import { NavigationScreenProp, SafeAreaView } from "react-navigation";
 import { Button, Toast, SearchBar } from "@ant-design/react-native";
 import { contentPadding } from "@/common/screen-util";
 import { ColorTheme } from "@/types/theme-props";
@@ -34,7 +34,7 @@ type SectionItem = {
 };
 
 type Props = {
-  navigation: NavigationScreenProp<string>;
+  navigation: any;
 };
 
 const getStyles = (theme: ColorTheme) =>
