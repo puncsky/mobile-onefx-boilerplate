@@ -47,7 +47,7 @@ export function App() {
   );
 
   if (!isLoadingComplete) {
-    return null;
+    return <View />;
   }
 
   return (
@@ -76,8 +76,8 @@ const AppContent = connect(
     updateReduxState: (state: { base: { currentTheme: string } }) => void;
   }) => {
     const { locale, currentTheme, updateReduxState } = props;
+    const { setLocale } = React.useContext(LocalizationContext);
     const theme = useTheme();
-
     if (locale && i18n) {
       i18n.locale = locale;
     }
@@ -87,6 +87,10 @@ const AppContent = connect(
         base: { currentTheme }
       });
     }
+
+    React.useEffect(() => {
+      setLocale(locale);
+    }, []);
 
     return (
       <View style={styles.container}>
