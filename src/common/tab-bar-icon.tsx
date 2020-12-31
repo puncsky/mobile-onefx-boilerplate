@@ -15,6 +15,8 @@ export function TabBarIcon(props: Props) {
     : theme.colorTheme.tabIconDefault;
   return (
     <Ionicons
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       name={name}
       size={26}
       style={{ marginBottom: -3 }}

@@ -1,7 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import {
   navigationBarHeight,
@@ -15,7 +14,7 @@ type Props = {
   currentTheme?: "light" | "dark";
   title: string;
   showBack?: boolean;
-  navigation?: NavigationScreenProp<string>;
+  navigation?: any;
 };
 
 export const NavigationBar = connect((state: AppState) => ({

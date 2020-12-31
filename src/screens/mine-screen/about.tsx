@@ -12,11 +12,10 @@ import { registerForPushNotificationAsync } from "@/common/register-push-token";
 import { actionUpdateReduxState } from "@/common/root-reducer";
 import { AppState } from "@/common/store";
 import { useTheme } from "@/common/theme";
-import { i18n } from "@/translations";
-import { ScreenProps } from "@/types/screen-props";
+import { i18n, LocalizationContext } from "@/translations";
 import { InviteSection } from "@/screens/referral-screen/components/invite-section";
 import { AccountHeader } from "@/screens/mine-screen/account-header";
-import { NavigationScreenProp } from "react-navigation";
+
 import { actionLogout } from "./account-reducer";
 
 const { Item } = List;
@@ -29,9 +28,8 @@ type Props = {
   updateReduxState: (state: {
     base: { locale?: string; currentTheme?: string };
   }) => void;
-  screenProps: ScreenProps;
   currentTheme: "dark" | "light";
-  navigation: NavigationScreenProp<string>;
+  navigation: any;
 };
 
 export const About = connect(
@@ -54,9 +52,8 @@ export const About = connect(
     locale,
     logout,
     updateReduxState,
-    screenProps,
-    currentTheme,
-    navigation
+    navigation,
+    currentTheme
   }: Props) => {
     useEffect(() => {
       async function init() {
@@ -65,7 +62,7 @@ export const About = connect(
       }
       init();
     }, []);
-
+    const { setLocale } = React.useContext(LocalizationContext);
     const theme = useTheme();
 
     const renderAppSection = () => {
@@ -104,7 +101,7 @@ export const About = connect(
                     base: { locale: changeTo }
                   });
                   i18n.locale = changeTo;
-                  screenProps.setLocale(changeTo);
+                  setLocale(changeTo);
                 }}
               />
             }
@@ -125,7 +122,6 @@ export const About = connect(
                 value={currentTheme === "dark"}
                 onValueChange={value => {
                   const mode = value ? "dark" : "light";
-                  // setTheme(mode);
                   updateReduxState({
                     base: { currentTheme: mode }
                   });
