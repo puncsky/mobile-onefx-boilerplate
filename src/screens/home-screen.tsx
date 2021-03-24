@@ -17,6 +17,9 @@ import { i18n } from "@/translations";
 import { NavigationBar } from "@/common/navigation-bar";
 import { MonoText } from "@/common/styled-text";
 
+import { connect } from "react-redux";
+import { AppState } from "@/common/store";
+
 const getStyles = (theme: ColorTheme) =>
   StyleSheet.create({
     container: {
@@ -82,8 +85,11 @@ const getStyles = (theme: ColorTheme) =>
       color: theme.secondary
     }
   });
-
-function HomeScreen(): JSX.Element {
+export const HomeScreen = connect((state: AppState) => {
+  return {
+    locale: state.base.locale
+  };
+})(function HomeScreenInner(): JSX.Element {
   const [shouldDisplayModal, setShouldDisplayModal] = useState(false);
   const theme = useTheme();
   const styles = getStyles(theme.colorTheme);
@@ -196,6 +202,4 @@ function HomeScreen(): JSX.Element {
       </ScrollView>
     </View>
   );
-}
-
-export { HomeScreen };
+});
