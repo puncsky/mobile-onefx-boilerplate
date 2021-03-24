@@ -6,13 +6,18 @@ import { useTheme } from "@/common/theme";
 import { i18n } from "@/translations";
 import { ScreenProps } from "@/types/screen-props";
 import { About } from "@/screens/mine-screen/about";
+import { connect } from "react-redux";
+import { AppState } from "@/common/store";
 
 type Props = {
   navigation: any;
   screenProps: ScreenProps;
 };
-
-export function MineScreen(props: Props): JSX.Element {
+export const MineScreen = connect((state: AppState) => {
+  return {
+    locale: state.base.locale
+  };
+})(function MineScreenInnner(props: Props): JSX.Element {
   const theme = useTheme();
   return (
     <View
@@ -25,4 +30,4 @@ export function MineScreen(props: Props): JSX.Element {
       <About navigation={props.navigation} />
     </View>
   );
-}
+});
